@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0AD794C1-06CB-4ECC-8C48-55DE0395F8B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LuxERP.DAL</RootNamespace>
+    <AssemblyName>LuxERP.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddStocksDAL.cs" />
+    <Compile Include="AllotStocksDAL.cs" />
+    <Compile Include="AppointEngineersDAL.cs" />
+    <Compile Include="EventLogsDAL.cs" />
+    <Compile Include="EventStateDAL.cs" />
+    <Compile Include="EventStepsDAL.cs" />
+    <Compile Include="EventTypesDAL.cs" />
+    <Compile Include="ExpressDAL.cs" />
+    <Compile Include="FacilityDAL.cs" />
+    <Compile Include="IPNetworking.cs" />
+    <Compile Include="IndexDAL.cs" />
+    <Compile Include="OutStockDemandsDAL.cs" />
+    <Compile Include="OutStocksDAL.cs" />
+    <Compile Include="PeopleDAL.cs" />
+    <Compile Include="PermissionDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneStateDAL.cs" />
+    <Compile Include="ScrapStocksDAL.cs" />
+    <Compile Include="SendEmail.cs" />
+    <Compile Include="SolutionsDAL.cs" />
+    <Compile Include="StocksDAL.cs" />
+    <Compile Include="StoresDAL.cs" />
+    <Compile Include="SynthesisDAL.cs" />
+    <Compile Include="SystemUserDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuxERP.Common\LuxERP.DAL.Common.csproj">
+      <Project>{7359C9C3-2C53-424B-B30E-81664C9D144F}</Project>
+      <Name>LuxERP.DAL.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

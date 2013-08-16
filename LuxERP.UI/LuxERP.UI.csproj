@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48A6F8C6-5EFE-488A-B9AB-7B51FE2AED0F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LuxERP.UI</RootNamespace>
+    <AssemblyName>LuxERP.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\RemoveStockFacility.aspx" />
+    <Content Include="Admin\RemoveStoreFacility.aspx" />
+    <Content Include="Admin\UserManage.aspx" />
+    <Content Include="Admin\UserPermission.aspx" />
+    <Content Include="Content\images\CannotLoading.png" />
+    <Content Include="Content\images\error404.png" />
+    <Content Include="Content\famfamfam.png" />
+    <Content Include="Content\images\animated-overlay.gif" />
+    <Content Include="Content\images\b.png" />
+    <Content Include="Content\images\bg-body.gif" />
+    <Content Include="Content\images\bg-button-green.gif" />
+    <Content Include="Content\images\bg-content-box.gif" />
+    <Content Include="Content\images\bg-form-field.gif" />
+    <Content Include="Content\images\bg-login-top.png" />
+    <Content Include="Content\images\bg-login.gif" />
+    <Content Include="Content\images\bg-menu-item-current.gif" />
+    <Content Include="Content\images\bg-menu-item-green.gif" />
+    <Content Include="Content\images\bg-radial-gradient.gif" />
+    <Content Include="Content\images\bg-sidebar.gif" />
+    <Content Include="Content\images\bl.png" />
+    <Content Include="Content\images\br.png" />
+    <Content Include="Content\images\closelabel.gif" />
+    <Content Include="Content\images\icons\bullet_black.png" />
+    <Content Include="Content\images\icons\clock_48.png" />
+    <Content Include="Content\images\icons\closelabel.gif" />
+    <Content Include="Content\images\icons\comment_48.png" />
+    <Content Include="Content\images\icons\cross.png" />
+    <Content Include="Content\images\icons\cross_circle.png" />
+    <Content Include="Content\images\icons\cross_grey_small.png" />
+    <Content Include="Content\images\icons\exclamation.png" />
+    <Content Include="Content\images\icons\hammer_screwdriver.png" />
+    <Content Include="Content\images\icons\image_add_48.png" />
+    <Content Include="Content\images\icons\information.png" />
+    <Content Include="Content\images\icons\jquery.wysiwyg.gif" />
+    <Content Include="Content\images\icons\loading.gif" />
+    <Content Include="Content\images\icons\paper_content_pencil_48.png" />
+    <Content Include="Content\images\icons\pencil.png" />
+    <Content Include="Content\images\icons\pencil_48.png" />
+    <Content Include="Content\images\ris.png" />
+    <Content Include="Content\images\icons\tick_circle.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\Matching_No.png" />
+    <Content Include="Content\images\Matching_Ok.png" />
+    <Content Include="Content\images\menu-current-arrow.gif" />
+    <Content Include="Content\images\noramlevents.png" />
+    <Content Include="Content\images\setupshop.png" />
+    <Content Include="Content\images\shortcut-button-bg.gif" />
+    <Content Include="Content\images\shutupshop.png" />
+    <Content Include="Content\images\storerenovation.png" />
+    <Content Include="Content\images\tl.png" />
+    <Content Include="Content\images\tr.png" />
+    <Content Include="Content\images\ui-bg_glass_55_fcf0ba_1x400.png" />
+    <Content Include="Content\images\ui-bg_gloss-wave_100_ece8da_500x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-hard_100_f5f3e5_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-hard_100_fafaf4_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-hard_15_459e00_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-hard_95_cccccc_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_25_67b021_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_95_ffedad_1x100.png" />
+    <Content Include="Content\images\ui-bg_inset-soft_15_2b2922_1x100.png" />
+    <Content Include="Content\images\ui-icons_808080_256x240.png" />
+    <Content Include="Content\images\ui-icons_847e71_256x240.png" />
+    <Content Include="Content\images\ui-icons_8DC262_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\images\ui-icons_eeeeee_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\workorderLogo.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\invalid.css" />
+    <Content Include="Content\jquery-ui-1.10.2.custom.min.css" />
+    <Content Include="Content\jquery.sceditor.default.min.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\nopicstyle.css" />
+    <Content Include="Error.html" />
+    <Content Include="EventManagement\CreateEvent.aspx" />
+    <Content Include="EventManagement\EventQuery.aspx" />
+    <Content Include="EventManagement\FacilityAllotByEvent.aspx" />
+    <Content Include="EventManagement\FacilityMatchingAndOutByEvent.aspx" />
+    <Content Include="EventManagement\NormalEvent.aspx" />
+    <Content Include="EventManagement\OutOrder.aspx" />
+    <Content Include="EventManagement\SceneByEnent.aspx" />
+    <Content Include="EventManagement\WorkOrder.aspx" />
+    <Content Include="FacilityManagement\AddStockQuery.aspx" />
+    <Content Include="FacilityManagement\AllotStockQuery.aspx" />
+    <Content Include="FacilityManagement\AddStocks.aspx" />
+    <Content Include="FacilityManagement\OutStockQuery.aspx" />
+    <Content Include="FacilityManagement\ScrapStocks.aspx" />
+    <Content Include="FacilityManagement\StockQuery.aspx" />
+    <Content Include="Index\Index.aspx" />
+    <Content Include="LogOn.aspx" />
+    <Content Include="EventManagement\Reporting.aspx" />
+    <Content Include="Scripts\facebox.js" />
+    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.2.custom.min.js" />
+    <Content Include="Scripts\jquery.date.js" />
+    <Content Include="Scripts\jquery.datePicker.js" />
+    <Content Include="Scripts\jquery.PrintArea.js" />
+    <Content Include="Scripts\jquery.sceditor.xhtml.min.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.wysiwyg.js" />
+    <Content Include="Scripts\menuSlide.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\simpla.jquery.configuration.js" />
+    <Content Include="SolutionManagement\emoticons\alien.png" />
+    <Content Include="SolutionManagement\emoticons\angel.png" />
+    <Content Include="SolutionManagement\emoticons\angry.png" />
+    <Content Include="SolutionManagement\emoticons\blink.png" />
+    <Content Include="SolutionManagement\emoticons\blush.png" />
+    <Content Include="SolutionManagement\emoticons\cheerful.png" />
+    <Content Include="SolutionManagement\emoticons\cool.png" />
+    <Content Include="SolutionManagement\emoticons\credits.txt" />
+    <Content Include="SolutionManagement\emoticons\cwy.png" />
+    <Content Include="SolutionManagement\emoticons\devil.png" />
+    <Content Include="SolutionManagement\emoticons\dizzy.png" />
+    <Content Include="SolutionManagement\emoticons\ermm.png" />
+    <Content Include="SolutionManagement\emoticons\face.png" />
+    <Content Include="SolutionManagement\emoticons\getlost.png" />
+    <Content Include="SolutionManagement\emoticons\grin.png" />
+    <Content Include="SolutionManagement\emoticons\happy.png" />
+    <Content Include="SolutionManagement\emoticons\heart.png" />
+    <Content Include="SolutionManagement\emoticons\kissing.png" />
+    <Content Include="SolutionManagement\emoticons\laughing.png" />
+    <Content Include="SolutionManagement\emoticons\ninja.png" />
+    <Content Include="SolutionManagement\emoticons\pinch.png" />
+    <Content Include="SolutionManagement\emoticons\pouty.png" />
+    <Content Include="SolutionManagement\emoticons\sad.png" />
+    <Content Include="SolutionManagement\emoticons\shocked.png" />
+    <Content Include="SolutionManagement\emoticons\sick.png" />
+    <Content Include="SolutionManagement\emoticons\sideways.png" />
+    <Content Include="SolutionManagement\emoticons\silly.png" />
+    <Content Include="SolutionManagement\emoticons\sleeping.png" />
+    <Content Include="SolutionManagement\emoticons\smile.png" />
+    <Content Include="SolutionManagement\emoticons\tongue.png" />
+    <Content Include="SolutionManagement\emoticons\unsure.png" />
+    <Content Include="SolutionManagement\UpdateSolution.aspx" />
+    <Content Include="SolutionManagement\emoticons\w00t.png" />
+    <Content Include="SolutionManagement\emoticons\wassat.png" />
+    <Content Include="SolutionManagement\emoticons\whistling.png" />
+    <Content Include="SolutionManagement\emoticons\wink.png" />
+    <Content Include="SolutionManagement\emoticons\wub.png" />
+    <Content Include="StoreInformation\StoreFacility.aspx" />
+    <Content Include="StoreInformation\StoreInformation.aspx" />
+    <Content Include="SystemInitial\EventState.aspx" />
+    <Content Include="SystemInitial\EventTypes.aspx" />
+    <Content Include="SystemInitial\FacilityManage.aspx" />
+    <Content Include="SystemInitial\InitialStocks.aspx" />
+    <Content Include="SystemInitial\InitialStores.aspx" />
+    <Content Include="SystemInitial\PeopleManage.aspx" />
+    <Content Include="SystemInitial\SynthesisManage.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="CannotLoading.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\RemoveStockFacility.aspx.cs">
+      <DependentUpon>RemoveStockFacility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RemoveStockFacility.aspx.designer.cs">
+      <DependentUpon>RemoveStockFacility.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RemoveStoreFacility.aspx.cs">
+      <DependentUpon>RemoveStoreFacility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RemoveStoreFacility.aspx.designer.cs">
+      <DependentUpon>RemoveStoreFacility.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserManage.aspx.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManage.aspx.designer.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserPermission.aspx.cs">
+      <DependentUpon>UserPermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserPermission.aspx.designer.cs">
+      <DependentUpon>UserPermission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\CreateEvent.aspx.cs">
+      <DependentUpon>CreateEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\CreateEvent.aspx.designer.cs">
+      <DependentUpon>CreateEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\EventQuery.aspx.cs">
+      <DependentUpon>EventQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\EventQuery.aspx.designer.cs">
+      <DependentUpon>EventQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\FacilityAllotByEvent.aspx.cs">
+      <DependentUpon>FacilityAllotByEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\FacilityAllotByEvent.aspx.designer.cs">
+      <DependentUpon>FacilityAllotByEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\FacilityMatchingAndOutByEvent.aspx.cs">
+      <DependentUpon>FacilityMatchingAndOutByEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\FacilityMatchingAndOutByEvent.aspx.designer.cs">
+      <DependentUpon>FacilityMatchingAndOutByEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\NormalEvent.aspx.cs">
+      <DependentUpon>NormalEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\NormalEvent.aspx.designer.cs">
+      <DependentUpon>NormalEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\OutOrder.aspx.cs">
+      <DependentUpon>OutOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\OutOrder.aspx.designer.cs">
+      <DependentUpon>OutOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\SceneByEnent.aspx.cs">
+      <DependentUpon>SceneByEnent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\SceneByEnent.aspx.designer.cs">
+      <DependentUpon>SceneByEnent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\WorkOrder.aspx.cs">
+      <DependentUpon>WorkOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\WorkOrder.aspx.designer.cs">
+      <DependentUpon>WorkOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\AddStockQuery.aspx.cs">
+      <DependentUpon>AddStockQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\AddStockQuery.aspx.designer.cs">
+      <DependentUpon>AddStockQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\AllotStockQuery.aspx.cs">
+      <DependentUpon>AllotStockQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\AllotStockQuery.aspx.designer.cs">
+      <DependentUpon>AllotStockQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\AddStocks.aspx.cs">
+      <DependentUpon>AddStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\AddStocks.aspx.designer.cs">
+      <DependentUpon>AddStocks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\OutStockQuery.aspx.cs">
+      <DependentUpon>OutStockQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\OutStockQuery.aspx.designer.cs">
+      <DependentUpon>OutStockQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\ScrapStocks.aspx.cs">
+      <DependentUpon>ScrapStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\ScrapStocks.aspx.designer.cs">
+      <DependentUpon>ScrapStocks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacilityManagement\StockQuery.aspx.cs">
+      <DependentUpon>StockQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityManagement\StockQuery.aspx.designer.cs">
+      <DependentUpon>StockQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogOn.aspx.cs">
+      <DependentUpon>LogOn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOn.aspx.designer.cs">
+      <DependentUpon>LogOn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LuxERP.Master.cs">
+      <DependentUpon>LuxERP.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LuxERP.Master.designer.cs">
+      <DependentUpon>LuxERP.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EventManagement\Reporting.aspx.cs">
+      <DependentUpon>Reporting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\Reporting.aspx.designer.cs">
+      <DependentUpon>Reporting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionManagement\UpdateSolution.aspx.cs">
+      <DependentUpon>UpdateSolution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SolutionManagement\UpdateSolution.aspx.designer.cs">
+      <DependentUpon>UpdateSolution.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StoreInformation\StoreFacility.aspx.cs">
+      <DependentUpon>StoreFacility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StoreInformation\StoreFacility.aspx.designer.cs">
+      <DependentUpon>StoreFacility.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StoreInformation\StoreInformation.aspx.cs">
+      <DependentUpon>StoreInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StoreInformation\StoreInformation.aspx.designer.cs">
+      <DependentUpon>StoreInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\EventState.aspx.cs">
+      <DependentUpon>EventState.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\EventState.aspx.designer.cs">
+      <DependentUpon>EventState.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\EventTypes.aspx.cs">
+      <DependentUpon>EventTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\EventTypes.aspx.designer.cs">
+      <DependentUpon>EventTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\FacilityManage.aspx.cs">
+      <DependentUpon>FacilityManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\FacilityManage.aspx.designer.cs">
+      <DependentUpon>FacilityManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\InitialStocks.aspx.cs">
+      <DependentUpon>InitialStocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\InitialStocks.aspx.designer.cs">
+      <DependentUpon>InitialStocks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\InitialStores.aspx.cs">
+      <DependentUpon>InitialStores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\InitialStores.aspx.designer.cs">
+      <DependentUpon>InitialStores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\PeopleManage.aspx.cs">
+      <DependentUpon>PeopleManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\PeopleManage.aspx.designer.cs">
+      <DependentUpon>PeopleManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\SynthesisManage.aspx.cs">
+      <DependentUpon>SynthesisManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\SynthesisManage.aspx.designer.cs">
+      <DependentUpon>SynthesisManage.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuxERP.DAL\LuxERP.DAL.csproj">
+      <Project>{0AD794C1-06CB-4ECC-8C48-55DE0395F8B1}</Project>
+      <Name>LuxERP.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LuxERP.Master" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_Browsers\ie.browser" />
+    <Content Include="App_Browsers\firefox.browser" />
+    <Content Include="packages.config" />
+    <None Include="Scripts\jquery-1.9.1.min.map" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61718</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

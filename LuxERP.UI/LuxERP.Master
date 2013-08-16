@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LuxERP.master.cs" Inherits="LuxERP.UI.LuxERP" %>
+
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta content="" charset="utf-8" />
+    <title></title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/reset.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/invalid.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="/Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="/Scripts/simpla.jquery.configuration.js" type="text/javascript"></script>
+    <script src="/Scripts/facebox.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.wysiwyg.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui-1.10.2.custom.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.ui.datepicker-zh-TW.js" type="text/javascript"></script>
+    <script src="/Scripts/modernizr-1.7.min.js" type="text/javascript"></script>
+    <script src="/Scripts/menuSlide.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var ClientParams={};
+    var Sys = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var s;
+    (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+    (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+    if (Sys.ie) {
+        ClientParams.Browser = "IE" + Sys.ie;
+    }
+    else if (Sys.firefox) {
+        ClientParams.Browser = "Firefox" + Sys.firefox;
+    }
+    else if (Sys.chrome) {
+        ClientParams.Browser = "Chrome" + Sys.chrome;
+    }
+    else if (Sys.opera) {
+        ClientParams.Browser = "Opera" + Sys.opera;
+    }
+    else if (Sys.safari) {
+        ClientParams.Browser = "Safari" + Sys.safari;
+    }
+    else {
+        ClientParams.Browser = "No";
+    };
+    String.prototype.startWith = function (compareStr) {
+        return this.indexOf(compareStr) == 0;
+    };
+    if (ClientParams.Browser.startWith('IE8.') != true && ClientParams.Browser.startWith('IE9.') != true && ClientParams.Browser.startWith('IE10.') != true && ClientParams.Browser.startWith('Chrome') != true) {
+        window.location.href = '/CannotLoading.html';
+    }
+
+//    window.onload = function () {
+//        var inputs = document.getElementsByTagName("input");
+//        for (var i = 0; i < inputs.length; i++) {
+//            if (inputs[i].getAttribute("type") == "text")
+//                inputs[i].onkeyup = function () {
+//                    this.value = this.value.replace(/(^\s+)|\s+$/g, "");
+//                };
+//        }
+//    }
+</script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="body-wrapper">
+    <div id="sidebar">
+        <div id="sidebar-wrapper">
+            <h1 id="sidebar-title"><a href="#">IIRIS</a></h1>
+            <div style=" text-align:center">
+            <a href="#"><img style=" width:132px; height:48px" id="logo" src="../../Content/images/ris.png" alt="ERP logo" /></a>
+            </div>          
+            <div id="profile-links"> 
+                <asp:Label runat="server" Text="当前用户："></asp:Label><asp:Label ID="lblUser" runat="server"></asp:Label>
+                &nbsp;<asp:LinkButton ID="lbtnLogOff" runat="server" onclick="lbtnLogOff_Click">注销</asp:LinkButton>
+            </div>
+            <ul id="main-nav">
+                <!-- 0st menu -->
+                <li><a href="/Admin/UserManage.aspx" class="nav-top-item no-submenu" id="admin" runat="server" >管理员</a></li>
+                <li><a href="/Index/Index.aspx" class="nav-top-item no-submenu" id="index" runat="server" >主页</a></li>
+                <!-- 1st menu -->
+                <li><a href="#" class="nav-top-item" id="solution" runat="server">解决方案管理</a>
+                    <ul>                        
+                        <li><a href="/SolutionManagement/UpdateSolution.aspx" id="updateSolution" runat="server">查询修改解决方案</a></li>
+                    </ul>
+                </li>
+                <!-- 2nd menu -->
+                <li><a href="#" class="nav-top-item" id="eventManage" runat="server">事件管理</a>
+                    <ul>
+                        <li><a href="/EventManagement/EventQuery.aspx" id="eventQuery" runat="server">事件查询</a></li>
+                        <li><a href="/EventManagement/CreateEvent.aspx" id="createEvent" runat="server">创建事件</a></li>
+                        <li><a href="/EventManagement/Reporting.aspx" id="reportFormsEvent" runat="server">事件报表</a></li>
+                    </ul>
+                </li>
+                <!-- 3rd menu -->
+                <li><a href="#" class="nav-top-item" id="stockManage" runat="server">库存管理</a>
+                    <ul>
+                        <li><a href="/FacilityManagement/AddStocks.aspx" id="addStock" runat="server">添加库存</a></li>
+                        <li><a href="/FacilityManagement/StockQuery.aspx" id="stockQuery" runat="server">库存查询</a></li>
+                        <li><a href="/FacilityManagement/OutStockQuery.aspx" id="outStockQuery" runat="server">历史调出</a></li>
+                        <li><a href="/FacilityManagement/AllotStockQuery.aspx" id="allotStockQuery" runat="server">历史调入</a></li>
+                        <li><a href="/FacilityManagement/AddStockQuery.aspx" id="addStockQuery" runat="server">入库历史</a></li>
+                        <li><a href="/FacilityManagement/ScrapStocks.aspx" id="scrapStocks" runat="server">废损设备</a></li>
+                    </ul>
+                </li>
+                <!-- 4th menu -->
+                <li><a href="#" class="nav-top-item" id="storeInformation" runat="server">店铺信息</a>
+                    <ul>
+                        <li><a href="/StoreInformation/StoreInformation.aspx" id="alterStore" runat="server">查询修改店铺</a></li>                        
+                    </ul>
+                </li>
+                <!-- 5th menu -->
+                <li><a href="#" class="nav-top-item" id="systemInitial" runat="server">系统初始化</a>
+                    <ul>
+                        <li><a href="/SystemInitial/EventTypes.aspx" id="eventTypes" runat="server">事件类管理</a></li>
+                        <li><a href="/SystemInitial/FacilityManage.aspx" id="facilityManage" runat="server">设备信息管理</a></li>
+                        <li><a href="/SystemInitial/PeopleManage.aspx" id="peopleManage" runat="server">人员管理</a></li>
+                        <li><a href="/SystemInitial/SynthesisManage.aspx" id="synthesisManage" runat="server">综合信息管理</a></li>
+                        <li><a href="/SystemInitial/EventState.aspx" id="eventState" runat="server">事件状态管理</a></li>
+                        <li><a href="/SystemInitial/InitialStores.aspx" id="initialStores" runat="server">店铺信息初始化</a></li>
+                        <li><a href="/SystemInitial/InitialStocks.aspx" id="initialStocks" runat="server">设备初始化</a></li>   
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>    
+    <div id="main-content">
+        <asp:ContentPlaceHolder ID="myContent" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </div>
+    </form>
+</body>
+</html>
