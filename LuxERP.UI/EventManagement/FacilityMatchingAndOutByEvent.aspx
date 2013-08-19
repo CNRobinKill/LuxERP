@@ -188,6 +188,8 @@
             </asp:BoundField>
     </Columns>
     </asp:GridView>
+    <asp:Button ID="btnSendStockIn" runat="server" Text="发送入库需求" CssClass="button" 
+            Visible="false" onclick="btnSendStockIn_Click" />
     </div>
 </div>
 <div style="width:600px">

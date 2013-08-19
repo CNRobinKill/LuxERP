@@ -83,11 +83,9 @@ namespace LuxERP.UI.EventManagement
                                 {
                                     if (Request.QueryString["typeCode"] == "9999")
                                     {
-                                        //string minState = DAL.EventStateDAL.GetMinEventState("1").ToString();
                                         btnUpdateEventType.Visible = false;
                                         btnSendEventTo.Visible = false;
                                         btnReOpenEvent.Visible = false;
-                                        //btnFacilityAllotByEvent.Visible = false;
                                         lblSetUpDate.Visible = true;
                                         lblToResolvedTime.Visible = true;
                                         ddlEventState.DataSource = DAL.EventStateDAL.GetEventStateByStateID(int.Parse(EventInformationArray(6)), "1");
@@ -109,7 +107,6 @@ namespace LuxERP.UI.EventManagement
                                     }
                                     if (Request.QueryString["typeCode"] == "9000")
                                     {
-                                        //string minState = DAL.EventStateDAL.GetMinEventState("2").ToString();
                                         btnUpdateEventType.Visible = false;
                                         btnSendEventTo.Visible = false;
                                         btnReOpenEvent.Visible = false;
@@ -136,7 +133,6 @@ namespace LuxERP.UI.EventManagement
                                     }
                                     if (Request.QueryString["typeCode"] == "8888")
                                     {
-                                        //string minState = DAL.EventStateDAL.GetMinEventState("3").ToString();
                                         btnUpdateEventType.Visible = false;
                                         btnSendEventTo.Visible = false;
                                         btnReOpenEvent.Visible = false;
@@ -220,19 +216,6 @@ namespace LuxERP.UI.EventManagement
                 return "门店已不存在";
             }
         }
-        //public string EventTypesArray()
-        //{
-        //    SqlDataReader dr = DAL.EventTypesDAL.GetEventTypesByTypeCode(EventInformationArray(3));
-        //    dr.Read();
-        //    if (dr[3].ToString() == "")
-        //    {
-        //        return dr[2].ToString();
-        //    }
-        //    else
-        //    {
-        //        return dr[3].ToString();
-        //    }
-        //}
 
         public static bool readerExists(SqlDataReader dr, string columnName)
         {
@@ -505,7 +488,6 @@ namespace LuxERP.UI.EventManagement
             btnUpdateEventState.Visible = false;
             ddlEventState.Enabled = true;
             btnOKUpdate.Visible = true;
-            //DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
             if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888")
             {
                 ddlEventState.DataSource = DAL.EventStateDAL.GetEventStateByStateID(int.Parse(EventInformationArray(6)), "0");
@@ -520,7 +502,6 @@ namespace LuxERP.UI.EventManagement
                     btnUpdateEventType.Visible = false;
                     btnSendEventTo.Visible = false;
                     btnReOpenEvent.Visible = false;
-                    //btnFacilityAllotByEvent.Visible = false;
                     ddlEventState.DataSource = DAL.EventStateDAL.GetEventStateByStateID(199, "1");
                     ddlEventState.DataValueField = "StateID";
                     ddlEventState.DataTextField = "StateName";
@@ -830,14 +811,14 @@ namespace LuxERP.UI.EventManagement
 
                     string mailToName = SendEmailInfo(4, handingBy, typeCode);
                     string eventName = SendEmailInfo(5, handingBy, typeCode);
-                    string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + "：<div>&nbsp; &nbsp; 当前有一个事件需要移交由" + handingBy + "处理，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + StoreInformationArray(0) + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + typeCode + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：" + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow() + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件详细：</div><div>" + GridViewToHtml(gvEventSteps) + "</div><div>&nbsp; &nbsp; 请及时通知相关人员处理，我们将会对事件进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
+                    string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + "：<div>&nbsp; &nbsp; 当前有一个事件需要移交由 " + handingBy + " 处理，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + StoreInformationArray(0) + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + typeCode + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：" + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow() + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件详细：</div><div>" + GridViewToHtml(gvEventSteps) + "</div><div>&nbsp; &nbsp; 请及时通知相关人员处理，我们将会对事件进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
                     if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
                     {
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(移交事件)已成功向" + mailToName + "发送邮件", timeNow(), "0", Session["userName"].ToString());
+                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(移交事件)已成功向 " + mailToName + " 发送邮件", timeNow(), "0", Session["userName"].ToString());
                     }
                     else
                     {
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(移交事件)SMTP服务器无法接通，向" + mailToName + "发送邮件失败，请手动发送或使用其它方式联系", timeNow(), "0", Session["userName"].ToString());
+                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(移交事件)SMTP服务器无法接通，向 " + mailToName + " 发送邮件失败，请手动发送或使用其它方式联系", timeNow(), "0", Session["userName"].ToString());
                     }
                 }
                 

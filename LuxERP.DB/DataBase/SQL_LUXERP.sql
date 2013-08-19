@@ -628,6 +628,7 @@ Go
 /***************************TypeFour***************************/
 
 /***************************Solver***************************/
+insert into tb_Solver(Solver,SMTP,Email,EPassword,Note) values('库存管理员',NULL,NULL,NULL,NULL)
 /**Add**/
 Create Procedure [dbo].[AddSolver]
 (
@@ -693,7 +694,27 @@ Create Procedure [dbo].[GetSolver]
 
 AS
 begin
-select Solver from tb_Solver order by Solver
+select Solver from tb_Solver where Solver<>'库存管理员' order by Solver 
+end
+Go
+
+Create Procedure [dbo].[GetStockIn]
+(
+	@stockInSolver	nvarchar(50)
+)
+AS
+declare @email1		nvarchar(50)
+declare @email2		nvarchar(50)
+declare @solver1	nvarchar(50)
+declare	@smtp		nvarchar(50)
+declare	@ePassword	nvarchar(50)
+declare @note		nvarchar(50)
+
+begin
+select top 1 @solver1=Solver, @email1=Email, @smtp=SMTP, @ePassword=EPassword from tb_Solver where SMTP<>'' and SMTP is not null and EPassword <> '' and EPassword is not null
+select @note=Note from tb_Solver where Solver=@stockInSolver
+select @email2=Email from tb_Solver where Solver=@note
+select @email1,@smtp,@ePassword,@email2,@note from tb_Solver
 end
 Go
 /**Update**/

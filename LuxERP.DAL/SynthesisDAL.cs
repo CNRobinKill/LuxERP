@@ -14,7 +14,8 @@ namespace LuxERP.DAL
         private const string SPGetAllSolver = "GetAllSolver";
         private const string SPGetSolverByEventType = "GetSolverByEventType";
         private const string SPGetSolverChangeHandingBy = "GetSolverChangeHandingBy";
-        
+        private const string SPGetStockIn = "GetStockIn";
+         
         private const string SPUpdateSolver = "UpdateSolver";
         private const string SPDelSolver = "DelSolver";
         private const string SPAddExpressCo = "AddExpressCo";
@@ -62,6 +63,15 @@ namespace LuxERP.DAL
 	            new SqlParameter("@typeCode",typeCode)
             };
             return Common.SqlHelper.ExecuteReader(SPGetSolverChangeHandingBy, paras);
+
+        }
+
+        public static SqlDataReader GetStockIn(string stockInSolver)
+        {
+            SqlParameter[] paras = {
+                new SqlParameter("@stockInSolver",stockInSolver)
+            };
+            return Common.SqlHelper.ExecuteReader(SPGetStockIn, paras);
 
         }
 

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
+using System.IO;
 
 namespace LuxERP.UI.EventManagement
 {
@@ -168,25 +170,28 @@ namespace LuxERP.UI.EventManagement
             gvOutStockDemandsBind();
         }
 
-        //public void DdlShow()
-        //{
-        //    for (int i = 0; i < DAL.FacilityDAL.GetMaching().Tables[0].Rows.Count; i++)
-        //    {
-        //        ddlMaching.Items.Add(DAL.FacilityDAL.GetMaching().Tables[0].Rows[i][0].ToString());
-        //    }
-        //    for (int i = 0; i < DAL.FacilityDAL.GetBrand().Tables[0].Rows.Count; i++)
-        //    {
-        //        ddlBrand.Items.Add(DAL.FacilityDAL.GetBrand().Tables[0].Rows[i][0].ToString());
-        //    }
-        //    for (int i = 0; i < DAL.FacilityDAL.GetModel().Tables[0].Rows.Count; i++)
-        //    {
-        //        ddlModel.Items.Add(DAL.FacilityDAL.GetModel().Tables[0].Rows[i][0].ToString());
-        //    }
-        //    for (int i = 0; i < DAL.FacilityDAL.GetParameter().Tables[0].Rows.Count; i++)
-        //    {
-        //        ddlParameter.Items.Add(DAL.FacilityDAL.GetParameter().Tables[0].Rows[i][0].ToString());
-        //    }
-        //}
+        public string SendEmailInfo(int n)
+        {
+            SqlDataReader dr = DAL.SynthesisDAL.GetStockIn("库存管理员");
+            dr.Read();
+            string emailInfo = dr[n].ToString();
+            dr.Close();
+            return emailInfo;
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            //OverRide　为了使导出成Excel可行！
+        }
+
+        private string GridViewToHtml(GridView gv)
+        {
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            gv.RenderControl(hw);
+            return sb.ToString();
+        }
 
         public void gvOutStockDemandsBind()
         {
@@ -230,12 +235,14 @@ namespace LuxERP.UI.EventManagement
                 if (DAL.OutStockDemandsDAL.GetNoMatchingByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count == 0)
                 {
                     imgMatchingNo.Visible = false;
+                    btnSendStockIn.Visible = false;
                     noExpressText.Visible = false;
                     divAddExpress.Visible = true;
                 }
                 else
                 {
                     imgMatchingNo.Visible = true;
+                    btnSendStockIn.Visible = true;
                     noExpressText.Visible = true;
                     noCheckFacilityText.Visible = true;
                     divAddExpress.Visible = false;
@@ -646,6 +653,34 @@ namespace LuxERP.UI.EventManagement
         protected void btnPrint_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterClientScriptBlock(UpdatePanel1, this.GetType(), "openWorkOrder", "window.open('OutOrder.aspx?eventNo=" + Request.QueryString["eventNo"] + "&storeNo=" + Request.QueryString["storeNo"] + "','','scrollbars=yes');", true);
+        }
+
+        protected void btnSendStockIn_Click(object sender, EventArgs e)
+        {
+            string eventNo = Request.QueryString["eventNo"];
+            string typeCode= Request.QueryString["typeCode"];
+            string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string mailTo = SendEmailInfo(3);
+            if (mailTo != "")
+            {
+                string email = SendEmailInfo(0);
+                string mailServer = SendEmailInfo(1);
+                string ePassword = SendEmailInfo(2);
+                string mailToName = SendEmailInfo(4);
+
+
+                string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + "：<div>&nbsp; &nbsp; 当前有一个门店需要寄送设备，但由于库存不足，需要入库。</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + Request.QueryString["storeNo"] + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + eventNo + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;设备入库需求：</div><div>" + GridViewToHtml(gvNoMatching) + "</div><div>&nbsp; &nbsp; 我们将会继续进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
+                if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
+                {
+                    DAL.EventStepsDAL.AddEventSteps(eventNo, "(匹配出库)已成功向" + mailToName + "发送 设备入库申请 邮件", timeNow, "0", Session["userName"].ToString());
+                    MsgBox("发送成功！");
+                }
+                else
+                {
+                    DAL.EventStepsDAL.AddEventSteps(eventNo, "(匹配出库)SMTP服务器无法接通，向" + mailToName + "发送邮件失败，请手动发送或使用其它方式联系", timeNow, "0", Session["userName"].ToString());
+                    MsgBox("发送失败！");
+                }
+            }
         }
 
     }
