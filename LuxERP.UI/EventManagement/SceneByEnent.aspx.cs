@@ -333,6 +333,24 @@ namespace LuxERP.UI.EventManagement
                 gvHistoryService.HeaderRow.Cells[5].Text = "<b>购买日期</b>";
                 gvHistoryService.HeaderRow.Cells[6].Text = "<b>供应商</b>";
                 gvHistoryService.HeaderRow.Cells[7].Text = "<b>服务时间</b>";
+                if (DAL.SceneStateDAL.GetHistoryServiceByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count == 0)
+                {
+                    divUpload.Visible = false;
+                }
+                else
+                {
+                    divUpload.Visible = true;
+                    if (DAL.EventLogsDAL.GetPic(Request.QueryString["eventNo"], "1") != "")
+                    {
+                        uploado.Visible = false;
+                        uploadt.Visible = true;
+                    }
+                    else
+                    {
+                        uploado.Visible = true;
+                        uploadt.Visible = false;
+                    }
+                }
             }
         }
 
@@ -581,6 +599,46 @@ namespace LuxERP.UI.EventManagement
             ScriptManager.RegisterClientScriptBlock(UpdatePanel1, this.GetType(), "openWorkOrder", "window.open('WorkOrder.aspx?eventNo=" + Request.QueryString["eventNo"] + "&storeNo=" + StoreInformationArray(0) + "','','scrollbars=yes');", true);
         }
 
-        
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            string eventNo = Request.QueryString["eventNo"];
+            if (fuFile.HasFile)//上传控件命名为fuFILE了
+            {
+                string path = Server.MapPath("~/Content/uploadimages/");//你要保存的目录
+                //if (!Directory.Exists(path))    //判断目录是否存在
+                //    Directory.CreateDirectory(path);
+                string name = fuFile.FileName;  //获取上传的文件名称
+                String ext = Path.GetExtension(fuFile.FileName).ToLower();  //获取上传文件的后缀名
+                String[] allowedExtensions = { ".gif", ".png", ".bmp", ".jpg" };
+                bool fileOK = false;
+                for (int i = 0; i < allowedExtensions.Length; i++)//判断是否是图片
+                {
+                    if (ext == allowedExtensions[i])
+                    {
+                        fileOK = true;
+                        break;
+                    }
+                }
+                if (fileOK)//是图片上传
+                {
+                    string newName = Guid.NewGuid() + ext; //重命名，防止重名文件
+                    DAL.EventLogsDAL.UpdateUpLoadPic(eventNo, "", newName);
+                    fuFile.SaveAs(path + newName);        //保存到服务器上了。
+                    uploado.Visible = false;
+                    uploadt.Visible = true;
+                }
+            }
+        }
+
+        protected void btnShowPic_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(UpdatePanel1, this.GetType(), "openShowPic", "window.open('ShowPic.aspx?eventNo=" + Request.QueryString["eventNo"] + "&n=1 ','','scrollbars=yes');", true);
+        }
+
+        protected void btnDelPic_Click(object sender, EventArgs e)
+        {
+            uploado.Visible = true;
+            uploadt.Visible = false;
+        }
     }
 }

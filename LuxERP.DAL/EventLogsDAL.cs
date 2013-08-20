@@ -12,6 +12,7 @@ namespace LuxERP.DAL
         private const string SPAddEventLogs = "AddEventLogs";
         private const string SPGetEventLogsByEventNo = "GetEventLogsByEventNo";
         private const string SPGetEventLogsInNormalEvent = "GetEventLogsInNormalEvent";
+        private const string SPGetPic = "GetPic";
         private const string SPUpdateEventState = "UpdateEventState";
         private const string SPUpdateToResolvedTime = "UpdateToResolvedTime";
         private const string SPUpdateResolvedByAndTime = "UpdateResolvedByAndTime";
@@ -22,6 +23,7 @@ namespace LuxERP.DAL
         private const string SPGetTopTenEventLogsByStoreNo = "GetTopTenEventLogsByStoreNo";
         private const string SPGetAllotStocksTotal = "GetEventLogsTotal";
         private const string SPGetAllotStocksPaged = "GetEventLogsPaged";
+        private const string SPUpdateUpLoadPic = "UpdateUpLoadPic";
         
 
         public static int AddEventLogs(string eventNo, string eventTime, string storeNo, string typeCode, string eventDescribe, string toResolvedTime, string eventState, string logBy)
@@ -174,6 +176,33 @@ namespace LuxERP.DAL
             DataSet ds = null;
             ds = Common.SqlHelper.ExecuteDataSet(SPGetAllotStocksPaged, paras);
             return ds;
+        }
+
+        public static int UpdateUpLoadPic(string eventNo, string outStockPic, string scenePic)
+        {
+            SqlParameter[] paras = { 
+	            new SqlParameter("@eventNo",eventNo),
+                new SqlParameter("@outStockPic",outStockPic),
+                new SqlParameter("@scenePic",scenePic),
+            };
+            return Common.SqlHelper.ExecuteNonQuery(SPUpdateUpLoadPic, paras);
+        }
+
+        public static string GetPic(string eventNo, string picNo)
+        {
+            SqlParameter[] paras = {
+	            new SqlParameter("@eventNo",eventNo),
+                new SqlParameter("@picNo",picNo)
+            };
+            try
+            {
+                return (string) Common.SqlHelper.ExecuteScalar(SPGetPic, paras);;
+            }
+            catch
+            {
+                return "";
+            }
+
         }
     }
 }

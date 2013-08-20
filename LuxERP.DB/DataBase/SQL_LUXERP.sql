@@ -143,7 +143,9 @@ create table tb_EventLogs
 	ResolvedTime	datetime,
 	ResolvedBy		nvarchar(50),
 	LogBy			nvarchar(50),
-	HandingBy		nvarchar(50)
+	HandingBy		nvarchar(50),
+	OutStockPic		nvarchar(50),
+	ScenePic		nvarchar(50)
 )
 
 -- ÊÂ¼þ²½Öè
@@ -1191,6 +1193,19 @@ begin
 select EventNo,EventTime,StoreNo,TypeCode,EventDescribe,convert(nvarchar(10),ToResolvedTime,111) ToResolvedTime,EventState,LogBy,ResolvedBy,ResolvedTime from tb_EventLogs where EventNo = @eventNo
 end
 Go
+create Procedure [dbo].[GetPic]
+(
+	@eventNo		nvarchar(50),
+	@picNo			nvarchar(50)
+)
+AS
+begin
+if @picNo='0'
+select OutStockPic from tb_EventLogs where EventNo = @eventNo
+if @picNo='1'
+select ScenePic from tb_EventLogs where EventNo = @eventNo
+end
+Go
 create Procedure [dbo].[GetTopTenEventLogsByStoreNo]
 (
 	@storeNo		nvarchar(50)
@@ -1275,6 +1290,32 @@ Create Procedure UpdateEventState
 as
 begin
 	update tb_EventLogs set EventState=@eventState where EventNo=@eventNo
+end
+go
+Create Procedure UpdateUpLoadPic
+(
+	@eventNo		nvarchar(50),
+	@outStockPic	nvarchar(50),
+	@scenePic		nvarchar(50)
+)
+as
+begin
+if @outStockPic<>'' and @outStockPic<>'Clean'
+begin
+	update tb_EventLogs set OutStockPic=@outStockPic where EventNo=@eventNo
+end
+if @scenePic<>'' and @scenePic<>'Clean'
+begin
+	update tb_EventLogs set ScenePic=@scenePic where EventNo=@eventNo
+end
+if @outStockPic='Clean'
+begin
+	update tb_EventLogs set OutStockPic=NULL where EventNo=@eventNo
+end
+if @scenePic='Clean'
+begin
+	update tb_EventLogs set ScenePic=NULL where EventNo=@eventNo
+end
 end
 go
 Create Procedure UpdateEventStateByShutUpShop

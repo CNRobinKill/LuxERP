@@ -124,7 +124,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="myContent" runat="server">
 
-   <asp:ScriptManager ID="ScriptManager1" runat="server">
+   <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="false" runat="server">
     </asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
@@ -287,6 +287,19 @@
             </asp:BoundField>
     </Columns>
  </asp:GridView>
+</div>
+</div>
+
+<div id="divUpload" runat="server" visible="false" style="width:500px" >
+<div id="divUploadHeader" class="content-box-header" ><h3 style="cursor: s-resize;">Upload</h3></div>
+<div id="divUploadContent" class="content-box-content">
+    <div id="uploado"  runat="server" visible="false" style=" text-align:center">上门服务单：<asp:FileUpload ID="fuFile" runat="server" />&nbsp;&nbsp;&nbsp;<asp:Button ID="btnUpload"  runat="server" CssClass="button" Text="确定上传" onclick="btnUpload_Click" /></div>
+    <div id="uploadt"  runat="server" visible="false" style=" text-align:center">
+        <asp:Button ID="btnShowPic"  runat="server" CssClass="button" Text="查看服务单" 
+            onclick="btnShowPic_Click" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="btnDelPic"  runat="server" CssClass="button" Text="重置" 
+            onclick="btnDelPic_Click" /></div>
 </div>
 </div>
 

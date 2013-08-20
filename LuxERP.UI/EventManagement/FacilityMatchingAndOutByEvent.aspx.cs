@@ -312,7 +312,7 @@ namespace LuxERP.UI.EventManagement
                     divCheckFacility.Visible = false;
                     divHistory.Visible = true;
                     gvHistoryBind();
-                }
+                } 
             }
             else
             {
@@ -424,20 +424,24 @@ namespace LuxERP.UI.EventManagement
                 gvHistory.HeaderRow.Cells[8].Text = "<b>供应商</b>";
                 gvHistory.HeaderRow.Cells[9].Text = "<b>出库时间</b>";
                 gvHistory.HeaderRow.Cells[10].Text = "<b>出库情况</b>";
-                //if (DAL.OutStocksDAL.GetOutStocks(Request.QueryString["eventNo"]).Tables[0].Rows.Count == 0)
-                //{
-                //    imgMatchingOk.Visible = false;
-                //    noRecordsText1.Visible = true;
-                //    divAddExpress.Visible = false;
-                //    noExpressText.Visible = true;
-                //}
-                //else
-                //{
-                //    noRecordsText1.Visible = false;
-                //    imgMatchingOk.Visible = true;
-                //    divAddExpress.Visible = true;
-                //    noExpressText.Visible = false;
-                //}
+                if (DAL.OutStocksDAL.GetOutStocks(Request.QueryString["eventNo"]).Tables[0].Rows.Count == 0)
+                {
+                    divUpload.Visible = false;
+                }
+                else
+                {
+                    divUpload.Visible = true;
+                    if (DAL.EventLogsDAL.GetPic(Request.QueryString["eventNo"], "0") != "")
+                    {
+                        uploado.Visible = false;
+                        uploadt.Visible = true;
+                    }
+                    else
+                    {
+                        uploado.Visible = true;
+                        uploadt.Visible = false;
+                    }
+                }
             }
 
         }
@@ -681,6 +685,48 @@ namespace LuxERP.UI.EventManagement
                     MsgBox("发送失败！");
                 }
             }
+        }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            string eventNo = Request.QueryString["eventNo"];
+            if (fuFile.HasFile)//上传控件命名为fuFILE了
+            {
+                string path = Server.MapPath("~/Content/uploadimages/");//你要保存的目录
+                //if (!Directory.Exists(path))    //判断目录是否存在
+                //    Directory.CreateDirectory(path);
+                string name = fuFile.FileName;  //获取上传的文件名称
+                String ext = Path.GetExtension(fuFile.FileName).ToLower();  //获取上传文件的后缀名
+                String[] allowedExtensions = { ".gif", ".png", ".bmp", ".jpg" };
+                bool fileOK = false;
+                for (int i = 0; i < allowedExtensions.Length; i++)//判断是否是图片
+                {
+                    if (ext == allowedExtensions[i])
+                    {
+                        fileOK = true;
+                        break;
+                    }
+                }
+                if (fileOK)//是图片上传
+                {
+                    string newName = Guid.NewGuid() + ext; //重命名，防止重名文件
+                    DAL.EventLogsDAL.UpdateUpLoadPic(eventNo, newName, "");
+                    fuFile.SaveAs(path + newName);        //保存到服务器上了。
+                    uploado.Visible = false;
+                    uploadt.Visible = true; 
+                }
+            }
+        }
+
+        protected void btnShowPic_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(UpdatePanel1, this.GetType(), "openShowPic", "window.open('ShowPic.aspx?eventNo=" + Request.QueryString["eventNo"] + "&n=0 ','','scrollbars=yes');", true);
+        }
+
+        protected void btnDelPic_Click(object sender, EventArgs e)
+        {
+            uploado.Visible = true;
+            uploadt.Visible = false;         
         }
 
     }

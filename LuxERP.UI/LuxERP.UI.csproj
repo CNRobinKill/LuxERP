@@ -134,6 +134,7 @@
     <Content Include="EventManagement\NormalEvent.aspx" />
     <Content Include="EventManagement\OutOrder.aspx" />
     <Content Include="EventManagement\SceneByEnent.aspx" />
+    <Content Include="EventManagement\ShowPic.aspx" />
     <Content Include="EventManagement\WorkOrder.aspx" />
     <Content Include="FacilityManagement\AddStockQuery.aspx" />
     <Content Include="FacilityManagement\AllotStockQuery.aspx" />
@@ -305,6 +306,13 @@
     <Compile Include="EventManagement\SceneByEnent.aspx.designer.cs">
       <DependentUpon>SceneByEnent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EventManagement\ShowPic.aspx.cs">
+      <DependentUpon>ShowPic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\ShowPic.aspx.designer.cs">
+      <DependentUpon>ShowPic.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EventManagement\WorkOrder.aspx.cs">
       <DependentUpon>WorkOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,7 +471,9 @@
   <ItemGroup>
     <Content Include="LuxERP.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\uploadimages\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Browsers\ie.browser" />
     <Content Include="App_Browsers\firefox.browser" />
