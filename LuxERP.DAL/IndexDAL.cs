@@ -38,10 +38,14 @@ namespace LuxERP.DAL
             return (int)Common.SqlHelper.ExecuteScalar(SPCountStoreRenovationEventLog, null);
         }
 
-        public static DataSet GetUrgentNormalEventLog()
-        {   
+        public static DataSet GetUrgentNormalEventLog(string temp, string logBy)
+        {
+            SqlParameter[] paras = { 
+                new SqlParameter("@temp",temp),
+                new SqlParameter("@logBy",logBy)
+            };
             DataSet ds = null;
-            ds = Common.SqlHelper.ExecuteDataSet(SPGetUrgentNormalEventLog, null);
+            ds = Common.SqlHelper.ExecuteDataSet(SPGetUrgentNormalEventLog, paras);
             return ds;
         }
 

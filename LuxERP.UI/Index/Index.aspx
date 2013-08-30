@@ -53,6 +53,10 @@
 <div style="clear:both;margin: 10px 10px 10px 10px;"><h2>AttentionEvents</h2></div>
 <div style="clear:both;margin: 10px 10px 10px 10px;"><h3>NormalEvents</h3></div>
 <div style="clear:both;">
+    <asp:Label runat="server" Text="显示事件：" ></asp:Label>
+    <asp:DropDownList ID="ddlLogBy" runat="server" AutoPostBack="true" 
+        onselectedindexchanged="ddlLogBy_SelectedIndexChanged">
+    </asp:DropDownList>
     <asp:GridView ID="gvNormalEvent" runat="server" AutoGenerateColumns="False" >
     <Columns>
            <asp:BoundField DataField="EventNo">
@@ -81,7 +85,7 @@
     </asp:GridView>
 </div>
 <div id="nogvNormalEvent" runat="server" visible="false" style="clear:both;width:600px;height:45px; line-height:45px; text-align:center; border:1px solid gray">
-    <asp:Label ID="Label1" runat="server" Font-Bold="false" Font-Size="Medium" ForeColor="Red">目前没有未关闭的普通事件</asp:Label>
+    <asp:Label ID="Label1" runat="server" Font-Bold="false" Font-Size="Medium" ForeColor="Red">没有相关的普通事件</asp:Label>
 </div>
 <div style="clear:both;margin: 10px 10px 10px 10px;"><h3>SetUpShopEvents</h3></div>
 <div style="clear:both;">

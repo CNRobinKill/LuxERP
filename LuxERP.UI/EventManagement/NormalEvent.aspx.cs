@@ -15,7 +15,22 @@ namespace LuxERP.UI.EventManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddEventSteps.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddEventSteps, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnFacilityAllotByEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnFacilityAllotByEvent, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnFacilityMatchingAndOutByEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnFacilityMatchingAndOutByEvent, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnOKSend.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnOKSend, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnOKUpdate.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnOKUpdate, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnOKUpdateToResolvedTime.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnOKUpdateToResolvedTime, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnOKUpdateType.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnOKUpdateType, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnOpener.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnOpener, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnReOpenEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnReOpenEvent, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnReturnEventQuery.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnReturnEventQuery, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnSendEventTo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSendEventTo, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnStopEventLog.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStopEventLog, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnUpdateEventState.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpdateEventState, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnUpdateEventType.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpdateEventType, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnUpdateToResolvedTime.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpdateToResolvedTime, "click") + ";this.disabled=true; this.value='处理中...';");
+           
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

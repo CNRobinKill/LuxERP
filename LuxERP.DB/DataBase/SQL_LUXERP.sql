@@ -1352,6 +1352,10 @@ if @resolvedTime=''
 begin
  set @resolvedTime = null
 end
+if @resolvedBy=''
+begin
+ set @resolvedBy = null
+end
 begin
 	update tb_EventLogs set ResolvedBy=@resolvedBy,ResolvedTime=@resolvedTime where EventNo = @eventNo
 end
@@ -3215,15 +3219,42 @@ BEGIN
 END
 Go
 Create Procedure [dbo].[GetUrgentNormalEventLog]
-
+(
+	@temp	nvarchar(50),
+	@logBy	nvarchar(50)
+)
 AS
+BEGIN
+declare		@handingBy	nvarchar(50)
+select @handingBy=Solver from tb_Solver where SMTP is not null and SMTP<>'' and Email is not null and Email<>'' and EPassword is not null and EPassword<>''
+
+if @temp='0'
 BEGIN
 	select * from (select tb_EventLogs.EventNo,EventTime,StoreNo,TypeCode,EventDescribe,StateName as EventState,LogBy,StepDescribe,row_number() over (partition by tb_EventLogs.EventNo order by tb_EventSteps.ID desc) as rn 
 	from tb_EventLogs 
 	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
 	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
-	where EventState<>'0') tm where tm.rn=1  
+	where EventState<>'0' and LogBy=@logBy and HandingBy=@handingBy) tm where tm.rn=1  
 	order by tm.EventTime desc 
+END
+if @temp='1'
+BEGIN
+	select * from (select tb_EventLogs.EventNo,EventTime,StoreNo,TypeCode,EventDescribe,StateName as EventState,LogBy,StepDescribe,row_number() over (partition by tb_EventLogs.EventNo order by tb_EventSteps.ID desc) as rn 
+	from tb_EventLogs 
+	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
+	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
+	where EventState<>'0' and LogBy<>@logBy and HandingBy=@handingBy) tm where tm.rn=1  
+	order by tm.EventTime desc 
+END
+if @temp='2'
+BEGIN
+	select * from (select tb_EventLogs.EventNo,EventTime,StoreNo,TypeCode,EventDescribe,StateName as EventState,LogBy,StepDescribe,row_number() over (partition by tb_EventLogs.EventNo order by tb_EventSteps.ID desc) as rn 
+	from tb_EventLogs 
+	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
+	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
+	where EventState<>'0'  and HandingBy<>@handingBy) tm where tm.rn=1  
+	order by tm.EventTime desc 
+END
 END
 Go
 Create Procedure [dbo].[GetUrgentSetUpShopEventLog]

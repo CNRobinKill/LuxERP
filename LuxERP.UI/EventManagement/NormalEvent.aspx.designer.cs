@@ -427,42 +427,6 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.TextBox txtToResolvedTime;
         
         /// <summary>
-        /// gvEventSteps 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEventSteps;
-        
-        /// <summary>
-        /// btnReOpenEvent 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReOpenEvent;
-        
-        /// <summary>
-        /// txtStepDescribe 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStepDescribe;
-        
-        /// <summary>
-        /// btnAddEventSteps 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddEventSteps;
-        
-        /// <summary>
         /// divThreeBtn 控件。
         /// </summary>
         /// <remarks>
@@ -497,5 +461,41 @@ namespace LuxERP.UI.EventManagement {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSceneByEnent;
+        
+        /// <summary>
+        /// gvEventSteps 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEventSteps;
+        
+        /// <summary>
+        /// btnReOpenEvent 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReOpenEvent;
+        
+        /// <summary>
+        /// txtStepDescribe 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStepDescribe;
+        
+        /// <summary>
+        /// btnAddEventSteps 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddEventSteps;
     }
 }

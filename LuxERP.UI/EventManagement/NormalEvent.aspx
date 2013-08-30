@@ -144,6 +144,17 @@
 <div style="width:870px">
 <div class="content-box-header" ><h3 style="cursor: s-resize;">Event-handlingProcedure</h3></div>
 <div class="content-box-content">
+
+    <div id="divThreeBtn" runat="server">
+        <asp:Button ID="btnFacilityMatchingAndOutByEvent" runat="server" 
+            Text="匹配出库" CssClass="button" Width="100" 
+            onclick="btnFacilityMatchingAndOutByEvent_Click"/>
+        <asp:Button ID="btnFacilityAllotByEvent" runat="server" Text="返库调拨" 
+            CssClass="button" Width="100" onclick="btnFacilityAllotByEvent_Click"/>
+        <asp:Button ID="btnSceneByEnent" runat="server" Text="上门服务" CssClass="button" 
+            Width="100" onclick="btnSceneByEnent_Click"/>
+    </div>
+
 <asp:GridView ID="gvEventSteps" runat="server" AutoGenerateColumns="False" 
         onrowediting="gvEventSteps_RowEditing" 
         onrowcancelingedit="gvEventSteps_RowCancelingEdit" 
@@ -181,17 +192,6 @@
         <td style="width:50px"><asp:Button ID="btnAddEventSteps" runat="server" Text="添加" CssClass="button" onclick="btnAddEventSteps_Click"></asp:Button>
         </td>
     </tr>
-    <tr><td colspan="5">
-    <div id="divThreeBtn" runat="server">
-        <asp:Button ID="btnFacilityMatchingAndOutByEvent" runat="server" 
-            Text="匹配出库" CssClass="button" Width="100" 
-            onclick="btnFacilityMatchingAndOutByEvent_Click"/>
-        <asp:Button ID="btnFacilityAllotByEvent" runat="server" Text="返库调拨" 
-            CssClass="button" Width="100" onclick="btnFacilityAllotByEvent_Click"/>
-        <asp:Button ID="btnSceneByEnent" runat="server" Text="上门服务" CssClass="button" 
-            Width="100" onclick="btnSceneByEnent_Click"/>
-    </div>
-    </td></tr>
     </table>
     </div>
 <div id="solutions" title="解决资源方案" style="font-size:20px">

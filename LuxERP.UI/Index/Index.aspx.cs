@@ -60,10 +60,13 @@ namespace LuxERP.UI.Index
                                 lblCountSetUpShopEvents.Text = DAL.IndexDAL.CountSetUpShopEventLog().ToString();
                                 lblCountShutUpShopEvents.Text = DAL.IndexDAL.CountShutUpShopEventLog().ToString();
                                 lblCountStoreRenovationEvents.Text = DAL.IndexDAL.CountStoreRenovationEventLog().ToString();
-                                gvNormalEventDataBind();
+                                gvNormalEventDataBind("0",Session["userName"].ToString());
                                 gvSetUpShopEventDataBind();
                                 gvShutUpShopEventDataBind();
                                 gvStoreRenovationEventDataBind();
+                                ddlLogBy.Items.Add("我创建的事件");
+                                ddlLogBy.Items.Add("其他人创建的事件");
+                                ddlLogBy.Items.Add("已转出的事件");
                             }
                         }
                         catch
@@ -74,10 +77,10 @@ namespace LuxERP.UI.Index
                 }         
         }
 
-        public void gvNormalEventDataBind()
+        public void gvNormalEventDataBind(string temp,string logBy)
         {
             gvNormalEvent.Width = 1050;
-            gvNormalEvent.DataSource = DAL.IndexDAL.GetUrgentNormalEventLog();
+            gvNormalEvent.DataSource = DAL.IndexDAL.GetUrgentNormalEventLog(temp,logBy);
             gvNormalEvent.DataBind();
             if (gvNormalEvent.HeaderRow != null)
             {
@@ -88,10 +91,20 @@ namespace LuxERP.UI.Index
                 gvNormalEvent.HeaderRow.Cells[4].Text = "<b>执行步骤</b>";
                 gvNormalEvent.HeaderRow.Cells[5].Text = "<b>状态</b>";
                 gvNormalEvent.HeaderRow.Cells[6].Text = "<b>创建人</b>";
+                if (DAL.IndexDAL.GetUrgentNormalEventLog(temp, logBy).Tables[0].Rows.Count == 0)
+                {
+                    nogvNormalEvent.Visible = true;
+                }
+                else
+                {
+                    nogvNormalEvent.Visible = false;
+                }
             }
             else
             {
-                nogvNormalEvent.Visible = true;
+
+                    nogvNormalEvent.Visible = true;
+
             }
         }
 
@@ -158,6 +171,22 @@ namespace LuxERP.UI.Index
             else
             {
                 nogvStoreRenovationEvent.Visible = true;
+            }
+        }
+
+        protected void ddlLogBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlLogBy.SelectedValue == "我创建的事件")
+            {
+                gvNormalEventDataBind("0", Session["userName"].ToString());
+            }
+            if (ddlLogBy.SelectedValue == "其他人创建的事件")
+            {
+                gvNormalEventDataBind("1", Session["userName"].ToString());
+            }
+            if (ddlLogBy.SelectedValue == "已转出的事件")
+            {
+                gvNormalEventDataBind("2", Session["userName"].ToString());
             }
         }
     }
