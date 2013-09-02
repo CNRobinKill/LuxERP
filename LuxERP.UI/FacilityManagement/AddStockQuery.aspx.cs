@@ -17,7 +17,6 @@ namespace LuxERP.UI.FacilityManagement
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

@@ -57,13 +57,13 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
 <div>
-    <asp:Label runat="server" Text="事件编号："></asp:Label>
-    <asp:TextBox ID="txtEventNo" runat="server" Width="100"></asp:TextBox>
-    <asp:Label runat="server" Text="类型编号："></asp:Label>
-    <asp:TextBox ID="txtTypeCode" runat="server" Width="100" ontextchanged="txtTypeCode_TextChanged" AutoPostBack="true"></asp:TextBox>
+    
+    <asp:Label runat="server" Text="店号："></asp:Label><asp:TextBox ID="txtStoreNo" runat="server" Width="100"></asp:TextBox> 
+    <asp:Label runat="server" Text="类型编号："></asp:Label><asp:TextBox ID="txtTypeCode" runat="server" Width="100" ontextchanged="txtTypeCode_TextChanged" AutoPostBack="true"></asp:TextBox>
+    <asp:Label runat="server" Text="创建人："></asp:Label><asp:DropDownList ID="ddlLogBy" runat="server"></asp:DropDownList>
     <asp:Label ID="lblEventTime" runat="server" Text="创建时间："></asp:Label><asp:TextBox ID="txtAEventTime" runat="server" Width="100"></asp:TextBox>
     <asp:Label runat="server" Text="至"></asp:Label><asp:TextBox ID="txtBEventTime" runat="server" Width="100"></asp:TextBox>
-    <asp:Label runat="server" Text="店号："></asp:Label><asp:TextBox ID="txtStoreNo" runat="server" Width="100"></asp:TextBox>    
+    <asp:Label runat="server" Text="事件编号："></asp:Label><asp:TextBox ID="txtEventNo" runat="server" Width="100"></asp:TextBox>
     <asp:Label runat="server" Text="状态："></asp:Label><asp:DropDownList ID="ddlEventState" runat="server"></asp:DropDownList>
     <asp:Button ID="btnNormalEventQuery" runat="server" Text="事件查询" CssClass="button" 
         onclick="btnNormalEventQuery_Click" />

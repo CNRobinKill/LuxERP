@@ -13,6 +13,9 @@ namespace LuxERP.UI.EventManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnAddAllAllotStock.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddAllAllotStock, "click") + ";this.disabled=true; this.value='处理中...';");
+            btnAddExpress.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddExpress, "click") + ";this.disabled=true; this.value='处理中...';");
+            btnAddStoreFacilitie.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddStoreFacilitie, "click") + ";this.disabled=true; this.value='处理中...';");
             
                 if (Session["userName"] == null)
                 {

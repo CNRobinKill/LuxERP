@@ -210,7 +210,6 @@
     <Content Include="SolutionManagement\emoticons\whistling.png" />
     <Content Include="SolutionManagement\emoticons\wink.png" />
     <Content Include="SolutionManagement\emoticons\wub.png" />
-    <Content Include="StoreInformation\StoreFacility.aspx" />
     <Content Include="StoreInformation\StoreInformation.aspx" />
     <Content Include="SystemInitial\EventState.aspx" />
     <Content Include="SystemInitial\EventTypes.aspx" />
@@ -397,13 +396,6 @@
     </Compile>
     <Compile Include="SolutionManagement\UpdateSolution.aspx.designer.cs">
       <DependentUpon>UpdateSolution.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StoreInformation\StoreFacility.aspx.cs">
-      <DependentUpon>StoreFacility.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StoreInformation\StoreFacility.aspx.designer.cs">
-      <DependentUpon>StoreFacility.aspx</DependentUpon>
     </Compile>
     <Compile Include="StoreInformation\StoreInformation.aspx.cs">
       <DependentUpon>StoreInformation.aspx</DependentUpon>

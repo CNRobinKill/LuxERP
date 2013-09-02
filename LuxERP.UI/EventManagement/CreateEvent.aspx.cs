@@ -12,6 +12,10 @@ namespace LuxERP.UI.EventManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.btnNormalEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnNormalEvent, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnSetUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSetUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnShutUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnShutUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnStoreRenovation.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStoreRenovation, "click") + ";this.disabled=true; this.value='处理中...';");
             
                 if (Session["userName"] == null)
                 {

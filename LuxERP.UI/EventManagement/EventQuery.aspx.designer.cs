@@ -31,13 +31,13 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// txtEventNo 控件。
+        /// txtStoreNo 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEventNo;
+        protected global::System.Web.UI.WebControls.TextBox txtStoreNo;
         
         /// <summary>
         /// txtTypeCode 控件。
@@ -47,6 +47,15 @@ namespace LuxERP.UI.EventManagement {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTypeCode;
+        
+        /// <summary>
+        /// ddlLogBy 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLogBy;
         
         /// <summary>
         /// lblEventTime 控件。
@@ -76,13 +85,13 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.TextBox txtBEventTime;
         
         /// <summary>
-        /// txtStoreNo 控件。
+        /// txtEventNo 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStoreNo;
+        protected global::System.Web.UI.WebControls.TextBox txtEventNo;
         
         /// <summary>
         /// ddlEventState 控件。

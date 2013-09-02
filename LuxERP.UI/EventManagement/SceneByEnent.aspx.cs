@@ -14,7 +14,17 @@ namespace LuxERP.UI.EventManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddEngineers.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddEngineers, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnAddStoreFacilitie.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddStoreFacilitie, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnChange.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnChange, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelPic.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelPic, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnEndNo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnEndNo, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnEndOk.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnEndOk, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnGoOn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnGoOn, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnStart.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStart, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnUpload.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpload, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnWorkOrder.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnWorkOrder, "click") + ";this.disabled=true; this.value='处理中...';");
+
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

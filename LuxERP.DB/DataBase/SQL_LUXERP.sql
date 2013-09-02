@@ -104,65 +104,65 @@ go
 --事件类型
 create table tb_EventTypes
 (
-	TypeCode	nvarchar(50) not null primary key,
-	TypeOne		nvarchar(50),
-	TypeTwo		nvarchar(50),
-	TypeThree	nvarchar(50),
-	TypeFour	nvarchar(50),
-	EventLevel	nvarchar(50)
+	TypeCode	nvarchar(500) not null primary key,
+	TypeOne		nvarchar(500),
+	TypeTwo		nvarchar(500),
+	TypeThree	nvarchar(500),
+	TypeFour	nvarchar(500),
+	EventLevel	nvarchar(500)
 )
 
 -- 店铺
 create table tb_Stores
 (
-	StoreNo			nvarchar(50) not null primary key,
-	TopStore		nvarchar(50),
-	StoreType		nvarchar(50),
-	Region			nvarchar(50),
-	Rating			nvarchar(50),
-	StoreName		nvarchar(50),
-	City			nvarchar(50),
-	StoreAddress	nvarchar(50),
-	StoreTel		nvarchar(50),
-	ContractArea	nvarchar(50),
+	StoreNo			nvarchar(500) not null primary key,
+	TopStore		nvarchar(500),
+	StoreType		nvarchar(500),
+	Region			nvarchar(500),
+	Rating			nvarchar(500),
+	StoreName		nvarchar(500),
+	City			nvarchar(500),
+	StoreAddress	nvarchar(500),
+	StoreTel		nvarchar(500),
+	ContractArea	nvarchar(500),
 	OpeingDate		date,
-	StoreState		nvarchar(50)
+	StoreState		nvarchar(500)
 )
 
 -- 事件记录
 create table tb_EventLogs
 (
     ID				int identity,
-	EventNo			nvarchar(50) not null primary key,
+	EventNo			nvarchar(500) not null primary key,
 	EventTime		datetime,
-	StoreNo			nvarchar(50),
-	TypeCode		nvarchar(50),
-	EventDescribe	nvarchar(50),
+	StoreNo			nvarchar(500),
+	TypeCode		nvarchar(500),
+	EventDescribe	nvarchar(500),
 	ToResolvedTime	datetime,
-	EventState		nvarchar(50),
+	EventState		nvarchar(500),
 	ResolvedTime	datetime,
-	ResolvedBy		nvarchar(50),
-	LogBy			nvarchar(50),
-	HandingBy		nvarchar(50),
-	OutStockPic		nvarchar(50),
-	ScenePic		nvarchar(50)
+	ResolvedBy		nvarchar(500),
+	LogBy			nvarchar(500),
+	HandingBy		nvarchar(500),
+	OutStockPic		nvarchar(500),
+	ScenePic		nvarchar(500)
 )
 
 -- 事件步骤
 create table tb_EventSteps
 (
 	ID				int identity primary key,
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	StepDescribe	nvarchar(50),
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	StepDescribe	nvarchar(500),
 	StepTime		datetime,
-	StepState		nvarchar(50),
-	StepBy			nvarchar(50)
+	StepState		nvarchar(500),
+	StepBy			nvarchar(500)
 )
 
 -- 解决方案
 create table tb_Solutions
 (
-	TypeCode		nvarchar(50) references dbo.tb_EventTypes(TypeCode),
+	TypeCode		nvarchar(500) references dbo.tb_EventTypes(TypeCode),
 	Content			text
 )
 
@@ -170,127 +170,127 @@ create table tb_Solutions
 create table tb_AddStocks
 (
 	ID				int not null primary key identity,
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	WarehouseNo		nvarchar(50),
-	Maching			nvarchar(50),
-	Brand			nvarchar(50),
-	Model			nvarchar(50),
-	SerialNo		nvarchar(50),
-	Parameter		nvarchar(50),
-	EpcTags			nvarchar(50),
-	SapNo			nvarchar(50),
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	WarehouseNo		nvarchar(500),
+	Maching			nvarchar(500),
+	Brand			nvarchar(500),
+	Model			nvarchar(500),
+	SerialNo		nvarchar(500),
+	Parameter		nvarchar(500),
+	EpcTags			nvarchar(500),
+	SapNo			nvarchar(500),
 	PurchaseDate	datetime,
 	GuaranteeTime	datetime,
-	RepairsNo		nvarchar(50),
-	Supplier		nvarchar(50),
+	RepairsNo		nvarchar(500),
+	Supplier		nvarchar(500),
 	AddStockDate	datetime,
-	Operator		nvarchar(50)	
+	Operator		nvarchar(500)	
 )
 
 -- 出库需求
 create table tb_OutStockDemands
 (
 	DemandNo		int not null primary key identity,
-	EventNo			nvarchar(50),
-	Maching			nvarchar(50),
-	Brand			nvarchar(50),
-	Model			nvarchar(50),
-	Parameter		nvarchar(50)
+	EventNo			nvarchar(500),
+	Maching			nvarchar(500),
+	Brand			nvarchar(500),
+	Model			nvarchar(500),
+	Parameter		nvarchar(500)
 )
 
 -- 库存
 create table tb_Stocks
 (
 	ID					int not null primary key identity,
-	EventNo				nvarchar(50),
+	EventNo				nvarchar(500),
 	DemandNo			int,
-	WarehouseStoreNo	nvarchar(50),
-	Maching				nvarchar(50),
-	Brand				nvarchar(50),
-	Model				nvarchar(50),
-	SerialNo			nvarchar(50),
-	Parameter			nvarchar(50),
-	EpcTags				nvarchar(50),
-	SapNo				nvarchar(50),
+	WarehouseStoreNo	nvarchar(500),
+	Maching				nvarchar(500),
+	Brand				nvarchar(500),
+	Model				nvarchar(500),
+	SerialNo			nvarchar(500),
+	Parameter			nvarchar(500),
+	EpcTags				nvarchar(500),
+	SapNo				nvarchar(500),
 	PurchaseDate		datetime,
 	GuaranteeTime		datetime,
-	RepairsNo			nvarchar(50),
-	Supplier			nvarchar(50),
+	RepairsNo			nvarchar(500),
+	Supplier			nvarchar(500),
 	AddStockDate		datetime,
 	OutStockDate		datetime,
-	Operator			nvarchar(50),
-	StockType			nvarchar(50),
-	MachingState		nvarchar(50)
+	Operator			nvarchar(500),
+	StockType			nvarchar(500),
+	MachingState		nvarchar(500)
 )
 
 -- 废损库
 create table tb_ScrapStocks
 (
 	ID					int not null primary key identity,
-	WarehouseNo			nvarchar(50),
-	Maching				nvarchar(50),
-	Brand				nvarchar(50),
-	Model				nvarchar(50),
-	SerialNo			nvarchar(50),
-	Parameter			nvarchar(50),
-	EpcTags				nvarchar(50),
+	WarehouseNo			nvarchar(500),
+	Maching				nvarchar(500),
+	Brand				nvarchar(500),
+	Model				nvarchar(500),
+	SerialNo			nvarchar(500),
+	Parameter			nvarchar(500),
+	EpcTags				nvarchar(500),
 	PurchaseDate		datetime,
 	GuaranteeTime		datetime,
-	RepairsNo			nvarchar(50),
-	Supplier			nvarchar(50),
+	RepairsNo			nvarchar(500),
+	Supplier			nvarchar(500),
 	AddScrapStockDate	datetime,
-	Operator			nvarchar(50),
-	LastWarehouseNo		nvarchar(50),
-	ScrapReason			nvarchar(50)
+	Operator			nvarchar(500),
+	LastWarehouseNo		nvarchar(500),
+	ScrapReason			nvarchar(500)
 )
 
 -- 出库历史
 create table tb_OutStocks
 (
 	ID				int not null primary key identity,
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	WarehouseNo		nvarchar(50),
-	StoreNo			nvarchar(50),
-	Maching			nvarchar(50),
-	Brand			nvarchar(50),
-	Model			nvarchar(50),
-	SerialNo		nvarchar(50),
-	Parameter		nvarchar(50),
-	EpcTags			nvarchar(50),
-	SapNo			nvarchar(50),
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	WarehouseNo		nvarchar(500),
+	StoreNo			nvarchar(500),
+	Maching			nvarchar(500),
+	Brand			nvarchar(500),
+	Model			nvarchar(500),
+	SerialNo		nvarchar(500),
+	Parameter		nvarchar(500),
+	EpcTags			nvarchar(500),
+	SapNo			nvarchar(500),
 	PurchaseDate	datetime,
 	GuaranteeTime	datetime,
-	RepairsNo		nvarchar(50),
-	Supplier		nvarchar(50),
+	RepairsNo		nvarchar(500),
+	Supplier		nvarchar(500),
 	OutStockDate	datetime,
-	Operator		nvarchar(50),
-	OutStocksState	nvarchar(50)
+	Operator		nvarchar(500),
+	OutStocksState	nvarchar(500)
 )
 
 -- 调拨历史
 create table tb_AllotStocks
 (
 	ID					int not null primary key identity,
-	EventNo				nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	WarehouseStoreNoA	nvarchar(50),
-	WarehouseStoreNoB	nvarchar(50),
-	Maching				nvarchar(50),
-	Brand				nvarchar(50),
-	Model				nvarchar(50),
-	SerialNo			nvarchar(50),
-	Parameter			nvarchar(50),
+	EventNo				nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	WarehouseStoreNoA	nvarchar(500),
+	WarehouseStoreNoB	nvarchar(500),
+	Maching				nvarchar(500),
+	Brand				nvarchar(500),
+	Model				nvarchar(500),
+	SerialNo			nvarchar(500),
+	Parameter			nvarchar(500),
 	AllotStockDate		datetime,
-	Operator			nvarchar(50),
-	AllotStockState		nvarchar(50)
+	Operator			nvarchar(500),
+	AllotStockState		nvarchar(500)
 )
 
 -- 快递信息
 create table tb_Express
 (
 	ID				int not null primary key identity,
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	ExpressCo		nvarchar(50),
-	ExpressNo		nvarchar(50),
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	ExpressCo		nvarchar(500),
+	ExpressNo		nvarchar(500),
 	GetOrSend		int,
 	ExpressState	int
 )
@@ -298,170 +298,170 @@ create table tb_Express
 ---- 上门状态
 create table tb_SceneState
 (
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	SceneState		nvarchar(50)
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	SceneState		nvarchar(500)
 )
 
 -- 预约工程师
 create table tb_AppointEngineers
 (
 	ID				int not null primary key identity,
-	EventNo			nvarchar(50) references dbo.tb_EventLogs(EventNo),
-	Name			nvarchar(50),
-	Phone			nvarchar(50),
-	Email			nvarchar(50),
+	EventNo			nvarchar(500) references dbo.tb_EventLogs(EventNo),
+	Name			nvarchar(500),
+	Phone			nvarchar(500),
+	Email			nvarchar(500),
 	SceneTime		datetime,
-	AppointState	nvarchar(50)
+	AppointState	nvarchar(500)
 	
 )
 
 ---- 状态表
 --create table tb_States
 --(
---	StateNo			nvarchar(50) not null primary key,
---	StateName		nvarchar(50),
---	StateDateDiff	nvarchar(50),
---	StateNote		nvarchar(50)	
+--	StateNo			nvarchar(500) not null primary key,
+--	StateName		nvarchar(500),
+--	StateDateDiff	nvarchar(500),
+--	StateNote		nvarchar(500)	
 --)
 
 -- 服务历史
 create table tb_HistoryService
 (
-	EventNo				nvarchar(50),
-	Maching				nvarchar(50),
-	Brand				nvarchar(50),
-	Model				nvarchar(50),
-	SerialNo			nvarchar(50),
-	Parameter			nvarchar(50),
+	EventNo				nvarchar(500),
+	Maching				nvarchar(500),
+	Brand				nvarchar(500),
+	Model				nvarchar(500),
+	SerialNo			nvarchar(500),
+	Parameter			nvarchar(500),
 	PurchaseDate		datetime,
-	Supplier			nvarchar(50),
+	Supplier			nvarchar(500),
 	ServiceDate			datetime
 )
 
 -- 人员信息
 create table tb_People
 (
-	Position			nvarchar(50),
-	Name				nvarchar(50),
-	Sex					nvarchar(50),
-	Phone				nvarchar(50),
-	Email				nvarchar(50)
+	Position			nvarchar(500),
+	Name				nvarchar(500),
+	Sex					nvarchar(500),
+	Phone				nvarchar(500),
+	Email				nvarchar(500)
 )
 
 -- 设备基础信息
 create table tb_Facility
 (
 	ID					int identity(1,1) not null,
-	Maching				nvarchar(50),
-	Brand				nvarchar(50),
-	Model				nvarchar(50),
-	Parameter			nvarchar(50)
+	Maching				nvarchar(500),
+	Brand				nvarchar(500),
+	Model				nvarchar(500),
+	Parameter			nvarchar(500)
 )
 
 -- 机器名称
 create table tb_Machings
 (
 	ID		int identity(1,1) not null,
-	Maching nvarchar(50)
+	Maching nvarchar(500)
 )
 
 -- 品牌
 create table tb_Brands
 (
 	ID		int identity(1,1) not null,
-	Brand	nvarchar(50)
+	Brand	nvarchar(500)
 )
 
 -- 型号
 create table tb_Models
 (
 	ID		int identity(1,1) not null,
-	Model	nvarchar(50)
+	Model	nvarchar(500)
 )
 
 -- 配置参数
 create table tb_Parameters
 (
 	ID		int identity(1,1) not null,
-	Parameter	nvarchar(50)
+	Parameter	nvarchar(500)
 )
 
 -- 供应
 create table tb_Suppliers
 (
 	ID		int identity(1,1) not null,
-	Supplier	nvarchar(50)
+	Supplier	nvarchar(500)
 )
 
 -- 类型1
 create table tb_TypeOnes
 (
 	ID			int identity(1,1) not null,
-	TypeOne		nvarchar(50)
+	TypeOne		nvarchar(500)
 )
 
 -- 类型2
 create table tb_TypeTwos
 (
 	ID			int identity(1,1) not null,
-	TypeTwo		nvarchar(50)
+	TypeTwo		nvarchar(500)
 )
 
 -- 类型3
 create table tb_TypeThrees
 (
 	ID			int identity(1,1) not null,
-	TypeThree	nvarchar(50)
+	TypeThree	nvarchar(500)
 )
 
 -- 类型4
 create table tb_TypeFours
 (
 	ID			int identity(1,1) not null,
-	TypeFour	nvarchar(50)
+	TypeFour	nvarchar(500)
 )
 
 -- 解决人/组织
 create table tb_Solver
 (
 	ID			int identity(1,1) not null,
-	Solver		nvarchar(50),
-	SMTP		nvarchar(50),
-	Email		nvarchar(50),
-	EPassword	nvarchar(50),
-	Note		nvarchar(50)
+	Solver		nvarchar(500),
+	SMTP		nvarchar(500),
+	Email		nvarchar(500),
+	EPassword	nvarchar(500),
+	Note		nvarchar(500)
 )
 
 -- 快递公司
 create table tb_ExpressCo
 (
 	ID			int identity(1,1) not null,
-	ExpressCo	nvarchar(50)
+	ExpressCo	nvarchar(500)
 )
 
 -- 事件状态
 create table tb_EventState
 (
 	StateID			int primary key,
-	StateName		nvarchar(50),
+	StateName		nvarchar(500),
 	StateDay		int
 )
 
 -- 系统用户
 create table tb_SystemUser
 (
-	UserName		nvarchar(50) primary key,
-	[Password]		nvarchar(50),
+	UserName		nvarchar(500) primary key,
+	[Password]		nvarchar(500),
 	CreateTime		datetime,
 	LastLogOnTime	datetime,
 	UserState		int,
-	UserIP			nvarchar(50)
+	UserIP			nvarchar(500)
 )
 
 -- 权限
 create table tb_Permission
 (
-	UserName			nvarchar(50) references dbo.tb_SystemUser(UserName),
+	UserName			nvarchar(500) references dbo.tb_SystemUser(UserName),
 	[Admin]				int,
 	[Index]				int,
 	UpdateSolution		int,
@@ -497,7 +497,7 @@ GO
 /**Add**/
 Create Procedure [dbo].[AddTypeOne]
 (
-	@typeOne  nvarchar(50)
+	@typeOne  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -517,7 +517,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelTypeOne]
 (
-	@typeOne  nvarchar(50)
+	@typeOne  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -531,7 +531,7 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddTypeTwo]
 (
-	@typeTwo  nvarchar(50)
+	@typeTwo  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -551,7 +551,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelTypeTwo]
 (
-	@typeTwo  nvarchar(50)
+	@typeTwo  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -565,7 +565,7 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddTypeThree]
 (
-	@typeThree  nvarchar(50)
+	@typeThree  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -585,7 +585,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelTypeThree]
 (
-	@typeThree  nvarchar(50)
+	@typeThree  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -599,7 +599,7 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddTypeFour]
 (
-	@typeFour  nvarchar(50)
+	@typeFour  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -619,7 +619,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelTypeFour]
 (
-	@typeFour  nvarchar(50)
+	@typeFour  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -634,7 +634,7 @@ insert into tb_Solver(Solver,SMTP,Email,EPassword,Note) values('库存管理员',NULL
 /**Add**/
 Create Procedure [dbo].[AddSolver]
 (
-	@solver  nvarchar(50)
+	@solver  nvarchar(500)
 )
 as
 begin
@@ -651,17 +651,17 @@ end
 Go
 Create Procedure [dbo].[GetSolverByEventType]
 (
-	@typeCode	nvarchar(50)
+	@typeCode	nvarchar(500)
 )
 AS
-declare @email1		nvarchar(50)
-declare @email2		nvarchar(50)
-declare @solver1	nvarchar(50)
-declare @solver2	nvarchar(50)
-declare	@smtp		nvarchar(50)
-declare	@ePassword	nvarchar(50)
-declare @note		nvarchar(50)
-declare @eventName	nvarchar(50)
+declare @email1		nvarchar(500)
+declare @email2		nvarchar(500)
+declare @solver1	nvarchar(500)
+declare @solver2	nvarchar(500)
+declare	@smtp		nvarchar(500)
+declare	@ePassword	nvarchar(500)
+declare @note		nvarchar(500)
+declare @eventName	nvarchar(500)
 begin
 select top 1 @solver1=Solver, @email1=Email, @smtp=SMTP, @ePassword=EPassword from tb_Solver where SMTP<>'' and SMTP is not null and EPassword <> '' and EPassword is not null
 select @solver2=EventLevel from tb_EventTypes where TypeCode=@typeCode
@@ -673,17 +673,17 @@ end
 Go
 Create Procedure [dbo].[GetSolverChangeHandingBy]
 (
-	@handingBy	nvarchar(50),
-	@typeCode	nvarchar(50)
+	@handingBy	nvarchar(500),
+	@typeCode	nvarchar(500)
 )
 AS
-declare @email1		nvarchar(50)
-declare @email2		nvarchar(50)
-declare @solver1	nvarchar(50)
-declare	@smtp		nvarchar(50)
-declare	@ePassword	nvarchar(50)
-declare @note		nvarchar(50)
-declare @eventName	nvarchar(50)
+declare @email1		nvarchar(500)
+declare @email2		nvarchar(500)
+declare @solver1	nvarchar(500)
+declare	@smtp		nvarchar(500)
+declare	@ePassword	nvarchar(500)
+declare @note		nvarchar(500)
+declare @eventName	nvarchar(500)
 begin
 select top 1 @solver1=Solver, @email1=Email, @smtp=SMTP, @ePassword=EPassword from tb_Solver where SMTP<>'' and SMTP is not null and EPassword <> '' and EPassword is not null
 select @note=Note from tb_Solver where Solver=@handingBy
@@ -702,15 +702,15 @@ Go
 
 Create Procedure [dbo].[GetStockIn]
 (
-	@stockInSolver	nvarchar(50)
+	@stockInSolver	nvarchar(500)
 )
 AS
-declare @email1		nvarchar(50)
-declare @email2		nvarchar(50)
-declare @solver1	nvarchar(50)
-declare	@smtp		nvarchar(50)
-declare	@ePassword	nvarchar(50)
-declare @note		nvarchar(50)
+declare @email1		nvarchar(500)
+declare @email2		nvarchar(500)
+declare @solver1	nvarchar(500)
+declare	@smtp		nvarchar(500)
+declare	@ePassword	nvarchar(500)
+declare @note		nvarchar(500)
 
 begin
 select top 1 @solver1=Solver, @email1=Email, @smtp=SMTP, @ePassword=EPassword from tb_Solver where SMTP<>'' and SMTP is not null and EPassword <> '' and EPassword is not null
@@ -722,11 +722,11 @@ Go
 /**Update**/
 Create Procedure [dbo].[UpdateSolver]
 (
-	@solver		nvarchar(50),
-	@smtp		nvarchar(50),
-	@email		nvarchar(50),
-	@epassword  nvarchar(50),
-	@note		nvarchar(50)
+	@solver		nvarchar(500),
+	@smtp		nvarchar(500),
+	@email		nvarchar(500),
+	@epassword  nvarchar(500),
+	@note		nvarchar(500)
 )
 AS
 begin
@@ -736,7 +736,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelSolver]
 (
-	@solver  nvarchar(50)
+	@solver  nvarchar(500)
 )
 AS
 begin	
@@ -759,9 +759,9 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddEventState]
 (
-	@stateName		nvarchar(50),
+	@stateName		nvarchar(500),
 	@stateDay		int,
-	@stateType		nvarchar(50)
+	@stateType		nvarchar(500)
 )
 as
 begin
@@ -807,7 +807,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetEventState]
 (
-	@stateType		nvarchar(50)
+	@stateType		nvarchar(500)
 )
 AS
 begin
@@ -821,7 +821,7 @@ end
 Go
 Create Procedure [dbo].[GetEventStateByStateID]
 (
-	@stateType		nvarchar(50),
+	@stateType		nvarchar(500),
 	@stateID		int
 )
 AS
@@ -838,7 +838,7 @@ end
 Go
 Create Procedure [dbo].[GetMinEventState]
 (
-	@stateType		nvarchar(50)
+	@stateType		nvarchar(500)
 )
 AS
 begin
@@ -853,7 +853,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelEventState]
 (
-	@stateType		nvarchar(50),
+	@stateType		nvarchar(500),
 	@stateID		int
 )
 AS
@@ -904,7 +904,7 @@ Go
 Create Procedure UpdateEventStateByStateID
 (
 	@stateID		int,
-	@stateName		nvarchar(50),
+	@stateName		nvarchar(500),
 	@stateDay		int
 )
 as
@@ -948,7 +948,7 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddExpressCo]
 (
-	@expressCo  nvarchar(50)
+	@expressCo  nvarchar(500)
 )
 as
 begin
@@ -966,7 +966,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelExpressCo]
 (
-	@expressCo  nvarchar(50)
+	@expressCo  nvarchar(500)
 )
 AS
 begin	
@@ -987,12 +987,12 @@ if not exists(select TypeCode from tb_EventTypes where TypeCode='8888') insert i
 go
 Create Procedure [dbo].[AddEventTypes]
 (
-	@typeCode	nvarchar(50),
-	@typeOne	nvarchar(50),
-	@typeTwo	nvarchar(50),
-	@typeThree  nvarchar(50),
-	@typeFour	nvarchar(50),
-	@eventLevel	nvarchar(50)
+	@typeCode	nvarchar(500),
+	@typeOne	nvarchar(500),
+	@typeTwo	nvarchar(500),
+	@typeThree  nvarchar(500),
+	@typeFour	nvarchar(500),
+	@eventLevel	nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1032,7 +1032,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelEventTypes]
 (
-	@typeCode  nvarchar(50)
+	@typeCode  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1046,11 +1046,11 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddPeople]
 (
-	@position	nvarchar(50),
-	@name		nvarchar(50),
-	@sex		nvarchar(50),
-	@phone		nvarchar(50),
-	@email		nvarchar(50)
+	@position	nvarchar(500),
+	@name		nvarchar(500),
+	@sex		nvarchar(500),
+	@phone		nvarchar(500),
+	@email		nvarchar(500)
 )
 AS
 begin
@@ -1078,7 +1078,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelPeople]
 (
-	@name  nvarchar(50)
+	@name  nvarchar(500)
 )
 as
 begin
@@ -1091,7 +1091,7 @@ Go
 /**Add**/
 create proc dbo.sp_AddSolution
 (
-	@TypeCode nvarchar(50)=''
+	@TypeCode nvarchar(500)=''
 )
 as
 begin
@@ -1101,7 +1101,7 @@ go
 /**Get**/
 create proc dbo.sp_GetSolutionByID
 (
-	@TypeCode nvarchar(50) = ''
+	@TypeCode nvarchar(500) = ''
 )
 as
 begin
@@ -1126,7 +1126,7 @@ go
 /**Uptate**/
 create proc dbo.sp_UpdateSolution
 (
-	@TypeCode nvarchar(50) = '',
+	@TypeCode nvarchar(500) = '',
 	@Content text = ''
 )
 as
@@ -1137,7 +1137,7 @@ go
 /**Del**/
 Create Procedure [dbo].[sp_DelSolution]
 (
-	@TypeCode  nvarchar(50)
+	@TypeCode  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1151,20 +1151,20 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddEventLogs]
 (
-	@eventNo		nvarchar(50),
-	@eventTime		nvarchar(50),
-	@storeNo		nvarchar(50),
-	@typeCode		nvarchar(50),
-	@eventDescribe	nvarchar(50),
-	@toResolvedTime	nvarchar(50),
-	@eventState		nvarchar(50),
-	@logBy			nvarchar(50)
+	@eventNo		nvarchar(500),
+	@eventTime		nvarchar(500),
+	@storeNo		nvarchar(500),
+	@typeCode		nvarchar(500),
+	@eventDescribe	nvarchar(500),
+	@toResolvedTime	nvarchar(500),
+	@eventState		nvarchar(500),
+	@logBy			nvarchar(500)
 )
 AS
 DECLARE	 @sql					nvarchar (1000)
 DECLARE  @eventDateTime			datetime
 DECLARE  @toResolvedDateTime	datetime
-DECLARE	 @handingBy				nvarchar(50)
+DECLARE	 @handingBy				nvarchar(500)
 	SET @eventDateTime = cast(@eventTime as datetime)
 	select @handingBy=EventLevel from tb_EventTypes where TypeCode=@typeCode
 IF @toResolvedTime <> ''
@@ -1186,7 +1186,7 @@ Go
 /**Get**/
 create Procedure [dbo].[GetEventLogsByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 begin	
@@ -1195,8 +1195,8 @@ end
 Go
 create Procedure [dbo].[GetPic]
 (
-	@eventNo		nvarchar(50),
-	@picNo			nvarchar(50)
+	@eventNo		nvarchar(500),
+	@picNo			nvarchar(500)
 )
 AS
 begin
@@ -1208,7 +1208,7 @@ end
 Go
 create Procedure [dbo].[GetTopTenEventLogsByStoreNo]
 (
-	@storeNo		nvarchar(50)
+	@storeNo		nvarchar(500)
 )
 AS
 begin	
@@ -1217,11 +1217,11 @@ end
 Go
 create Procedure [dbo].[GetEventLogsInNormalEvent]
 (
-	@eventTimeA		nvarchar(50),
-	@eventTimeB		nvarchar(50),
-	@storeNo		nvarchar(50),
-	@typeCode		nvarchar(50),
-	@eventState		nvarchar(50)
+	@eventTimeA		nvarchar(500),
+	@eventTimeB		nvarchar(500),
+	@storeNo		nvarchar(500),
+	@typeCode		nvarchar(500),
+	@eventState		nvarchar(500)
 )
 AS
 DECLARE  @where   nvarchar(500)
@@ -1274,7 +1274,7 @@ EXEC(@sql)
 Go
 create Procedure [dbo].[GetHandingByByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 begin	
@@ -1284,8 +1284,8 @@ Go
 /**Update**/
 Create Procedure UpdateEventState
 (
-	@eventState nvarchar(50),
-	@eventNo	nvarchar(50)
+	@eventState nvarchar(500),
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -1294,9 +1294,9 @@ end
 go
 Create Procedure UpdateUpLoadPic
 (
-	@eventNo		nvarchar(50),
-	@outStockPic	nvarchar(50),
-	@scenePic		nvarchar(50)
+	@eventNo		nvarchar(500),
+	@outStockPic	nvarchar(500),
+	@scenePic		nvarchar(500)
 )
 as
 begin
@@ -1320,15 +1320,15 @@ end
 go
 Create Procedure UpdateEventStateByShutUpShop
 (
-	@storeNo		nvarchar(50),
-	@stepDescribe	nvarchar(50),
-	@stepTime		nvarchar(50),
-	@stepState		nvarchar(50),
-	@stepBy			nvarchar(50)
+	@storeNo		nvarchar(500),
+	@stepDescribe	nvarchar(500),
+	@stepTime		nvarchar(500),
+	@stepState		nvarchar(500),
+	@stepBy			nvarchar(500)
 )
 as
 declare @count		int
-declare @eventNo	nvarchar(50)
+declare @eventNo	nvarchar(500)
 begin
 
 	select @eventNo=(select top 1 EventNo from tb_EventLogs where StoreNo=@storeNo and EventState='99') 
@@ -1343,9 +1343,9 @@ end
 go
 Create Procedure UpdateResolvedByAndTime
 (
-	@resolvedBy nvarchar(50),
-	@resolvedTime nvarchar(50),
-	@eventNo	nvarchar(50)
+	@resolvedBy nvarchar(500),
+	@resolvedTime nvarchar(500),
+	@eventNo	nvarchar(500)
 )
 as
 if @resolvedTime=''
@@ -1362,8 +1362,8 @@ end
 go
 Create Procedure UpdateTypeCode
 (
-	@typeCode	nvarchar(50),
-	@eventNo	nvarchar(50)
+	@typeCode	nvarchar(500),
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -1372,8 +1372,8 @@ end
 go
 Create Procedure UpdateHandingBy
 (
-	@handingBy	nvarchar(50),
-	@eventNo	nvarchar(50)
+	@handingBy	nvarchar(500),
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -1389,8 +1389,8 @@ end
 go
 Create Procedure UpdateToResolvedTime
 (
-	@toResolvedTime nvarchar(50),
-	@eventNo	nvarchar(50)
+	@toResolvedTime nvarchar(500),
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -1403,11 +1403,11 @@ go
 /**Add**/
 Create Procedure [dbo].[AddEventSteps]
 (
-	@eventNo		nvarchar(50),
-	@stepDescribe	nvarchar(50),
-	@stepTime		nvarchar(50),
-	@stepState		nvarchar(50),
-	@stepBy			nvarchar(50)
+	@eventNo		nvarchar(500),
+	@stepDescribe	nvarchar(500),
+	@stepTime		nvarchar(500),
+	@stepState		nvarchar(500),
+	@stepBy			nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)
@@ -1420,7 +1420,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetEventStepsByEventNo]
 (		
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 begin	
@@ -1431,8 +1431,8 @@ Go
 Create Procedure UpdateEventSteps
 (
 	@id				int,
-	@stepDescribe	nvarchar(50),
-	@stepState		nvarchar(50)
+	@stepDescribe	nvarchar(500),
+	@stepState		nvarchar(500)
 )
 as
 begin
@@ -1445,18 +1445,18 @@ go
 /*Add*/
 create proc dbo.AddStores
 (
-	@storeNo		nvarchar(50),
-    @topStore		nvarchar(50),
-    @storeType		nvarchar(50),
-    @region			nvarchar(50),
-    @rating			nvarchar(50),
-    @storeName		nvarchar(50),
-    @city			nvarchar(50),
-    @storeAddress	nvarchar(50),
-    @storeTel		nvarchar(50),
-    @contractArea	nvarchar(50),
-    @opeingDate		nvarchar(50),
-    @storeState		nvarchar(50)
+	@storeNo		nvarchar(500),
+    @topStore		nvarchar(500),
+    @storeType		nvarchar(500),
+    @region			nvarchar(500),
+    @rating			nvarchar(500),
+    @storeName		nvarchar(500),
+    @city			nvarchar(500),
+    @storeAddress	nvarchar(500),
+    @storeTel		nvarchar(500),
+    @contractArea	nvarchar(500),
+    @opeingDate		nvarchar(500),
+    @storeState		nvarchar(500)
 )
 as
 begin
@@ -1472,7 +1472,7 @@ go
 /**Get**/
 Create Procedure [dbo].[GetRegionByStoreNo]
 (
-	@storeNo		nvarchar(50)
+	@storeNo		nvarchar(500)
 )
 
 AS
@@ -1483,7 +1483,7 @@ EXEC(@sql)
 Go
 Create Procedure [dbo].[GetStoresByStoreNo]
 (
-	@storeNo		nvarchar(50)
+	@storeNo		nvarchar(500)
 )
 AS
 begin	
@@ -1492,14 +1492,14 @@ end
 Go
 create proc dbo.GetStores
 (
-	@storeNo	nvarchar(50),
-	@topStore	nvarchar(50),
-	@storeType	nvarchar(50),
-	@region		nvarchar(50),
-	@rating		nvarchar(50),
-	@opeingDateF nvarchar(50),
-	@opeingDateT nvarchar(50),
-	@storeState nvarchar(50)
+	@storeNo	nvarchar(500),
+	@topStore	nvarchar(500),
+	@storeType	nvarchar(500),
+	@region		nvarchar(500),
+	@rating		nvarchar(500),
+	@opeingDateF nvarchar(500),
+	@opeingDateT nvarchar(500),
+	@storeState nvarchar(500)
 )
 as
 begin
@@ -1548,7 +1548,7 @@ go
 /**Del**/
 Create Procedure [dbo].[DelStores]
 (
-	@storeNo  nvarchar(50)
+	@storeNo  nvarchar(500)
 )
 AS
 begin
@@ -1558,18 +1558,18 @@ Go
 /**Update**/
 create proc dbo.UpdateStores
 (
-	@storeNo		nvarchar(50),
-    @topStore		nvarchar(50),
-    @storeType		nvarchar(50),
-    @region			nvarchar(50),
-    @rating			nvarchar(50),
-    @storeName		nvarchar(50),
-    @city			nvarchar(50),
-    @storeAddress	nvarchar(50),
-    @storeTel		nvarchar(50),
-    @contractArea	nvarchar(50),
-    @opeingDate		nvarchar(50),
-    @storeState		nvarchar(50)
+	@storeNo		nvarchar(500),
+    @topStore		nvarchar(500),
+    @storeType		nvarchar(500),
+    @region			nvarchar(500),
+    @rating			nvarchar(500),
+    @storeName		nvarchar(500),
+    @city			nvarchar(500),
+    @storeAddress	nvarchar(500),
+    @storeTel		nvarchar(500),
+    @contractArea	nvarchar(500),
+    @opeingDate		nvarchar(500),
+    @storeState		nvarchar(500)
 )
 as
 begin
@@ -1628,10 +1628,10 @@ go
 /**Add**/
 Create Procedure [dbo].[AddFacility]
 (
-	@maching	nvarchar(50),
-	@brand		nvarchar(50),
-	@model		nvarchar(50),
-	@parameter	nvarchar(50)
+	@maching	nvarchar(500),
+	@brand		nvarchar(500),
+	@model		nvarchar(500),
+	@parameter	nvarchar(500)
 	
 )
 AS
@@ -1655,7 +1655,7 @@ EXEC(@sql)
 Go
 Create Procedure [dbo].[GetBrandFromFacility]
 (
-	@maching	nvarchar(50)
+	@maching	nvarchar(500)
 	
 )
 AS
@@ -1669,8 +1669,8 @@ end
 Go
 Create Procedure [dbo].[GetModelFromFacility]
 (
-	@maching	nvarchar(50),
-	@brand		nvarchar(50)
+	@maching	nvarchar(500),
+	@brand		nvarchar(500)
 	
 )
 AS
@@ -1684,9 +1684,9 @@ end
 Go
 Create Procedure [dbo].[GetParameterFromFacility]
 (
-	@maching	nvarchar(50),
-	@brand		nvarchar(50),
-	@model		nvarchar(50)	
+	@maching	nvarchar(500),
+	@brand		nvarchar(500),
+	@model		nvarchar(500)	
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)
@@ -1700,10 +1700,10 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelFacility]
 (
-	@maching	nvarchar(50),
-	@brand		nvarchar(50),
-	@model		nvarchar(50),
-	@parameter	nvarchar(50)
+	@maching	nvarchar(500),
+	@brand		nvarchar(500),
+	@model		nvarchar(500),
+	@parameter	nvarchar(500)
 	
 )
 AS
@@ -1721,7 +1721,7 @@ Go
 /**Add**/
 create Procedure [dbo].[AddMaching]
 (
-	@maching  nvarchar(50)
+	@maching  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1741,7 +1741,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelMaching]
 (
-	@maching  nvarchar(50)
+	@maching  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1755,7 +1755,7 @@ Go
 /**Add**/
 create Procedure [dbo].[AddBrand]
 (
-	@brand  nvarchar(50)
+	@brand  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1775,7 +1775,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelBrand]
 (
-	@brand  nvarchar(50)
+	@brand  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1789,7 +1789,7 @@ Go
 /**Add**/
 create Procedure [dbo].[AddModel]
 (
-	@model  nvarchar(50)
+	@model  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1809,7 +1809,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelModel]
 (
-	@model  nvarchar(50)
+	@model  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1823,7 +1823,7 @@ Go
 /**Add**/
 create Procedure [dbo].[AddParameter]
 (
-	@parameter  nvarchar(50)
+	@parameter  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1843,7 +1843,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelParameter]
 (
-	@parameter  nvarchar(50)
+	@parameter  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1857,7 +1857,7 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddSupplier]
 (
-	@supplier nvarchar(50)
+	@supplier nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1877,7 +1877,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelSupplier]
 (
-	@supplier  nvarchar(50)
+	@supplier  nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar (1000)	
@@ -1891,11 +1891,11 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddOutStockDemands]
 (
-	@eventNo		nvarchar(50),
-	@maching		nvarchar(50),
-	@brand			nvarchar(50),
-	@model			nvarchar(50),
-	@parameter		nvarchar(50)
+	@eventNo		nvarchar(500),
+	@maching		nvarchar(500),
+	@brand			nvarchar(500),
+	@model			nvarchar(500),
+	@parameter		nvarchar(500)
 )
 AS
 BEGIN
@@ -1905,7 +1905,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetOutStockDemandsByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -1914,7 +1914,7 @@ END
 Go
 Create Procedure [dbo].[GetNoMatchingByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -1935,7 +1935,7 @@ Go
 /**Update**/
 Create Procedure [dbo].[UptateOutStockDemands]
 (
-	@eventNo	nvarchar(50),
+	@eventNo	nvarchar(500),
 	@demandNo	int,
 	@id			int
 )
@@ -1951,14 +1951,14 @@ Go
 /***************************AddStocks***************************/
 Create Procedure [dbo].[GetAddStocks]
 (
-	@warehouseNo			nvarchar(50),
-	@maching				nvarchar(50),
-	@brand					nvarchar(50),
-	@model					nvarchar(50),
-	@parameter				nvarchar(50),
-	@supplier				nvarchar(50),
-	@addStockDateA			nvarchar(50),
-	@addStockDateB			nvarchar(50)
+	@warehouseNo			nvarchar(500),
+	@maching				nvarchar(500),
+	@brand					nvarchar(500),
+	@model					nvarchar(500),
+	@parameter				nvarchar(500),
+	@supplier				nvarchar(500),
+	@addStockDateA			nvarchar(500),
+	@addStockDateB			nvarchar(500)
 )
 AS
 begin
@@ -1995,23 +1995,23 @@ go
 Create proc dbo.AddStocks
 (
 
-      @WarehouseStoreNo		nvarchar(50),
-      @Maching				nvarchar(50),
-      @Brand				nvarchar(50),
-      @Model				nvarchar(50),
-      @SerialNo				nvarchar(50),
-      @Parameter			nvarchar(50),
-      @EpcTags				nvarchar(50),
-      @SapNo				nvarchar(50),
-      @PurchaseDate			nvarchar(50),
-      @GuaranteeTime		nvarchar(50),
-      @RepairsNo			nvarchar(50),
-      @Supplier				nvarchar(50),
-      @AddStockDate			nvarchar(50),
-      @OutStockDate			nvarchar(50),     
-      @Operator				nvarchar(50),
-      @StockType			nvarchar(50),
-      @MachingState			nvarchar(50)
+      @WarehouseStoreNo		nvarchar(500),
+      @Maching				nvarchar(500),
+      @Brand				nvarchar(500),
+      @Model				nvarchar(500),
+      @SerialNo				nvarchar(500),
+      @Parameter			nvarchar(500),
+      @EpcTags				nvarchar(500),
+      @SapNo				nvarchar(500),
+      @PurchaseDate			nvarchar(500),
+      @GuaranteeTime		nvarchar(500),
+      @RepairsNo			nvarchar(500),
+      @Supplier				nvarchar(500),
+      @AddStockDate			nvarchar(500),
+      @OutStockDate			nvarchar(500),     
+      @Operator				nvarchar(500),
+      @StockType			nvarchar(500),
+      @MachingState			nvarchar(500)
 )
 as
 begin
@@ -2036,22 +2036,22 @@ end
 go
 CREATE proc dbo.AddStocksCommitHistory
 (
-      @WarehouseStoreNo		nvarchar(50),
-      @Maching				nvarchar(50),
-      @Brand				nvarchar(50),
-      @Model				nvarchar(50),
-      @SerialNo				nvarchar(50),
-      @Parameter			nvarchar(50),
-      @EpcTags				nvarchar(50),
-      @SapNo				nvarchar(50),
-      @PurchaseDate			nvarchar(50),
-      @GuaranteeTime		nvarchar(50),
-      @RepairsNo			nvarchar(50),
-      @Supplier				nvarchar(50),
-      @AddStockDate			nvarchar(50),
-      @Operator				nvarchar(50),
-      @StockType			nvarchar(50),
-      @MachingState			nvarchar(50)
+      @WarehouseStoreNo		nvarchar(500),
+      @Maching				nvarchar(500),
+      @Brand				nvarchar(500),
+      @Model				nvarchar(500),
+      @SerialNo				nvarchar(500),
+      @Parameter			nvarchar(500),
+      @EpcTags				nvarchar(500),
+      @SapNo				nvarchar(500),
+      @PurchaseDate			nvarchar(500),
+      @GuaranteeTime		nvarchar(500),
+      @RepairsNo			nvarchar(500),
+      @Supplier				nvarchar(500),
+      @AddStockDate			nvarchar(500),
+      @Operator				nvarchar(500),
+      @StockType			nvarchar(500),
+      @MachingState			nvarchar(500)
       
 )
 as
@@ -2079,19 +2079,19 @@ go
 /**Get**/
 Create Procedure [dbo].[GetStocks]
 (
-	@eventNo				nvarchar(50),
-	@warehouseStoreNo		nvarchar(50),
-	@maching				nvarchar(50),
-	@brand					nvarchar(50),
-	@model					nvarchar(50),
-	@parameter				nvarchar(50),
-	@supplier				nvarchar(50),
-	@addStockDateA			nvarchar(50),
-	@addStockDateB			nvarchar(50),
-	@outStockDateA			nvarchar(50),
-	@outStockDateB			nvarchar(50),
-	@stockType				nvarchar(50),
-	@machingState			nvarchar(50)
+	@eventNo				nvarchar(500),
+	@warehouseStoreNo		nvarchar(500),
+	@maching				nvarchar(500),
+	@brand					nvarchar(500),
+	@model					nvarchar(500),
+	@parameter				nvarchar(500),
+	@supplier				nvarchar(500),
+	@addStockDateA			nvarchar(500),
+	@addStockDateB			nvarchar(500),
+	@outStockDateA			nvarchar(500),
+	@outStockDateB			nvarchar(500),
+	@stockType				nvarchar(500),
+	@machingState			nvarchar(500)
 )
 AS
 begin
@@ -2150,7 +2150,7 @@ Create Procedure [dbo].[GetStocksInID]
 	@idTemp nvarchar(100)
 )
 AS
-declare @temp nvarchar(50)
+declare @temp nvarchar(500)
 declare @sql nvarchar(1000)
 declare @n int
 
@@ -2167,12 +2167,12 @@ go
 Create Procedure [dbo].[DelStocksToScrapInID]
 (
 	@idTemp				nvarchar(100),
-	@addScrapStockDate	nvarchar(50),
-	@operator			nvarchar(50),
-	@scrapReason		nvarchar(50)
+	@addScrapStockDate	nvarchar(500),
+	@operator			nvarchar(500),
+	@scrapReason		nvarchar(500)
 )
 AS
-declare @temp nvarchar(50)
+declare @temp nvarchar(500)
 declare @sql nvarchar(1000)
 declare @n int
 
@@ -2200,8 +2200,8 @@ go
 /**Mutual**/
 Create Procedure [dbo].[UpdateStocksMutualOutStockDemands]
 (
-	@eventNo	nvarchar(50),
-	@temp		nvarchar(50)
+	@eventNo	nvarchar(500),
+	@temp		nvarchar(500)
 )
 AS
 begin
@@ -2248,7 +2248,7 @@ end
 Go
 Create Procedure [dbo].[UpdateStocksMutualFacilityAllot]
 (
-	@eventNo	nvarchar(50),
+	@eventNo	nvarchar(500),
 	@rowID		nvarchar(500)
 )
 as
@@ -2261,7 +2261,7 @@ go
 /**Del**/
 Create Procedure [dbo].[DelStocksMutualFacilityAllot]
 (
-	@eventNo	nvarchar(50)
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -2270,7 +2270,7 @@ end
 go
 Create Procedure [dbo].[DelStocksBack]
 (
-	@eventNo	nvarchar(50)
+	@eventNo	nvarchar(500)
 )
 as
 begin
@@ -2279,7 +2279,7 @@ end
 go
 Create Procedure [dbo].[DelStocks]
 (
-	@id	nvarchar(50)
+	@id	nvarchar(500)
 )
 as
 begin
@@ -2292,9 +2292,9 @@ go
 /**Add**/
 Create Procedure [dbo].[AddExpress]
 (
-	@eventNo		nvarchar(50),
-	@expressCo		nvarchar(50),
-	@expressNo		nvarchar(50),
+	@eventNo		nvarchar(500),
+	@expressCo		nvarchar(500),
+	@expressNo		nvarchar(500),
 	@getOrSend		int,
 	@expressState	int
 )
@@ -2306,7 +2306,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetExpressByEventNo]
 (
-	@eventNo		nvarchar(50),
+	@eventNo		nvarchar(500),
 	@getOrSend		int
 )
 AS
@@ -2318,7 +2318,7 @@ Go
 Create Procedure UpdateExpressState
 (
 	@id int,
-	@expressState nvarchar(50)
+	@expressState nvarchar(500)
 )
 as
 begin
@@ -2331,11 +2331,11 @@ go
 /**Add**/
 CREATE Procedure [dbo].[AddAllOutStocksFromStocks]
 (
-	@eventNo		nvarchar(50),
-	@storeNo		nvarchar(50),
-	@outStockDate	nvarchar(50),
-	@operator		nvarchar(50),
-	@outStocksState	nvarchar(50)
+	@eventNo		nvarchar(500),
+	@storeNo		nvarchar(500),
+	@outStockDate	nvarchar(500),
+	@operator		nvarchar(500),
+	@outStocksState	nvarchar(500)
 )
 AS
 BEGIN
@@ -2355,12 +2355,12 @@ END
 Go
 Create Procedure [dbo].[AddOutStocksFromStocks]
 (
-	@id				nvarchar(50),
-	@storeNo		nvarchar(50),
-	@outStockDate	nvarchar(50),
-	@operator		nvarchar(50),
-	@outStocksState	nvarchar(50),
-	@scrapReason	nvarchar(50)
+	@id				nvarchar(500),
+	@storeNo		nvarchar(500),
+	@outStockDate	nvarchar(500),
+	@operator		nvarchar(500),
+	@outStocksState	nvarchar(500),
+	@scrapReason	nvarchar(500)
 )
 AS
 BEGIN
@@ -2376,7 +2376,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetOutStocks]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 declare @where nvarchar(300)
@@ -2396,7 +2396,7 @@ exec sp_executesql @sql
 Go
 Create Procedure [dbo].[GetCountOutStocksState]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -2409,11 +2409,11 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddAllAllotStocksFromStocks]
 (
-	@eventNo				nvarchar(50),
-	@warehouseStoreNoB		nvarchar(50),
-	@allotStockDate			nvarchar(50),
-	@operator				nvarchar(50),
-	@allotStockState		nvarchar(50)
+	@eventNo				nvarchar(500),
+	@warehouseStoreNoB		nvarchar(500),
+	@allotStockDate			nvarchar(500),
+	@operator				nvarchar(500),
+	@allotStockState		nvarchar(500)
 )
 AS
 BEGIN
@@ -2433,12 +2433,12 @@ END
 Go
 Create Procedure [dbo].[AddAllotStocksFromStocks]
 (
-	@id						nvarchar(50),
-	@warehouseStoreNoB		nvarchar(50),
-	@allotStockDate			nvarchar(50),
-	@operator				nvarchar(50),
-	@allotStockState		nvarchar(50),
-	@scrapReason			nvarchar(50)
+	@id						nvarchar(500),
+	@warehouseStoreNoB		nvarchar(500),
+	@allotStockDate			nvarchar(500),
+	@operator				nvarchar(500),
+	@allotStockState		nvarchar(500),
+	@scrapReason			nvarchar(500)
 )
 AS
 BEGIN
@@ -2454,7 +2454,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetAllotStocks]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 declare @where nvarchar(300)
@@ -2474,7 +2474,7 @@ exec sp_executesql @sql
 Go
 Create Procedure [dbo].[GetCountAllotStocksState]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -2487,15 +2487,15 @@ Go
 /**Add**/
 create Procedure [dbo].[AddAppointEngineers]
 (
-	@eventNo		nvarchar(50),
-	@name			nvarchar(50),
-	@appointState	nvarchar(50)
+	@eventNo		nvarchar(500),
+	@name			nvarchar(500),
+	@appointState	nvarchar(500)
 	
 )
 AS
 BEGIN
- declare @phonevalue	nvarchar(50)
- declare @email			nvarchar(50)
+ declare @phonevalue	nvarchar(500)
+ declare @email			nvarchar(500)
  select @phonevalue=Phone,@email=Email from tb_People where Name=@name
  insert into tb_AppointEngineers(EventNo,Name,Phone,Email,SceneTime,AppointState) values(@eventNo,@name,@phonevalue,@email,NULL,@appointState)
 END
@@ -2503,7 +2503,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetAppointEngineersByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -2512,18 +2512,18 @@ END
 Go
 Create Procedure [dbo].[GetEmailFromEngineers]
 (
-	@eventNo	nvarchar(50)
+	@eventNo	nvarchar(500)
 )
 AS
-declare @email1		nvarchar(50)
-declare @email2		nvarchar(50)
-declare @solver1	nvarchar(50)
-declare	@smtp		nvarchar(50)
-declare	@ePassword	nvarchar(50)
-declare @name		nvarchar(50)
-declare @typeCode	nvarchar(50)
-declare @eventName	nvarchar(50)
-declare @sceneTime	nvarchar(50)
+declare @email1		nvarchar(500)
+declare @email2		nvarchar(500)
+declare @solver1	nvarchar(500)
+declare	@smtp		nvarchar(500)
+declare	@ePassword	nvarchar(500)
+declare @name		nvarchar(500)
+declare @typeCode	nvarchar(500)
+declare @eventName	nvarchar(500)
+declare @sceneTime	nvarchar(500)
 begin
 select top 1 @solver1=Solver, @email1=Email, @smtp=SMTP, @ePassword=EPassword from tb_Solver where SMTP<>'' and SMTP is not null and EPassword <> '' and EPassword is not null
 select top 1 @name=Name,@email2=Email,@sceneTime=convert(varchar(20),SceneTime,120) from tb_AppointEngineers where AppointState='2' and EventNo=@eventNo order by ID desc
@@ -2536,8 +2536,8 @@ Go
 Create Procedure UpdateAppointState
 (
 	@id int,
-	@appointState	nvarchar(50),
-	@sceneTime		nvarchar(50)
+	@appointState	nvarchar(500),
+	@sceneTime		nvarchar(500)
 )
 as
 begin
@@ -2554,8 +2554,8 @@ go
 /**Add**/
 Create Procedure [dbo].[AddSceneState]
 (
-	@eventNo		nvarchar(50),
-	@sceneState		nvarchar(50)
+	@eventNo		nvarchar(500),
+	@sceneState		nvarchar(500)
 )
 AS
 BEGIN
@@ -2565,7 +2565,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetSceneStateByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -2575,8 +2575,8 @@ Go
 /**Uptate**/
 Create Procedure UpdateSceneState
 (
-	@eventNo		nvarchar(50),
-	@sceneState		nvarchar(50)
+	@eventNo		nvarchar(500),
+	@sceneState		nvarchar(500)
 )
 as
 begin
@@ -2589,8 +2589,8 @@ go
 /**Add**/
 Create Procedure [dbo].[AddHistoryServiceFromStocks]
 (
-	@eventNo				nvarchar(50),
-	@serviceDate			nvarchar(50)
+	@eventNo				nvarchar(500),
+	@serviceDate			nvarchar(500)
 )
 AS
 BEGIN
@@ -2610,7 +2610,7 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetHistoryServiceByEventNo]
 (
-	@eventNo		nvarchar(50)
+	@eventNo		nvarchar(500)
 )
 AS
 BEGIN
@@ -2628,7 +2628,7 @@ Create PROCEDURE [dbo].[GetPageOfRecords]
   @condition nvarchar(4000) = '',--查询条件, 不用加where关键字
   @ascColumn nvarchar(4000) = '', --排序的字段名 (即 order by column asc/desc)
   @bitOrderType bit = 0,        --排序的类型 (0为升序,1为降序)
-  @pkColumn nvarchar(50) = ''    --主键名称
+  @pkColumn nvarchar(500) = ''    --主键名称
 
 AS
 BEGIN                                                                                   
@@ -2671,18 +2671,18 @@ END
 Go
 Create Procedure [dbo].[GetAllotStocksPaged]
 (
-	@eventNo				nvarchar(50)='',
-	@storeNoA				nvarchar(50)='',
-	@storeNoB				nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',
-	@serialNo				nvarchar(50)='',	
-	@parameter				nvarchar(50)='',	
-	@allotStockDateA		nvarchar(50)='',
-	@allotStockDateB		nvarchar(50)='',
-	@operator				nvarchar(50)='',
-	@allotStockState		nvarchar(50)='',
+	@eventNo				nvarchar(500)='',
+	@storeNoA				nvarchar(500)='',
+	@storeNoB				nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',
+	@serialNo				nvarchar(500)='',	
+	@parameter				nvarchar(500)='',	
+	@allotStockDateA		nvarchar(500)='',
+	@allotStockDateB		nvarchar(500)='',
+	@operator				nvarchar(500)='',
+	@allotStockState		nvarchar(500)='',
 	@pageSize				int = 3,
 	@pageIndex				int = 2
 )
@@ -2732,18 +2732,18 @@ exec dbo.GetPageOfRecords @pageSize, @pageIndex, @sql, 'dbo.tb_AllotStocks', @wh
 Go
 Create Procedure [dbo].[GetAllotStocksTotal]
 (
-	@eventNo				nvarchar(50)='',
-	@storeNoA				nvarchar(50)='',
-	@storeNoB				nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',
-	@serialNo				nvarchar(50)='',	
-	@parameter				nvarchar(50)='',	
-	@allotStockDateA		nvarchar(50)='',
-	@allotStockDateB		nvarchar(50)='',
-	@operator				nvarchar(50)='',
-	@allotStockState		nvarchar(50)=''
+	@eventNo				nvarchar(500)='',
+	@storeNoA				nvarchar(500)='',
+	@storeNoB				nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',
+	@serialNo				nvarchar(500)='',	
+	@parameter				nvarchar(500)='',	
+	@allotStockDateA		nvarchar(500)='',
+	@allotStockDateB		nvarchar(500)='',
+	@operator				nvarchar(500)='',
+	@allotStockState		nvarchar(500)=''
 )
 AS
 declare @where nvarchar(300)
@@ -2791,15 +2791,15 @@ exec sp_executesql @sql
 Go
 Create Procedure [dbo].[GetStocksPaged]
 (	
-	@warehouseStoreNo		nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@addStockDateA			nvarchar(50)='',
-	@addStockDateB			nvarchar(50)='',	
-	@machingState			nvarchar(50)='',
+	@warehouseStoreNo		nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@addStockDateA			nvarchar(500)='',
+	@addStockDateB			nvarchar(500)='',	
+	@machingState			nvarchar(500)='',
 	@pageSize				int = 3,
 	@pageIndex				int = 1
 )
@@ -2837,14 +2837,14 @@ Go
 
 Create Procedure [dbo].[GetAddStocksPaged]
 (	
-	@warehouseNo			nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@addStockDateA			nvarchar(50)='',
-	@addStockDateB			nvarchar(50)='',
+	@warehouseNo			nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@addStockDateA			nvarchar(500)='',
+	@addStockDateB			nvarchar(500)='',
 	@pageSize				int = 3,
 	@pageIndex				int = 1
 )
@@ -2880,17 +2880,17 @@ Go
 
 Create Procedure [dbo].[GetOutStocksTotal]
 (
-	@eventNo				nvarchar(50)='',
-	@warehouseNo			nvarchar(50)='',
-	@storeNo				nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',	
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@outStockDateA			nvarchar(50)='',
-	@outStockDateB			nvarchar(50)='',
-	@outStocksState			nvarchar(50)=''
+	@eventNo				nvarchar(500)='',
+	@warehouseNo			nvarchar(500)='',
+	@storeNo				nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',	
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@outStockDateA			nvarchar(500)='',
+	@outStockDateB			nvarchar(500)='',
+	@outStocksState			nvarchar(500)=''
 )
 AS
 declare @where nvarchar(300)
@@ -2928,17 +2928,17 @@ exec sp_executesql @sql
 Go
 Create Procedure [dbo].[GetOutStocksPaged]
 (	
-	@eventNo				nvarchar(50)='',
-	@warehouseNo			nvarchar(50)='',
-	@storeNo				nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',	
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@outStockDateA			nvarchar(50)='',
-	@outStockDateB			nvarchar(50)='',
-	@outStocksState			nvarchar(50)='',
+	@eventNo				nvarchar(500)='',
+	@warehouseNo			nvarchar(500)='',
+	@storeNo				nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',	
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@outStockDateA			nvarchar(500)='',
+	@outStockDateB			nvarchar(500)='',
+	@outStocksState			nvarchar(500)='',
 	@pageSize				int = 3,
 	@pageIndex				int = 1
 )
@@ -2978,12 +2978,12 @@ end
 Go
 Create Procedure [dbo].[GetEventLogsTotal]
 (
-	@eventTimeA		nvarchar(50)='',
-	@eventTimeB		nvarchar(50)='',
-	@storeNo		nvarchar(50)='',
-	@typeCode		nvarchar(50)='',
-	@eventState		nvarchar(50)='',
-	@eventNo		nvarchar(50)=''
+	@eventTimeA		nvarchar(500)='',
+	@eventTimeB		nvarchar(500)='',
+	@storeNo		nvarchar(500)='',
+	@typeCode		nvarchar(500)='',
+	@eventState		nvarchar(500)='',
+	@eventNo		nvarchar(500)=''
 )
 AS
 begin
@@ -3042,12 +3042,12 @@ end
 Go
 Create Procedure [dbo].[GetEventLogsPaged]
 (
-	@eventTimeA		nvarchar(50)='',
-	@eventTimeB		nvarchar(50)='',
-	@storeNo		nvarchar(50)='',
-	@typeCode		nvarchar(50)='',
-	@eventState		nvarchar(50)='',
-	@eventNo		nvarchar(50)='',
+	@eventTimeA		nvarchar(500)='',
+	@eventTimeB		nvarchar(500)='',
+	@storeNo		nvarchar(500)='',
+	@typeCode		nvarchar(500)='',
+	@eventState		nvarchar(500)='',
+	@eventNo		nvarchar(500)='',
 	@pageSize		int = 3,
 	@pageIndex		int = 1
 )
@@ -3110,14 +3110,14 @@ Go
 ----------
 Create Procedure [dbo].[GetScrapStocksTotal]
 (
-	@warehouseNo			nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',	
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@addScrapStockDateA		nvarchar(50)='',
-	@addScrapStockDateB		nvarchar(50)=''
+	@warehouseNo			nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',	
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@addScrapStockDateA		nvarchar(500)='',
+	@addScrapStockDateB		nvarchar(500)=''
 )
 AS
 declare @where nvarchar(300)
@@ -3148,14 +3148,14 @@ exec sp_executesql @sql
 Go
 Create Procedure [dbo].[GetScrapStocksPaged]
 (	
-	@warehouseNo			nvarchar(50)='',
-	@maching				nvarchar(50)='',
-	@brand					nvarchar(50)='',
-	@model					nvarchar(50)='',	
-	@parameter				nvarchar(50)='',
-	@supplier				nvarchar(50)='',
-	@addScrapStockDateA		nvarchar(50)='',
-	@addScrapStockDateB		nvarchar(50)='',	
+	@warehouseNo			nvarchar(500)='',
+	@maching				nvarchar(500)='',
+	@brand					nvarchar(500)='',
+	@model					nvarchar(500)='',	
+	@parameter				nvarchar(500)='',
+	@supplier				nvarchar(500)='',
+	@addScrapStockDateA		nvarchar(500)='',
+	@addScrapStockDateB		nvarchar(500)='',	
 	@pageSize				int = 3,
 	@pageIndex				int = 1
 )
@@ -3220,12 +3220,12 @@ END
 Go
 Create Procedure [dbo].[GetUrgentNormalEventLog]
 (
-	@temp	nvarchar(50),
-	@logBy	nvarchar(50)
+	@temp	nvarchar(500),
+	@logBy	nvarchar(500)
 )
 AS
 BEGIN
-declare		@handingBy	nvarchar(50)
+declare		@handingBy	nvarchar(500)
 select @handingBy=Solver from tb_Solver where SMTP is not null and SMTP<>'' and Email is not null and Email<>'' and EPassword is not null and EPassword<>''
 
 if @temp='0'
@@ -3303,8 +3303,8 @@ Go
 /**Add**/
 Create Procedure [dbo].[AddSystemUser]
 (
-	@userName		nvarchar(50),
-	@password		nvarchar(50),
+	@userName		nvarchar(500),
+	@password		nvarchar(500),
 	@createTime		datetime
 )
 as
@@ -3327,8 +3327,8 @@ end
 Go
 Create Procedure [dbo].[GetCheckSystemUserPassword]
 (
-	@userName		nvarchar(50),
-	@password		nvarchar(50)
+	@userName		nvarchar(500),
+	@password		nvarchar(500)
 )
 AS
 begin
@@ -3337,8 +3337,8 @@ end
 Go
 Create Procedure [dbo].[GetUserIP]
 (
-	@userName			nvarchar(50),
-	@userIP				nvarchar(50)
+	@userName			nvarchar(500),
+	@userIP				nvarchar(500)
 )
 AS
 begin
@@ -3348,7 +3348,7 @@ Go
 /**Del**/
 Create Procedure [dbo].[DelSystemUser]
 (
-	@userName  nvarchar(50)
+	@userName  nvarchar(500)
 )
 AS
 begin
@@ -3359,8 +3359,8 @@ Go
 /**Update**/
 Create Procedure [dbo].[UpdateSystemUserByUserName]
 (
-	@userName		nvarchar(50),
-	@password		nvarchar(50)
+	@userName		nvarchar(500),
+	@password		nvarchar(500)
 )
 AS
 begin
@@ -3369,7 +3369,7 @@ end
 Go
 Create Procedure [dbo].[UpdateUserStateByUserName]
 (
-	@userName		nvarchar(50),
+	@userName		nvarchar(500),
 	@userState		int
 )
 AS
@@ -3379,8 +3379,8 @@ end
 Go
 Create Procedure [dbo].[UpdateLogOnByUserName]
 (
-	@userName			nvarchar(50),
-	@userIP				nvarchar(50)
+	@userName			nvarchar(500),
+	@userIP				nvarchar(500)
 )
 AS
 begin
@@ -3393,11 +3393,11 @@ Go
 /**Get**/
 Create Procedure [dbo].[GetOnePermission]
 (
-	@userName			nvarchar(50),
-	@temp				nvarchar(50)
+	@userName			nvarchar(500),
+	@temp				nvarchar(500)
 )
 AS
-declare @field nvarchar(50)
+declare @field nvarchar(500)
 declare @sql nvarchar(1000)
 begin
 if @temp='0'
@@ -3450,7 +3450,7 @@ end
 Go
 Create Procedure [dbo].[GetPermission]
 (
-	@userName			nvarchar(50)
+	@userName			nvarchar(500)
 )
 AS
 declare @sql nvarchar(2000)
@@ -3463,7 +3463,7 @@ Go
 /**Update**/
 Create Procedure [dbo].[UpdatePermissionByUserName]
 (
-	@userName			nvarchar(50),
+	@userName			nvarchar(500),
 	@index				int,
 	@updateSolution		int,
 	@eventQuery			int,

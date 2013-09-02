@@ -11,7 +11,8 @@ namespace LuxERP.UI.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddSystemUser.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddSystemUser, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnChangeAdministratorPassword.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnChangeAdministratorPassword, "click") + ";this.disabled=true; this.value='处理中...';");
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

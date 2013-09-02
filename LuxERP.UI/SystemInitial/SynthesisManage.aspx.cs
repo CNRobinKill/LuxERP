@@ -11,7 +11,12 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddExpressCo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddExpressCo, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnAddSolver.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddSolver, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnAddSupplier.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddSupplier, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelExpressCo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelExpressCo, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelSolver.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelSolver, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelSupplier.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelSupplier, "click") + ";this.disabled=true; this.value='处理中...';");
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

@@ -65,6 +65,7 @@ namespace LuxERP.UI.EventManagement
                                 //}
 
                                 ddlEventStateShow();
+                                ddlSolverShow();
                             }
                             if (IsPostBack)
                             {
@@ -225,6 +226,13 @@ namespace LuxERP.UI.EventManagement
             ddlEventState.DataBind();
             ddlEventState.Items.Add("");
             ddlEventState.SelectedValue = "";
+        }
+
+        public void ddlSolverShow()
+        {
+            ddlEventState.DataSource = DAL.SynthesisDAL.GetSolver();
+            ddlEventState.DataValueField = "Solver";
+            ddlEventState.DataTextField = "Solver";
         }
 
         protected void btnNormalEventQuery_Click(object sender, EventArgs e)

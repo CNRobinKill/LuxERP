@@ -11,7 +11,8 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddFacility.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddFacility, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelFacility.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelFacility, "click") + ";this.disabled=true; this.value='处理中...';");
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

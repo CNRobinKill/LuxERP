@@ -22,7 +22,13 @@ namespace LuxERP.UI.EventManagement
         public static string stRow;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.btnAddAllOutStock.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddAllOutStock, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnAddExpress.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddExpress, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnAddOutStockDemands.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddOutStockDemands, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnDelPic.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelPic, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnSendStockIn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSendStockIn, "click") + ";this.disabled=true; this.value='处理中...';");
+            this.btnUpload.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpload, "click") + ";this.disabled=true; this.value='处理中...';");
+
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +
