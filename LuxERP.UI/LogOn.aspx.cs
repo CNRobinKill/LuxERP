@@ -11,7 +11,7 @@ namespace LuxERP.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnLogIn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnLogIn, "click") + ";this.disabled=true; this.value='登录中...';");
+            //this.btnLogIn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnLogIn, "click") + ";this.disabled=true; this.value='登录中...';");
             if (!IsPostBack)
             {
                 if (Session["userName"] != null)

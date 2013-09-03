@@ -16,7 +16,6 @@ namespace LuxERP.UI.EventManagement
             this.btnSetUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSetUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
             this.btnShutUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnShutUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
             this.btnStoreRenovation.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStoreRenovation, "click") + ";this.disabled=true; this.value='处理中...';");
-            
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +
@@ -107,7 +106,7 @@ namespace LuxERP.UI.EventManagement
             btnStoreRenovation.Visible = false;
             trToResolvedTime.Visible = false;
             storeInformation.Visible = false;
-            btnStoreInfo.Visible = false;
+            btnStoreInfo.Style["Display"] = "none";
             //lblTypeCodeText.Visible = false;
             //lblStoreInfoText.Visible = false;
             //lblStoreTextNo.Visible = false;
@@ -137,7 +136,7 @@ namespace LuxERP.UI.EventManagement
             lblShutUp.Visible = false;
             lblEnd.Visible = false;
             storeInformation.Visible = false;
-            btnStoreInfo.Visible = false;
+            btnStoreInfo.Style["Display"] = "none";
             //lblTypeCodeText.Visible = false;
             //lblStoreInfoText.Visible = false;
             //lblStoreTextNo.Visible = false;
@@ -166,7 +165,7 @@ namespace LuxERP.UI.EventManagement
             lblShutUp.Visible = true;
             lblEnd.Visible = false;
             storeInformation.Visible = false;
-            btnStoreInfo.Visible = false;
+            btnStoreInfo.Style["Display"] = "none";
             //lblTypeCodeText.Visible = false;
             //lblStoreInfoText.Visible = false;
             //lblStoreTextNo.Visible = false;
@@ -195,7 +194,7 @@ namespace LuxERP.UI.EventManagement
             lblShutUp.Visible = false;
             lblEnd.Visible = true;
             storeInformation.Visible = false;
-            btnStoreInfo.Visible = false;
+            btnStoreInfo.Style["Display"] = "none";
             //lblTypeCodeText.Visible = false;
             //lblStoreInfoText.Visible = false;
             //lblStoreTextNo.Visible = false;
@@ -408,35 +407,35 @@ namespace LuxERP.UI.EventManagement
             ScriptManager.RegisterStartupScript(UpdatePanel1, this.Page.GetType(), method, method + "();", true);
         }
 
-        protected void txtTypeCode_TextChanged(object sender, EventArgs e)
-        {
-             lblTypeCodeText.Text = EventTypes(txtTypeCode.Text.Trim());
-        }
+        //protected void txtTypeCode_TextChanged(object sender, EventArgs e)
+        //{
+        //    lblTypeCodeText.Text = EventTypes(txtTypeCode.Text.Trim());
+        //}
 
-        protected void txtStoreNo_TextChanged(object sender, EventArgs e)
-        {
-            SqlDataReader reader = DAL.StoresDAL.GetStoresByStoreNo(txtStoreNo.Text.Trim());
-            if (txtStoreNo.Text.Trim() != "")
-            {
-                if (!reader.Read())
-                {
-                    lblStoreInfoText.Visible = true;
-                    btnStoreInfo.Visible = false;
-                }
-                else
-                {
-                    lblStoreInfoText.Visible = false;
-                    btnStoreInfo.Visible = true;
-                }
-                reader.Close();
-            }
-            else
-            {
-                lblStoreInfoText.Visible = false;
-                btnStoreInfo.Visible = false;
-            }
-            storeInformation.Visible = false;
-        }
+        //protected void txtStoreNo_TextChanged(object sender, EventArgs e)
+        //{
+        //    SqlDataReader reader = DAL.StoresDAL.GetStoresByStoreNo(txtStoreNo.Text.Trim());
+        //    if (txtStoreNo.Text.Trim() != "")
+        //    {
+        //        if (!reader.Read())
+        //        {
+        //            lblStoreInfoText.Visible = true;
+        //            btnStoreInfo.Visible = false;
+        //        }
+        //        else
+        //        {
+        //            lblStoreInfoText.Visible = false;
+        //            btnStoreInfo.Visible = true;
+        //        }
+        //        reader.Close();
+        //    }
+        //    else
+        //    {
+        //        lblStoreInfoText.Visible = false;
+        //        btnStoreInfo.Visible = false;
+        //    }
+        //    storeInformation.Visible = false;
+        //}
 
         protected void txtStoreNo2_TextChanged(object sender, EventArgs e)
         {
@@ -533,7 +532,11 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnStoreInfo_Click(object sender, EventArgs e)
         {
+            divStoreInformation.Visible = false;
+            divgvEvent.Visible = false;
+            divFacility.Visible = false;
             storeInformation.Visible = true;
+            btnStoreInfo.Style["Display"] = "inline-block";
         }
 
         protected void btnStoreInformation_Click(object sender, EventArgs e)

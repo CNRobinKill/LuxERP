@@ -51,21 +51,8 @@ namespace LuxERP.UI.EventManagement
                         {
                             if (!IsPostBack)
                             {
-
-                                //try
-                                //{
-
-                                //}
-                                //catch
-                                //{
-                                //    Response.Write("<script LANGUAGE=JavaScript >" +
-                                //            " alert('还没登录吧？');" +
-                                //            " window.location=('/LogOn.aspx');" +
-                                //            "</script>");
-                                //}
-
                                 ddlEventStateShow();
-                                ddlSolverShow();
+                                ddlUserShow();
                             }
                             if (IsPostBack)
                             {
@@ -89,25 +76,9 @@ namespace LuxERP.UI.EventManagement
             string typeCode =paras.TypeCode;
             string eventState = paras.EventState;
             string eventNo = paras.EventNo;
-            //string aEventTime = txtAEventTime.Text + " 00:00:00";
-            //string bEventTime = txtBEventTime.Text + " 23:59:59";
-            //if (txtAEventTime.Text == "")
-            //{
-            //    aEventTime = txtAEventTime.Text;
-            //}
-            //else
-            //{
-            //    aEventTime = txtAEventTime.Text + " 00:00:00";
-            //}
-            //if (txtBEventTime.Text == "")
-            //{
-            //    bEventTime = txtBEventTime.Text;
-            //}
-            //else
-            //{
-            //    bEventTime = txtBEventTime.Text + " 23:59:59";
-            //}
-            DataSet source = DAL.EventLogsDAL.GetEventLogsPaged(aEventTime, bEventTime, txtStoreNo.Text, txtTypeCode.Text, eventState, eventNo, pageSize, pageidx);
+            string user = paras.User;
+            
+            DataSet source = DAL.EventLogsDAL.GetEventLogsPaged(aEventTime, bEventTime, txtStoreNo.Text, txtTypeCode.Text, eventState, eventNo, user, pageSize, pageidx);
 
             currentPage = pageidx;
             lblCurrent.Text = "第 " + currentPage.ToString() + " 页";
@@ -118,16 +89,17 @@ namespace LuxERP.UI.EventManagement
             gvEvent.DataBind();
             if (gvEvent.HeaderRow != null)
             {
-                gvEvent.HeaderRow.Cells[0].Text = "<b>事件编号</b>";
-                gvEvent.HeaderRow.Cells[1].Text = "<b>创建时间</b>";
-                gvEvent.HeaderRow.Cells[2].Text = "<b>店号</b>";
-                gvEvent.HeaderRow.Cells[3].Text = "<b>类型编号</b>";
-                gvEvent.HeaderRow.Cells[4].Text = "<b>事件简述</b>";
+                gvEvent.HeaderRow.Cells[0].Text = "";
+                gvEvent.HeaderRow.Cells[1].Text = "<b>事件编号</b>";
+                gvEvent.HeaderRow.Cells[2].Text = "<b>创建时间</b>";
+                gvEvent.HeaderRow.Cells[3].Text = "<b>店号</b>";
+                gvEvent.HeaderRow.Cells[4].Text = "<b>类型编号</b>";
+                gvEvent.HeaderRow.Cells[5].Text = "<b>事件简述</b>";
                 if (txtTypeCode.Text.Trim() == "" || txtTypeCode.Text.Trim() != "9999" || txtTypeCode.Text.Trim() != "9000" || txtTypeCode.Text.Trim() != "8888")
                 {
                     gvEvent.Columns[6].Visible = false;
                     gvEvent.Columns[5].Visible = true;
-                    gvEvent.HeaderRow.Cells[5].Text = "<b>解决人/组织</b>";
+                    gvEvent.HeaderRow.Cells[6].Text = "<b>解决人/组织</b>";
                 }
                 if (txtTypeCode.Text.Trim() == "9999" || txtTypeCode.Text.Trim() == "9000" || txtTypeCode.Text.Trim() == "8888")
                 {
@@ -135,83 +107,25 @@ namespace LuxERP.UI.EventManagement
                     gvEvent.Columns[5].Visible = false;
                     if (txtTypeCode.Text.Trim() == "9999")
                     {
-                        gvEvent.HeaderRow.Cells[6].Text = "<b>开店日期</b>";
+                        gvEvent.HeaderRow.Cells[7].Text = "<b>开店日期</b>";
                     }
                     if (txtTypeCode.Text.Trim() == "9000")
                     {
-                        gvEvent.HeaderRow.Cells[6].Text = "<b>关店日期</b>";
+                        gvEvent.HeaderRow.Cells[7].Text = "<b>关店日期</b>";
                     }
                     if (txtTypeCode.Text.Trim() == "8888")
                     {
-                        gvEvent.HeaderRow.Cells[6].Text = "<b>结束日期</b>";
+                        gvEvent.HeaderRow.Cells[7].Text = "<b>结束日期</b>";
                     }
                 }
-                gvEvent.HeaderRow.Cells[7].Text = "<b>状态</b>";
-                gvEvent.HeaderRow.Cells[8].Text = "<b>创建人</b>";
+                gvEvent.HeaderRow.Cells[8].Text = "<b>状态</b>";
+                gvEvent.HeaderRow.Cells[9].Text = "<b>创建人</b>";
                 showpage.Visible = true;
             }
             else
             { showpage.Visible = true; }
         }
-        //public void GvEventDataBind(string eventState)
-        //{
-        //    string aEventTime;
-        //    string bEventTime;
-        //    if (txtAEventTime.Text == "")
-        //    {
-        //        aEventTime = txtAEventTime.Text;
-        //    }
-        //    else
-        //    {
-        //        aEventTime = txtAEventTime.Text + " 00:00:00";
-        //    }
-        //    if (txtBEventTime.Text == "")
-        //    {
-        //        bEventTime = txtBEventTime.Text;
-        //    }
-        //    else
-        //    {
-        //        bEventTime = txtBEventTime.Text + " 23:59:59";
-        //    }
-
-        //    gvEvent.Width = 950;
-        //    gvEvent.DataSource = DAL.EventLogsDAL.GetEventLogsInNormalEvent(aEventTime, bEventTime, txtStoreNo.Text, txtTypeCode.Text, eventState);
-        //    gvEvent.DataKeyNames = new string[] { "EventNo" };
-        //    gvEvent.DataBind();
-        //    if (gvEvent.HeaderRow != null)
-        //    {
-        //        gvEvent.HeaderRow.Cells[0].Text = "<b>事件编号</b>";
-        //        gvEvent.HeaderRow.Cells[1].Text = "<b>创建时间</b>";
-        //        gvEvent.HeaderRow.Cells[2].Text = "<b>店号</b>";
-        //        gvEvent.HeaderRow.Cells[3].Text = "<b>类型编号</b>";
-        //        gvEvent.HeaderRow.Cells[4].Text = "<b>事件简述</b>";
-        //        if (txtTypeCode.Text.Trim() == "" || txtTypeCode.Text.Trim() != "9999" || txtTypeCode.Text.Trim() != "9000" || txtTypeCode.Text.Trim() != "8888")
-        //        {
-        //            gvEvent.Columns[6].Visible = false;
-        //            gvEvent.Columns[5].Visible = true;
-        //            gvEvent.HeaderRow.Cells[5].Text = "<b>解决人/组织</b>";
-        //        }
-        //        if (txtTypeCode.Text.Trim() == "9999" || txtTypeCode.Text.Trim() == "9000" || txtTypeCode.Text.Trim() == "8888")
-        //        {
-        //            gvEvent.Columns[6].Visible = true;
-        //            gvEvent.Columns[5].Visible = false;
-        //            if (txtTypeCode.Text.Trim() == "9999")
-        //            {
-        //                gvEvent.HeaderRow.Cells[6].Text = "<b>开店日期</b>";
-        //            }
-        //            if (txtTypeCode.Text.Trim() == "9000")
-        //            {
-        //                gvEvent.HeaderRow.Cells[6].Text = "<b>关店日期</b>";
-        //            }
-        //            if (txtTypeCode.Text.Trim() == "8888")
-        //            {
-        //                gvEvent.HeaderRow.Cells[6].Text = "<b>结束日期</b>";
-        //            }                  
-        //        }
-        //        gvEvent.HeaderRow.Cells[7].Text = "<b>状态</b>";
-        //        gvEvent.HeaderRow.Cells[8].Text = "<b>创建人</b>";
-        //    }
-        //}
+        
 
         public void RegisterJS(string method)
         {
@@ -228,11 +142,14 @@ namespace LuxERP.UI.EventManagement
             ddlEventState.SelectedValue = "";
         }
 
-        public void ddlSolverShow()
+        public void ddlUserShow()
         {
-            ddlEventState.DataSource = DAL.SynthesisDAL.GetSolver();
-            ddlEventState.DataValueField = "Solver";
-            ddlEventState.DataTextField = "Solver";
+            ddlUser.DataSource = DAL.EventLogsDAL.GetUsers();
+            ddlUser.DataValueField = "LogBy";
+            ddlUser.DataTextField = "LogBy";
+            ddlUser.DataBind();
+            ddlUser.Items.Add("");
+            ddlUser.SelectedValue = "";
         }
 
         protected void btnNormalEventQuery_Click(object sender, EventArgs e)
@@ -250,8 +167,9 @@ namespace LuxERP.UI.EventManagement
             { paras.EventTimeB = txtBEventTime.Text.Trim() + " 23:59:59"; }
             paras.StoreNo = txtStoreNo.Text.Trim();
             paras.EventState = ddlEventState.SelectedValue;
+            paras.User = ddlUser.SelectedValue;
 
-            DataSet ds = DAL.EventLogsDAL.GetEventLogsTotal(paras.EventTimeA, paras.EventTimeB, paras.StoreNo, paras.TypeCode, paras.EventState, paras.EventNo);
+            DataSet ds = DAL.EventLogsDAL.GetEventLogsTotal(paras.EventTimeA, paras.EventTimeB, paras.StoreNo, paras.TypeCode, paras.EventState, paras.EventNo, paras.User);
             int rowsCount = ds.Tables[0].Rows.Count;
             if (rowsCount > pageSize)
             {
@@ -299,6 +217,7 @@ namespace LuxERP.UI.EventManagement
             else
             {
                 ddlEventStateShow();
+                ddlUserShow();
             }
         }
 
@@ -346,6 +265,7 @@ namespace LuxERP.UI.EventManagement
         public string EventTimeB { get; set; }
         public string StoreNo { get; set; }
         public string EventState { get; set; }
+        public string User { get; set; }
     }
 
 

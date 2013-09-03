@@ -1206,6 +1206,14 @@ if @picNo='1'
 select ScenePic from tb_EventLogs where EventNo = @eventNo
 end
 Go
+CREATE Procedure [dbo].[GetUsers]
+AS
+Begin
+DECLARE	 @sql	 nvarchar (2000)	
+SET @sql = 'select distinct LogBy from tb_EventLogs'
+EXEC(@sql)
+End
+Go
 create Procedure [dbo].[GetTopTenEventLogsByStoreNo]
 (
 	@storeNo		nvarchar(500)
@@ -2978,12 +2986,13 @@ end
 Go
 Create Procedure [dbo].[GetEventLogsTotal]
 (
-	@eventTimeA		nvarchar(500)='',
-	@eventTimeB		nvarchar(500)='',
-	@storeNo		nvarchar(500)='',
-	@typeCode		nvarchar(500)='',
-	@eventState		nvarchar(500)='',
-	@eventNo		nvarchar(500)=''
+	@eventTimeA		nvarchar(50)='',
+	@eventTimeB		nvarchar(50)='',
+	@storeNo		nvarchar(50)='',
+	@typeCode		nvarchar(50)='',
+	@eventState		nvarchar(50)='',
+	@eventNo		nvarchar(50)='',
+	@user			nvarchar(50)=''
 )
 AS
 begin
@@ -3035,26 +3044,34 @@ if @eventNo<>''
 begin
 	SET @where=@where+' and EventNo= '''+@eventNo+''''
 end
+if @user<>''
+begin
+	SET @where=@where+' and LogBy= '''+@user+''''
+end
 
-set @sql='select EventNo,EventTime,StoreNo,TypeCode,EventDescribe,ResolvedBy,convert(nvarchar(10),ToResolvedTime,127) ToResolvedTime,StateName as EventState,LogBy from tb_EventLogs left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID '+ @where +' order by EventTime desc '
+set @sql='select row_number() over(order by EventTime desc) N, EventNo,EventTime,StoreNo,TypeCode,EventDescribe,ResolvedBy,convert(nvarchar(10),ToResolvedTime,127) ToResolvedTime,StateName as EventState,LogBy from tb_EventLogs left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID '+ @where +' order by EventTime desc '
 exec sp_executesql @sql
 end
+
 Go
 Create Procedure [dbo].[GetEventLogsPaged]
 (
-	@eventTimeA		nvarchar(500)='',
-	@eventTimeB		nvarchar(500)='',
-	@storeNo		nvarchar(500)='',
-	@typeCode		nvarchar(500)='',
-	@eventState		nvarchar(500)='',
-	@eventNo		nvarchar(500)='',
-	@pageSize		int = 3,
-	@pageIndex		int = 1
+	@eventTimeA		nvarchar(50)='',
+	@eventTimeB		nvarchar(50)='',
+	@storeNo		nvarchar(50)='',
+	@typeCode		nvarchar(50)='',
+	@eventState		nvarchar(50)='',
+	@eventNo		nvarchar(50)='',
+	@user			nvarchar(50)='',
+	@pageSize		int = 30,
+	@pageIndex		int = 2
 )
 AS
 begin
 DECLARE  @where   nvarchar(500)
 DECLARE  @sql   nvarchar(1000)
+declare  @n		nvarchar(100)
+set @n = Cast((@pageIndex - 1) * @pageSize as nvarchar(100))
 	
 	
 	SET @where='  1=1 '
@@ -3101,11 +3118,16 @@ if @eventNo<>''
 begin
 	SET @where=@where+' and EventNo= '''+@eventNo+''''
 end
-
-set @sql=' EventNo,EventTime,StoreNo,TypeCode,EventDescribe,ResolvedBy,convert(nvarchar(10),ToResolvedTime,127) ToResolvedTime,StateName as EventState,LogBy '
-
-exec dbo.GetPageOfRecords @pageSize, @pageIndex, @sql, 'dbo.tb_EventLogs left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID', @where, 'ID', 1, 'ID'
+if @user<>''
+begin
+	SET @where=@where+' and LogBy= '''+@user+''''
 end
+
+set @sql=' (row_number() over(order by EventTime desc)) + cast('+@n+' as int) N, EventNo,EventTime,StoreNo,TypeCode,EventDescribe,ResolvedBy,convert(nvarchar(10),ToResolvedTime,127) ToResolvedTime,StateName as EventState,LogBy '
+
+exec dbo.GetPageOfRecords @pageSize, @pageIndex, @sql, 'dbo.tb_EventLogs left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID', @where, 'EventTime', 1, 'EventTime'
+end
+
 Go
 ----------
 Create Procedure [dbo].[GetScrapStocksTotal]

@@ -20,8 +20,7 @@
 <script type="text/javascript">
 //  $(document).ready(
     $(function () {
-        menuSlide('#eventManage', '#createEvent');
-        ready();
+        menuSlide('#eventManage', '#createEvent');        
         setDate();
     });
 
@@ -37,91 +36,64 @@
         $('tbody tr:even').addClass('alt-row');
     };
 
-//    function imgBtnNormalEventClick() {
-//        $('#myContent_imgBtnNormalEvent').click();
-//    };
-    
+    function showHint(str) {
+        var xmlhttp;
+        if (str.length == 0) {
+            document.getElementById('myContent_lblTypeCodeText').innerHTML = "";
+            $('#myContent_lblTypeCodeText').hide();
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var text = xmlhttp.responseText;
+                var l = text.indexOf("\r");
+                text = text.substr(0, l);
+                $('#myContent_lblTypeCodeText').show();
+                document.getElementById('myContent_lblTypeCodeText').innerHTML = text;                
+            }
+        };
+        xmlhttp.open("GET", 'GetTypesData.aspx?q=' + str, true);
+        xmlhttp.send();
+    };
 
-//    function ready() {    
-//    $('#myContent_basicInformation').hide();    
-
-//    $('#myContent_imgBtnNormalEvent').click(function () {
-//      $('#myContent_basicInformation').show();
-//      $('#myContent_btnNormalEvent').show();
-//      $('#myContent_trTypeCode').show();
-
-//      $('#myContent_trRegion').hide();
-//      $('#myContent_btnSetUpShop').hide();
-//      $('#myContent_btnShutUpShop').hide();
-//      $('#myContent_btnStoreRenovation').hide();
-//      $('#myContent_trToResolvedTime').hide();
-
-//      $('#myContent_imgBtnNormalEvent').addClass('imgSelected');
-//      $('#myContent_imgBtnSetUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnShutUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnStoreRenovation').removeClass('imgSelected');
-//    });
-
-//    $('#myContent_imgBtnSetUpShop').click(function () {
-//      $('#myContent_basicInformation').show();
-//      $('#myContent_btnNormalEvent').hide();
-//      $('#myContent_trTypeCode').hide();
-
-//      $('#myContent_trRegion').show();
-//      $('#myContent_btnSetUpShop').show();
-//      $('#myContent_btnShutUpShop').hide();
-//      $('#myContent_btnStoreRenovation').hide();
-//      $('#myContent_trToResolvedTime').show();
-//      $('#myContent_lblSetUp').show();
-//      $('#myContent_lblShutUp').hide();
-//      $('#myContent_lblEnd').hide();
-
-//      $('#myContent_imgBtnNormalEvent').removeClass('imgSelected');
-//      $('#myContent_imgBtnSetUpShop').addClass('imgSelected');
-//      $('#myContent_imgBtnShutUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnStoreRenovation').removeClass('imgSelected');
-//    });
-
-//    $('#myContent_imgBtnShutUpShop').click(function () {
-//      $('#myContent_basicInformation').show();
-//      $('#myContent_btnNormalEvent').hide();
-//      $('#myContent_trTypeCode').hide();
-
-//      $('#myContent_trRegion').hide();
-//      $('#myContent_btnSetUpShop').hide();
-//      $('#myContent_btnShutUpShop').show();
-//      $('#myContent_btnStoreRenovation').hide();
-//      $('#myContent_trToResolvedTime').show();
-//      $('#myContent_lblSetUp').hide();
-//      $('#myContent_lblShutUp').show();
-//      $('#myContent_lblEnd').hide();
-
-//      $('#myContent_imgBtnNormalEvent').removeClass('imgSelected');
-//      $('#myContent_imgBtnSetUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnShutUpShop').addClass('imgSelected');
-//      $('#myContent_imgBtnStoreRenovation').removeClass('imgSelected');
-//    });
-
-//    $('#myContent_imgBtnStoreRenovation').click(function () {
-//      $('#myContent_basicInformation').show();
-//      $('#myContent_btnNormalEvent').hide();
-//      $('#myContent_trTypeCode').hide();
-
-//      $('#myContent_trRegion').hide();
-//      $('#myContent_btnSetUpShop').hide();
-//      $('#myContent_btnShutUpShop').hide();
-//      $('#myContent_btnStoreRenovation').show();
-//      $('#myContent_trToResolvedTime').show();
-//      $('#myContent_lblSetUp').hide();
-//      $('#myContent_lblShutUp').hide();
-//      $('#myContent_lblEnd').show();
-
-//      $('#myContent_imgBtnNormalEvent').removeClass('imgSelected');
-//      $('#myContent_imgBtnSetUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnShutUpShop').removeClass('imgSelected');
-//      $('#myContent_imgBtnStoreRenovation').addClass('imgSelected');
-//    });
-//  };  
+    function showStores(str) {
+        var xmlhttp;
+        if (str.length == 0) {
+            document.getElementById('myContent_lblStoreInfoText').innerHTML = "";
+            $('#myContent_lblStoreInfoText').hide();
+            $('#myContent_btnStoreInfo').hide();
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var text = xmlhttp.responseText;
+                var l = text.indexOf("\r");
+                text = text.substr(0, l);
+                if (text == str) {
+                    $('#myContent_lblStoreInfoText').hide();
+                    $('#myContent_btnStoreInfo').show();
+                }
+                else {
+                    $('#myContent_btnStoreInfo').hide();
+                    $('#myContent_storeInformation').hide();
+                    $('#myContent_lblStoreInfoText').show();
+                    document.getElementById('myContent_lblStoreInfoText').innerHTML = "没有该门店";
+                }
+            }
+        };
+        xmlhttp.open("GET", 'GetStoresData.aspx?q=' + str, true);
+        xmlhttp.send();
+    };       
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="myContent" runat="server">
@@ -131,10 +103,7 @@
     <ContentTemplate>
 <div>
 <h2>CreateEvent</h2>
-<%--<asp:Image  runat="server" ID="imgBtnNormalEvent" ImageUrl="~/Content/images/noramlevents.png" />
-<asp:Image  runat="server" ID="imgBtnSetUpShop"   ImageUrl="~/Content/images/setupshop.png" />
-<asp:Image  runat="server" ID="imgBtnShutUpShop"  ImageUrl="~/Content/images/shutupshop.png" />
-<asp:Image  runat="server" ID="imgBtnStoreRenovation" ImageUrl="~/Content/images/storerenovation.png" />--%>
+
 <asp:ImageButton  runat="server" ID="imgBtnNormalEvent" 
         ImageUrl="~/Content/images/noramlevents.png" 
         onclick="imgBtnNormalEvent_Click" />
@@ -151,15 +120,12 @@
 <h2>BasicInformation</h2> 
       <table>
       <tr runat="server" id="trTypeCode"><td style=" width:100px;"><asp:Label ID="Label1" runat="server">店号：</asp:Label></td> <td>
-          <asp:TextBox runat="server" ID="txtStoreNo" Width="50px" 
-              ontextchanged="txtStoreNo_TextChanged"  AutoPostBack="true"></asp:TextBox>&nbsp;&nbsp;
-          <asp:Button ID="btnStoreInfo" runat="server" Text="门店相关信息" CssClass="button" 
-              Visible="false" onclick="btnStoreInfo_Click" />
-          <asp:Label ID="lblStoreInfoText" runat="server" ForeColor="Red" Visible="false">找不到该门店</asp:Label>
+          <asp:TextBox runat="server" ID="txtStoreNo" Width="50px" AutoCompleteType="Disabled" onkeyup="showStores(this.value)" ></asp:TextBox>&nbsp;&nbsp;
+          <asp:Button ID="btnStoreInfo" runat="server" Text="门店相关信息" CssClass="button"  onclick="btnStoreInfo_Click" />
+          <asp:Label ID="lblStoreInfoText" runat="server" ForeColor="Red"></asp:Label>
           </td></tr>
       <tr runat="server" id="trStoreNo1"><td style=" width:100px;"><asp:Label ID="Label2" runat="server">事件类型编号：</asp:Label></td> <td>
-          <asp:TextBox runat="server" ID="txtTypeCode"  Width="100px" 
-              ontextchanged="txtTypeCode_TextChanged" AutoPostBack="true"></asp:TextBox>&nbsp;&nbsp;
+          <asp:TextBox runat="server" ID="txtTypeCode"  Width="100px" AutoCompleteType="Disabled" onkeyup="showHint(this.value)" ></asp:TextBox>&nbsp;&nbsp;
           <asp:Label ID="lblTypeCodeText" runat="server" ForeColor="Red"></asp:Label>
       </td></tr>
       <tr runat="server" id="trStoreNo2"><td style=" width:100px;"><asp:Label runat="server">店号：</asp:Label></td> <td>

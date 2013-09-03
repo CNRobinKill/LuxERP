@@ -57,20 +57,21 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
 <div>
-    
-    <asp:Label runat="server" Text="店号："></asp:Label><asp:TextBox ID="txtStoreNo" runat="server" Width="100"></asp:TextBox> 
-    <asp:Label runat="server" Text="类型编号："></asp:Label><asp:TextBox ID="txtTypeCode" runat="server" Width="100" ontextchanged="txtTypeCode_TextChanged" AutoPostBack="true"></asp:TextBox>
-    <asp:Label runat="server" Text="创建人："></asp:Label><asp:DropDownList ID="ddlLogBy" runat="server"></asp:DropDownList>
+    <asp:Label ID="Label1" runat="server" Text="店号："></asp:Label><asp:TextBox ID="txtStoreNo" runat="server" Width="60px"></asp:TextBox>
+    <asp:Label runat="server" Text="类型编号："></asp:Label><asp:TextBox ID="txtTypeCode" runat="server" Width="60px" ontextchanged="txtTypeCode_TextChanged" AutoPostBack="true"></asp:TextBox>
+    <asp:Label ID="Label3" runat="server" Text="创建人："></asp:Label><asp:DropDownList ID="ddlUser" runat="server"></asp:DropDownList>
     <asp:Label ID="lblEventTime" runat="server" Text="创建时间："></asp:Label><asp:TextBox ID="txtAEventTime" runat="server" Width="100"></asp:TextBox>
-    <asp:Label runat="server" Text="至"></asp:Label><asp:TextBox ID="txtBEventTime" runat="server" Width="100"></asp:TextBox>
-    <asp:Label runat="server" Text="事件编号："></asp:Label><asp:TextBox ID="txtEventNo" runat="server" Width="100"></asp:TextBox>
-    <asp:Label runat="server" Text="状态："></asp:Label><asp:DropDownList ID="ddlEventState" runat="server"></asp:DropDownList>
-    <asp:Button ID="btnNormalEventQuery" runat="server" Text="事件查询" CssClass="button" 
-        onclick="btnNormalEventQuery_Click" />
+    <asp:Label runat="server" Text="至"></asp:Label><asp:TextBox ID="txtBEventTime" runat="server" Width="100"></asp:TextBox>        
+    <asp:Label runat="server" Text="状态："></asp:Label><asp:DropDownList ID="ddlEventState" runat="server"></asp:DropDownList>    
+    <asp:Label ID="Label2" runat="server" Text="事件编号："></asp:Label><asp:TextBox ID="txtEventNo" runat="server" Width="100"></asp:TextBox>
+    <asp:Button ID="btnNormalEventQuery" runat="server" Text="事件查询" CssClass="button" onclick="btnNormalEventQuery_Click" />
 </div>
     <div id="result">
     <asp:GridView ID="gvEvent" runat="server" AutoGenerateColumns="False" >
     <Columns>
+           <asp:BoundField DataField="N">
+                 <ItemStyle Width="20px" />
+           </asp:BoundField>
            <asp:BoundField DataField="EventNo">
                  <ItemStyle Width="100px" />
            </asp:BoundField>
@@ -98,7 +99,12 @@
            <asp:BoundField DataField="LogBy">
                  <ItemStyle Width="60px" />
            </asp:BoundField>
-           <asp:HyperLinkField HeaderStyle-Width="60px" DataNavigateUrlFields="EventNo,TypeCode" DataNavigateUrlFormatString="NormalEvent.aspx?eventNo={0}&typeCode={1}" Text="查看详情" />
+           <asp:HyperLinkField HeaderStyle-Width="60px" 
+               DataNavigateUrlFields="EventNo,TypeCode" 
+               DataNavigateUrlFormatString="NormalEvent.aspx?eventNo={0}&typeCode={1}" 
+               Text="查看详情" Target="_blank" >
+           <HeaderStyle Width="60px" />
+           </asp:HyperLinkField>
     </Columns>
     </asp:GridView>
     <div id="showpage" runat="server" visible="false">

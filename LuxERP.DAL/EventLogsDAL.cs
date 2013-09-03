@@ -24,6 +24,7 @@ namespace LuxERP.DAL
         private const string SPGetAllotStocksTotal = "GetEventLogsTotal";
         private const string SPGetAllotStocksPaged = "GetEventLogsPaged";
         private const string SPUpdateUpLoadPic = "UpdateUpLoadPic";
+        private const string SPGetUsers = "GetUsers";
         
 
         public static int AddEventLogs(string eventNo, string eventTime, string storeNo, string typeCode, string eventDescribe, string toResolvedTime, string eventState, string logBy)
@@ -146,22 +147,7 @@ namespace LuxERP.DAL
 
         }
 
-        public static DataSet GetEventLogsTotal(string eventTimeA, string eventTimeB, string storeNo, string typeCode, string eventState, string eventNo)
-        {
-            SqlParameter[] paras = {
-	            new SqlParameter("@eventTimeA",eventTimeA),
-                new SqlParameter("@eventTimeB",eventTimeB),
-                new SqlParameter("@storeNo",storeNo),
-                new SqlParameter("@typeCode",typeCode),
-                new SqlParameter("@eventState",eventState),
-                new SqlParameter("@eventNo",eventNo)
-            };
-            DataSet ds = null;
-            ds = Common.SqlHelper.ExecuteDataSet(SPGetAllotStocksTotal, paras);
-            return ds;
-        }
-
-        public static DataSet GetEventLogsPaged(string eventTimeA, string eventTimeB, string storeNo, string typeCode, string eventState, string eventNo, int pageSize, int pageIndex)
+        public static DataSet GetEventLogsTotal(string eventTimeA, string eventTimeB, string storeNo, string typeCode, string eventState, string eventNo, string user)
         {
             SqlParameter[] paras = {
 	            new SqlParameter("@eventTimeA",eventTimeA),
@@ -170,6 +156,23 @@ namespace LuxERP.DAL
                 new SqlParameter("@typeCode",typeCode),
                 new SqlParameter("@eventState",eventState),
                 new SqlParameter("@eventNo",eventNo),
+                new SqlParameter("@user",user)
+            };
+            DataSet ds = null;
+            ds = Common.SqlHelper.ExecuteDataSet(SPGetAllotStocksTotal, paras);
+            return ds;
+        }
+
+        public static DataSet GetEventLogsPaged(string eventTimeA, string eventTimeB, string storeNo, string typeCode, string eventState, string eventNo, string user, int pageSize, int pageIndex)
+        {
+            SqlParameter[] paras = {
+	            new SqlParameter("@eventTimeA",eventTimeA),
+                new SqlParameter("@eventTimeB",eventTimeB),
+                new SqlParameter("@storeNo",storeNo),
+                new SqlParameter("@typeCode",typeCode),
+                new SqlParameter("@eventState",eventState),
+                new SqlParameter("@eventNo",eventNo),
+                new SqlParameter("@user",user),
                 new SqlParameter("@pageSize",pageSize),
                 new SqlParameter("@pageIndex",pageIndex)
             };
@@ -203,6 +206,12 @@ namespace LuxERP.DAL
                 return "";
             }
 
+        }
+
+        public static DataSet GetUsers()
+        {
+            DataSet ds = Common.SqlHelper.ExecuteDataSet(SPGetUsers, null);
+            return ds;
         }
     }
 }

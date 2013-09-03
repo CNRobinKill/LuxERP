@@ -131,6 +131,8 @@
     <Content Include="EventManagement\EventQuery.aspx" />
     <Content Include="EventManagement\FacilityAllotByEvent.aspx" />
     <Content Include="EventManagement\FacilityMatchingAndOutByEvent.aspx" />
+    <Content Include="EventManagement\GetStoresData.aspx" />
+    <Content Include="EventManagement\GetTypesData.aspx" />
     <Content Include="EventManagement\NormalEvent.aspx" />
     <Content Include="EventManagement\OutOrder.aspx" />
     <Content Include="EventManagement\SceneByEnent.aspx" />
@@ -283,6 +285,20 @@
     </Compile>
     <Compile Include="EventManagement\FacilityMatchingAndOutByEvent.aspx.designer.cs">
       <DependentUpon>FacilityMatchingAndOutByEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\GetStoresData.aspx.cs">
+      <DependentUpon>GetStoresData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\GetStoresData.aspx.designer.cs">
+      <DependentUpon>GetStoresData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventManagement\GetTypesData.aspx.cs">
+      <DependentUpon>GetTypesData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\GetTypesData.aspx.designer.cs">
+      <DependentUpon>GetTypesData.aspx</DependentUpon>
     </Compile>
     <Compile Include="EventManagement\NormalEvent.aspx.cs">
       <DependentUpon>NormalEvent.aspx</DependentUpon>
