@@ -81,7 +81,7 @@
         onclick="btnReturnEventQuery_Click" />
 <h2>EventLog</h2>
 <div style="width:800px; text-align:right"><asp:Button ID="btnStopEventLog" 
-        runat="server" Text="立刻关闭事件" CssClass="button" 
+        runat="server" Text="关闭/作废事件" CssClass="button" 
         onclick="btnStopEventLog_Click" /></div>
 <div class="content-box-header" ><h3 style="cursor: s-resize;">StoreInformation</h3></div>
 <div class="content-box-content">

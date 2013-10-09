@@ -10,12 +10,13 @@ namespace LuxERP.UI.EventManagement
 {
     public partial class CreateEvent : System.Web.UI.Page
     {
+        private static int n = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnNormalEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnNormalEvent, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnSetUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSetUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnShutUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnShutUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnStoreRenovation.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStoreRenovation, "click") + ";this.disabled=true; this.value='处理中...';");
+            //this.btnNormalEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnNormalEvent, "click") + ";this.disabled=true; this.value='处理中...';");
+            //this.btnSetUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnSetUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
+            //this.btnShutUpShop.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnShutUpShop, "click") + ";this.disabled=true; this.value='处理中...';");
+            //this.btnStoreRenovation.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStoreRenovation, "click") + ";this.disabled=true; this.value='处理中...';");
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +
@@ -60,7 +61,7 @@ namespace LuxERP.UI.EventManagement
                                 //            " window.location=('/LogOn.aspx');" +
                                 //            "</script>");
                                 //}
-
+                                n = 0;
                                 basicInformation.Visible = false;
                             }
                             if (IsPostBack)
@@ -212,38 +213,46 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnNormalEvent_Click(object sender, EventArgs e)
         {
-            string eventNoNow = EventNo();
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            if(DAL.EventLogsDAL.AddEventLogs(eventNoNow,timeNow,txtStoreNo.Text.Trim(),txtTypeCode.Text.Trim(),txtEventDescribe.Text.Trim(),"","99",Session["userName"].ToString())>0)
+            if (n == 0)
             {
-                string typeCode=txtTypeCode.Text.Trim();                
-                DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(typeCode) + " 处理", timeNow, "0", Session["userName"].ToString());              
-                string mailTo = SendEmailInfo(3, typeCode);
-                if (mailTo != "")
+                n++;
+                string eventNoNow = EventNo();
+                string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string typeCode = txtTypeCode.Text.Trim();
+                if (typeCode == "" || typeCode == null)
                 {
-                    string email = SendEmailInfo(0, typeCode);
-                    string mailServer = SendEmailInfo(1, typeCode);
-                    string ePassword = SendEmailInfo(2, typeCode);
-
-                    string mailToName = SendEmailInfo(4, typeCode);
-                    string eventLevel = SendEmailInfo(5, typeCode);
-                    string eventName = SendEmailInfo(6, typeCode);
-                    string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + "：<div>&nbsp; &nbsp; 当前有一个事件需要由" + eventLevel + "处理，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + txtStoreNo.Text.Trim() + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + typeCode + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：" + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow + "</div><div>&nbsp; &nbsp; 请及时通知相关人员处理，我们将会对事件进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
-                    if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
-                    {
-                        DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)已成功向" + mailToName + "发送邮件", timeNow, "0", Session["userName"].ToString());
-                    }
-                    else
-                    {
-                        DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)SMTP服务器无法接通，向" + mailToName + "发送邮件失败，请手动发送或使用其它方式联系", timeNow, "0", Session["userName"].ToString());
-                    }
+                    typeCode = "0000";
                 }
-                string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=" + txtTypeCode.Text.Trim().Trim() + "";
-                Response.Redirect(url);
-            }
-            else
-            {
-                MsgBox("基础信息必须填写完整且正确!");
+                if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), typeCode, txtEventDescribe.Text.Trim(), "", "99", Session["userName"].ToString()) > 0)
+                {
+                    DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(typeCode) + " 处理", timeNow, "0", Session["userName"].ToString());
+                    string mailTo = SendEmailInfo(3, typeCode);
+                    if (mailTo != "")
+                    {
+                        string email = SendEmailInfo(0, typeCode);
+                        string mailServer = SendEmailInfo(1, typeCode);
+                        string ePassword = SendEmailInfo(2, typeCode);
+
+                        string mailToName = SendEmailInfo(4, typeCode);
+                        string eventLevel = SendEmailInfo(5, typeCode);
+                        string eventName = SendEmailInfo(6, typeCode);
+                        string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + "：<div>&nbsp; &nbsp; 当前有一个事件需要由" + eventLevel + "处理，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + txtStoreNo.Text.Trim() + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + typeCode + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：" + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow + "</div><div>&nbsp; &nbsp; 请及时通知相关人员处理，我们将会对事件进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
+                        if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
+                        {
+                            DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)已成功向" + mailToName + "发送邮件", timeNow, "0", Session["userName"].ToString());
+                        }
+                        else
+                        {
+                            DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)SMTP服务器无法接通，向" + mailToName + "发送邮件失败，请手动发送或使用其它方式联系", timeNow, "0", Session["userName"].ToString());
+                        }
+                    }
+                    string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=" + typeCode + "";
+                    Response.Redirect(url);
+                }
+                else
+                {
+                    MsgBox("基础信息必须填写完整且正确!");
+                }
             }
             
         }
@@ -306,19 +315,52 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnSetUpShop_Click(object sender, EventArgs e)
         {
-            string eventNoNow = EventNo2();
-            string region = txtRegion.Text.ToUpper().Trim();
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string nowTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-            if (txtStoreNo2.Text.Trim() != "" && txtRegion.Text.Trim() != "")
+            if (n == 0)
             {
-                if (DAL.StoresDAL.AddStores(txtStoreNo2.Text.Trim(), "", "IFocus", region, "", "", "", "", "", "", "", "999") > 0)
+                n++;
+                string eventNoNow = EventNo2();
+                string region = txtRegion.Text.ToUpper().Trim();
+                string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string nowTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+                if (txtStoreNo2.Text.Trim() != "" && txtRegion.Text.Trim() != "")
                 {
-                    if (DAL.EventLogsDAL.AddEventLogs(region + nowTime, timeNow, txtStoreNo2.Text.Trim(), "9999", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "199", Session["userName"].ToString()) > 0)
+                    if (DAL.StoresDAL.AddStores(txtStoreNo2.Text.Trim(), "", "IFocus", region, "", "", "", "", "", "", "", "999") > 0)
                     {
-                        DAL.EventStepsDAL.AddEventSteps(region + nowTime, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
-                        DAL.EventStepsDAL.AddEventSteps(region + nowTime, "OS安装,Cisco配置,网络配置", timeNow, "99", Session["userName"].ToString());
-                        string url = "NormalEvent.aspx?eventNo=" + region + nowTime + "&typeCode=9999";
+                        if (DAL.EventLogsDAL.AddEventLogs(region + nowTime, timeNow, txtStoreNo2.Text.Trim(), "9999", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "199", Session["userName"].ToString()) > 0)
+                        {
+                            DAL.EventStepsDAL.AddEventSteps(region + nowTime, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
+                            DAL.EventStepsDAL.AddEventSteps(region + nowTime, "OS安装,Cisco配置,网络配置", timeNow, "99", Session["userName"].ToString());
+                            string url = "NormalEvent.aspx?eventNo=" + region + nowTime + "&typeCode=9999";
+                            Response.Redirect(url);
+                        }
+                        else
+                        {
+                            MsgBox("基础信息必须填写完整且正确!");
+                        }
+                    }
+                    else
+                    {
+                        MsgBox("该门店已存在!");
+                    }
+                }
+                else
+                { MsgBox("请填写店号!"); }
+            }
+        }
+
+        protected void btnShutUpShop_Click(object sender, EventArgs e)
+        {
+            if (n == 0)
+            {
+                n++;
+                string eventNoNow = EventNo();
+                string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "997") > 0)
+                {
+                    if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "9000", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "299", Session["userName"].ToString()) > 0)
+                    {
+                        DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
+                        string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=9000";
                         Response.Redirect(url);
                     }
                     else
@@ -328,56 +370,35 @@ namespace LuxERP.UI.EventManagement
                 }
                 else
                 {
-                    MsgBox("该门店已存在!");
+                    MsgBox("该门店不该有关店事件或不存在!");
                 }
-            }
-            else
-            { MsgBox("请填写店号!"); }
-        }
-
-        protected void btnShutUpShop_Click(object sender, EventArgs e)
-        {
-            string eventNoNow = EventNo();
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "997") > 0)
-            {
-                if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "9000", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "299", Session["userName"].ToString()) > 0)
-                {
-                    DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
-                    string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=9000";
-                    Response.Redirect(url);
-                }
-                else
-                {
-                    MsgBox("基础信息必须填写完整且正确!");
-                }
-            }
-            else
-            {
-                MsgBox("该门店不该有关店事件或不存在!");
             }
         }
 
         protected void btnStoreRenovation_Click(object sender, EventArgs e)
         {
-            string eventNoNow = EventNo();
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "998") > 0)
+            if (n == 0)
             {
-                if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "8888", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "399", Session["userName"].ToString()) > 0)
+                n++;
+                string eventNoNow = EventNo();
+                string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "998") > 0)
                 {
-                    DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
-                    string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=8888";
-                    Response.Redirect(url);
+                    if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "8888", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "399", Session["userName"].ToString()) > 0)
+                    {
+                        DAL.EventStepsDAL.AddEventSteps(eventNoNow, "(创建事件)事件由 " + DAL.EventTypesDAL.GetEventLevelByTypeCode(txtTypeCode.Text.Trim()) + " 处理", timeNow, "0", Session["userName"].ToString());
+                        string url = "NormalEvent.aspx?eventNo=" + eventNoNow + "&typeCode=8888";
+                        Response.Redirect(url);
+                    }
+                    else
+                    {
+                        MsgBox("基础信息必须填写完整且正确!");
+                    }
                 }
                 else
                 {
-                    MsgBox("基础信息必须填写完整且正确!");
+                    MsgBox("该门店已在装修状态或不存在!");
                 }
-            }
-            else
-            {
-                MsgBox("该门店已在装修状态或不存在!");
             }
         }
 

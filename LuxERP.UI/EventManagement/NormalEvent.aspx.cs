@@ -295,7 +295,7 @@ namespace LuxERP.UI.EventManagement
         {
             lblEventNo.Text = EventInformationArray(0);
             lblEventTime.Text = EventInformationArray(1);
-            if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888")
+            if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888" && Request.QueryString["typeCode"] != "0000")
             {
                 lblType.Text = Request.QueryString["typeCode"] + " " + EventTypes(Request.QueryString["typeCode"]);
             }
@@ -312,6 +312,10 @@ namespace LuxERP.UI.EventManagement
                 if (Request.QueryString["typeCode"] == "8888")
                 {
                     lblType.Text = Request.QueryString["typeCode"] + " 店铺装修";
+                }
+                if (Request.QueryString["typeCode"] == "0000")
+                {
+                    lblType.Text = Request.QueryString["typeCode"] + " 未分配";
                 }
                 lblToResolvedTime.Text = EventInformationArray(5);
             }            
@@ -784,7 +788,10 @@ namespace LuxERP.UI.EventManagement
             {
                 if (DAL.EventLogsDAL.UpdateTypeCode(Request.QueryString["eventNo"], txtType.Text.Trim()) > 0)
                 {
-                    DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(更改信息)事件类型由 " + Request.QueryString["typeCode"] + " 更改成 " + EventInformationArray(3) + "", timeNow(), "0", Session["userName"].ToString());
+                    if (Request.QueryString["typeCode"] != "0000")
+                    {
+                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(更改信息)事件类型由 " + Request.QueryString["typeCode"] + " 更改成 " + EventInformationArray(3) + "", timeNow(), "0", Session["userName"].ToString());
+                    }
                     Response.Redirect("NormalEvent.aspx?eventNo=" + Request.QueryString["eventNo"] + "&typeCode=" + EventInformationArray(3) + "");
                 }
                 else

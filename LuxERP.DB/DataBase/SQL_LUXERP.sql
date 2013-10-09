@@ -980,9 +980,12 @@ Go
 
 --固定值类型插入
 go
-if not exists(select TypeCode from tb_EventTypes where TypeCode='9999') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour) values('9999','开店','开店','开店','开店')
-if not exists(select TypeCode from tb_EventTypes where TypeCode='9000') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour) values('9000','关店','关店','关店','关店')
-if not exists(select TypeCode from tb_EventTypes where TypeCode='8888') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour) values('8888','店铺装修','店铺装修','店铺装修','店铺装修')
+declare @lv nvarchar(50)
+select @lv=(select Solver from tb_Solver where SMTP is not null and SMTP <>'' and EPassword is not null and EPassword <>'')
+if not exists(select TypeCode from tb_EventTypes where TypeCode='9999') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('9999','开店','开店','开店','开店',@lv)
+if not exists(select TypeCode from tb_EventTypes where TypeCode='9000') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('9000','关店','关店','关店','关店',@lv)
+if not exists(select TypeCode from tb_EventTypes where TypeCode='8888') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('8888','店铺装修','店铺装修','店铺装修','店铺装修',@lv)
+if not exists(select TypeCode from tb_EventTypes where TypeCode='0000') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('0000','未处理','未处理','未处理','未处理',@lv)
 
 go
 Create Procedure [dbo].[AddEventTypes]
@@ -1005,8 +1008,7 @@ Create Procedure [dbo].[GetEventTypes]
 
 AS
 DECLARE	 @sql	 nvarchar (1000)	
-SET @sql = 'select TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel, row_number() over(partition by left(TypeCode,3) order by cast(right(TypeCode,len(TypeCode)-3) as float)) from tb_EventTypes where TypeCode not in(''9999'',''9000'',''8888'')'
-print @sql
+SET @sql = 'select TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel, row_number() over(partition by left(TypeCode,3) order by cast(right(TypeCode,len(TypeCode)-3) as float)) from tb_EventTypes where TypeCode not in(''9999'',''9000'',''8888'',''0000'')'
 EXEC(@sql)
 Go
 Create Procedure [dbo].[GetEventTypesByTypeCode]
