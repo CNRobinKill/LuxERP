@@ -631,6 +631,7 @@ Go
 
 /***************************Solver***************************/
 insert into tb_Solver(Solver,SMTP,Email,EPassword,Note) values('ø‚¥Êπ‹¿Ì‘±',NULL,NULL,NULL,NULL)
+Go
 /**Add**/
 Create Procedure [dbo].[AddSolver]
 (
@@ -1027,7 +1028,10 @@ Create Procedure [dbo].[GetEventLevelByTypeCode]
 )
 
 AS
-begin	
+declare @lv nvarchar(50)
+begin
+select @lv=(select Solver from tb_Solver where SMTP is not null and SMTP <>'' and EPassword is not null and EPassword <>'')
+update tb_EventTypes set EventLevel=@lv where TypeCode in('9999','9000','8888','0000')	
 select EventLevel from tb_EventTypes where TypeCode= @typeCode
 end
 Go
@@ -1168,7 +1172,15 @@ DECLARE  @eventDateTime			datetime
 DECLARE  @toResolvedDateTime	datetime
 DECLARE	 @handingBy				nvarchar(500)
 	SET @eventDateTime = cast(@eventTime as datetime)
-	select @handingBy=EventLevel from tb_EventTypes where TypeCode=@typeCode
+	
+	if(@typeCode='0000')
+	begin
+		select @handingBy=(select Solver from tb_Solver where SMTP is not null and SMTP <>'' and EPassword is not null and EPassword <>'')
+	end
+	else
+	begin
+		select @handingBy=EventLevel from tb_EventTypes where TypeCode=@typeCode
+	end
 IF @toResolvedTime <> ''
 BEGIN
 	SET @toResolvedDateTime = cast(@toResolvedTime as datetime)

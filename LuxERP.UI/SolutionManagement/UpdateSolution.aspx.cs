@@ -13,7 +13,7 @@ namespace LuxERP.UI.SolutionManagement
     {        
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnUpdate.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpdate, "click") + ";this.disabled=true; this.value='处理中...';");
+            
                 if (Session["userName"] == null)
                 {
                     Response.Write("<script LANGUAGE=JavaScript >" +

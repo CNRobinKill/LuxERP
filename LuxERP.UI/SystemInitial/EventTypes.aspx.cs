@@ -12,15 +12,6 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnAddTypeFour.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddTypeFour, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnAddTypeOne.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddTypeOne, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnAddTypeThree.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddTypeThree, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnAddTypeTwo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddTypeTwo, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnCreateEventTypes.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnCreateEventTypes, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnDelTypeFour.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelTypeFour, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnDelTypeOne.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelTypeOne, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnDelTypeThree.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelTypeThree, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnDelTypeTwo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelTypeTwo, "click") + ";this.disabled=true; this.value='处理中...';");
 
                 if (Session["userName"] == null)
                 {

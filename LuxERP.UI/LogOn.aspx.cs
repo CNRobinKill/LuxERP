@@ -12,9 +12,9 @@ namespace LuxERP.UI
         public static int n = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.btnLogIn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnLogIn, "click") + ";this.disabled=true; this.value='登录中...';");
             if (!IsPostBack)
             {
+                n = 0;
                 if (Session["userName"] != null)
                 {
                     if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")

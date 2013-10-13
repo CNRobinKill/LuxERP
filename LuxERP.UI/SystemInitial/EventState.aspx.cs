@@ -11,9 +11,7 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnAddSetUpShopState.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddSetUpShopState, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnAddShutUpShopState.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddShutUpShopState, "click") + ";this.disabled=true; this.value='处理中...';");
-            this.btnAddStoreRenovationState.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddStoreRenovationState, "click") + ";this.disabled=true; this.value='处理中...';");
+
 
                 if (Session["userName"] == null)
                 {

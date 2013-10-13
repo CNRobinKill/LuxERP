@@ -12,7 +12,6 @@ namespace LuxERP.UI.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.btnPermission.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnPermission, "click") + ";this.disabled=true; this.value='处理中...';");
 
                 if (Session["userName"] == null)
                 {
