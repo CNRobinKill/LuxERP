@@ -9,12 +9,10 @@ namespace LuxERP.UI
 {
     public partial class LogOn : System.Web.UI.Page
     {
-        public static int n = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                n = 0;
                 if (Session["userName"] != null)
                 {
                     if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
@@ -35,9 +33,7 @@ namespace LuxERP.UI
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
-            if (n == 0)
-            {
-                n++;
+
                 if (txtPassword.Text.Length <= 30 && txtUserName.Text.Length <= 30)
                 {
                     if (txtUserName.Text.Trim() == "" || txtPassword.Text.Trim() == "")
@@ -73,7 +69,6 @@ namespace LuxERP.UI
                 {
                     MsgBox("不存在过长的用户名或密码！");
                 }
-            }
         }
     }
 
