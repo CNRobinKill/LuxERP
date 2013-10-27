@@ -136,6 +136,7 @@
     <Content Include="EventManagement\NormalEvent.aspx" />
     <Content Include="EventManagement\OutOrder.aspx" />
     <Content Include="EventManagement\SceneByEnent.aspx" />
+    <Content Include="EventManagement\SceneToken.aspx" />
     <Content Include="EventManagement\ShowPic.aspx" />
     <Content Include="EventManagement\WorkOrder.aspx" />
     <Content Include="FacilityManagement\AddStockQuery.aspx" />
@@ -213,12 +214,15 @@
     <Content Include="SolutionManagement\emoticons\wink.png" />
     <Content Include="SolutionManagement\emoticons\wub.png" />
     <Content Include="StoreInformation\StoreInformation.aspx" />
+    <Content Include="SystemInitial\AreaInformation.aspx" />
     <Content Include="SystemInitial\EventState.aspx" />
     <Content Include="SystemInitial\EventTypes.aspx" />
     <Content Include="SystemInitial\FacilityManage.aspx" />
     <Content Include="SystemInitial\InitialStocks.aspx" />
     <Content Include="SystemInitial\InitialStores.aspx" />
     <Content Include="SystemInitial\PeopleManage.aspx" />
+    <Content Include="SystemInitial\SceneInformation.aspx" />
+    <Content Include="SystemInitial\SceneServiceProvider.aspx" />
     <Content Include="SystemInitial\SynthesisManage.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -321,6 +325,13 @@
     <Compile Include="EventManagement\SceneByEnent.aspx.designer.cs">
       <DependentUpon>SceneByEnent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EventManagement\SceneToken.aspx.cs">
+      <DependentUpon>SceneToken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventManagement\SceneToken.aspx.designer.cs">
+      <DependentUpon>SceneToken.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EventManagement\ShowPic.aspx.cs">
       <DependentUpon>ShowPic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -420,6 +431,13 @@
     <Compile Include="StoreInformation\StoreInformation.aspx.designer.cs">
       <DependentUpon>StoreInformation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemInitial\AreaInformation.aspx.cs">
+      <DependentUpon>AreaInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\AreaInformation.aspx.designer.cs">
+      <DependentUpon>AreaInformation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemInitial\EventState.aspx.cs">
       <DependentUpon>EventState.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -461,6 +479,20 @@
     </Compile>
     <Compile Include="SystemInitial\PeopleManage.aspx.designer.cs">
       <DependentUpon>PeopleManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\SceneInformation.aspx.cs">
+      <DependentUpon>SceneInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\SceneInformation.aspx.designer.cs">
+      <DependentUpon>SceneInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInitial\SceneServiceProvider.aspx.cs">
+      <DependentUpon>SceneServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemInitial\SceneServiceProvider.aspx.designer.cs">
+      <DependentUpon>SceneServiceProvider.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemInitial\SynthesisManage.aspx.cs">
       <DependentUpon>SynthesisManage.aspx</DependentUpon>

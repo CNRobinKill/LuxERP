@@ -484,8 +484,54 @@ create table tb_Permission
 	[ScrapStocks]		int
 )
 
+-- 上门类型
+create table tb_SceneType
+(
+	TypeName				nvarchar(500) primary key,
+	BaseToken				float,
+	ComputingMethod			nvarchar(500)
+)
 
+-- 时段倍率
+create table tb_MultiplyingPowerType
+(
+	TypeName				nvarchar(500) primary key,
+	MultiplyingPower		float
+)
 
+-- 区域信息
+create table tb_AreaInfo
+(
+	AreaName				nvarchar(500) primary key,
+	AreaAliss				nvarchar(500),
+	AreaManager				nvarchar(500),
+	ManagerPhone			nvarchar(500),
+	ManagerEmail			nvarchar(500)
+)
+
+-- 上门服务商
+create table tb_SceneServiceProvider
+(
+	ServiceProvider			nvarchar(500) primary key,
+	Phone					nvarchar(500),
+	ServiceArea				nvarchar(500),
+	RemainToken				float
+)
+
+-- Token统计
+create table tb_Token
+(
+	ID						int identity(1,1) not null,
+	EventNo					nvarchar(500),
+	TimeStart				datetime,
+	TimeEnd					datetime,
+	SceneType				nvarchar(500),
+	BaseToken				float,
+	MultiplyingPower		float,
+	ServiceProvider			nvarchar(500)
+)
+
+	
 
 -- 存储过程
 SET ANSI_NULLS ON

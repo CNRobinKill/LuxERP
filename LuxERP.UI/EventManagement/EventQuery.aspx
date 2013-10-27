@@ -22,7 +22,7 @@
             alert("0到9的数字，不超过5位");
             return false;
         }
-    }
+    };
 
     function setDate() {
         $("#myContent_txtAEventTime").datepicker({
