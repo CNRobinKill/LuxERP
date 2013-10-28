@@ -12,6 +12,7 @@ namespace LuxERP.DAL
 
         private const string SPAddSceneType = "AddSceneType";
         private const string SPGetSceneType = "GetSceneType";
+        private const string SPGetTypeName = "GetTypeName";
         private const string SPDelSceneType = "DelSceneType";
 
 
@@ -29,6 +30,13 @@ namespace LuxERP.DAL
         {
             DataSet ds = null;
             ds = Common.SqlHelper.ExecuteDataSet(SPGetSceneType, null);
+            return ds;
+        }
+
+        public static DataSet GetTypeName()
+        {
+            DataSet ds = null;
+            ds = Common.SqlHelper.ExecuteDataSet(SPGetTypeName, null);
             return ds;
         }
 

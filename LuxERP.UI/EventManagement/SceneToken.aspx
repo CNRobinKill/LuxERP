@@ -59,10 +59,12 @@
     <asp:Label runat="server" Text="服务时间："></asp:Label><asp:TextBox ID="txtAServiceTime" runat="server" Width="100px"></asp:TextBox>
     <asp:Label runat="server" Text="至"></asp:Label><asp:TextBox ID="txtBServiceTime" runat="server" Width="100px"></asp:TextBox>
     <asp:Label runat="server" Text="服务商："></asp:Label><asp:DropDownList ID="ddlServiceProvider" runat="server"></asp:DropDownList>
-    <asp:Button ID="btnTokenQuery" runat="server" Text="Token查询" CssClass="button" />
+    <asp:Button ID="btnTokenQuery" runat="server" Text="Token查询" CssClass="button" 
+        onclick="btnTokenQuery_Click" />
 </div>
     <div id="result">
-    <asp:GridView ID="gvToken" runat="server" AutoGenerateColumns="False" >
+    <asp:GridView ID="gvToken" runat="server" AutoGenerateColumns="False" 
+            onrowdatabound="gvToken_RowDataBound" >
     <Columns>
            <asp:BoundField DataField="N">
                  <ItemStyle Width="20px" />
@@ -85,18 +87,24 @@
            <asp:BoundField DataField="MultiplyingPower">
                  <ItemStyle Width="50px" />
            </asp:BoundField>
+           <asp:BoundField DataField="Total">
+                 <ItemStyle Width="50px" />
+           </asp:BoundField>
            <asp:BoundField DataField="ServiceProvider">
                  <ItemStyle Width="100px" />
            </asp:BoundField>
            <asp:HyperLinkField HeaderStyle-Width="60px" 
                DataNavigateUrlFields="EventNo,TypeCode" 
                DataNavigateUrlFormatString="NormalEvent.aspx?eventNo={0}&typeCode={1}" 
-               Text="查看详情" Target="_blank" >
+               Text="查看事件" Target="_blank" >
            <HeaderStyle Width="60px" />
            </asp:HyperLinkField>
+           <asp:BoundField DataField="ScenePic">
+                 <ItemStyle Width="100px" />
+           </asp:BoundField>
     </Columns>
     </asp:GridView>
-<%--    <div id="showpage" runat="server" visible="false">
+    <div id="showpage" runat="server" visible="false">
         到<asp:TextBox ID="txtCurPage" runat="server" Width="30px"></asp:TextBox>页
         <asp:Button ID="btnGo" runat="server" Text="Go" CssClass="button" 
             onclick="btnGo_Click" OnClientClick="check();" Width="33px" /> 
@@ -110,7 +118,7 @@
             onclick="btnNxtPage_Click" /> 
         <asp:Button ID="btnLastPage" runat="server" Text="尾页>|" CssClass="button" 
             onclick="btnLastPage_Click" /> 
-    </div>--%>
+    </div>
     </div>
 </ContentTemplate>
 </asp:UpdatePanel>

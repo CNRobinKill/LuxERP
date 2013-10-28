@@ -56,8 +56,7 @@ namespace LuxERP.UI.SystemInitial
             //                //}
                             ddlServiceAreaShow();
                             ddlServiceProviderShow();
-            //                gvSceneTypeBind();
-            //                gvMultiplyingPowerTypeBind();
+            //                gvSceneServiceProviderBind();
                         }
             //            if (IsPostBack)
             //            {
@@ -126,7 +125,11 @@ namespace LuxERP.UI.SystemInitial
                 gvSceneServiceProvider.HeaderRow.Cells[1].Text = "<b>联系电话</b>";
                 gvSceneServiceProvider.HeaderRow.Cells[2].Text = "<b>服务区域</b>";
                 gvSceneServiceProvider.HeaderRow.Cells[3].Text = "<b>剩余Token数</b>";
-
+                divAddToken.Visible = true;
+            }
+            else
+            {
+                divAddToken.Visible = false;
             }
         }
 
@@ -182,11 +185,30 @@ namespace LuxERP.UI.SystemInitial
         protected void gvSceneServiceProvider_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             DropDownList ddl;
-            if (((DropDownList)e.Row.FindControl("ddlServiceArea")) != null)
+            if (((DropDownList)e.Row.FindControl("ddlServiceAreaB")) != null)
             {
                 ddl = (DropDownList)e.Row.FindControl("ddlServiceAreaB");
+                ddl.DataSource = DAL.AreaInfoDAL.GetAreaAliss();
+                ddl.DataValueField = "AreaAliss";
+                ddl.DataTextField = "AreaAliss";
+                ddl.DataBind();
                 ddl.SelectedValue = ((HiddenField)e.Row.FindControl("hdServiceArea")).Value;
             }
         }
+
+        protected void btnAddToken_Click(object sender, EventArgs e)
+        {
+            if (txtToken.Text.Trim()!="")
+            {
+                string token = txtToken.Text.Trim();
+                if (returnbool(token))
+                {
+                    DAL.SceneServiceProviderDAL.UpdateAddToken(ddlServiceProvider.SelectedValue, token);
+                }
+            }
+            txtToken.Text = "";
+            gvSceneServiceProviderBind();
+        }
+
     }
 }

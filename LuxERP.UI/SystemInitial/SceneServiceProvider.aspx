@@ -37,10 +37,12 @@
         onrowupdating="gvSceneServiceProvider_RowUpdating">
         <Columns>
                     <asp:BoundField DataField="ServiceProvider" >
-                        <ItemStyle Width="100px" />
+                        <ControlStyle Width="161px" />
+                        <ItemStyle Width="160px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Phone" >
-                        <ItemStyle Width="50px" />
+                        <ControlStyle Width="101px" />
+                        <ItemStyle Width="100px" />
                     </asp:BoundField>
                     <asp:TemplateField HeaderStyle-Width="102px">
                         <ItemTemplate>
@@ -51,7 +53,7 @@
                             <asp:DropDownList ID="ddlServiceAreaB" runat="server"></asp:DropDownList>
                             </EditItemTemplate>
                         <ItemStyle Width="100px" />
-                        <ControlStyle Width="101px" />
+                        <ControlStyle Width="71px" />
                     </asp:TemplateField>
 <%--                    <asp:BoundField DataField="ServiceArea" >
                         <ItemStyle Width="100px" />
@@ -68,7 +70,8 @@
     <asp:DropDownList ID="ddlServiceProvider" runat="server"></asp:DropDownList>
     <asp:Label runat="server" Text="增加Token数："></asp:Label>
     <asp:TextBox ID="txtToken" runat="server" Width="100px"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" Text="增加" CssClass="button"  />
+    <asp:Button ID="btnAddToken" runat="server" Text="增加" CssClass="button" 
+            onclick="btnAddToken_Click"  />
     </div>
  </ContentTemplate>
  </asp:UpdatePanel>

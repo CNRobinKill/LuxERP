@@ -69,6 +69,7 @@
     <Compile Include="StoresDAL.cs" />
     <Compile Include="SynthesisDAL.cs" />
     <Compile Include="SystemUserDAL.cs" />
+    <Compile Include="TokenDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LuxERP.Common\LuxERP.DAL.Common.csproj">

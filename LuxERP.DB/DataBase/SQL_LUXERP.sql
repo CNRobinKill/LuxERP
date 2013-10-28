@@ -1027,7 +1027,7 @@ Go
 
 --固定值类型插入
 go
-declare @lv nvarchar(50)
+declare @lv nvarchar(500)
 select @lv=(select Solver from tb_Solver where SMTP is not null and SMTP <>'' and EPassword is not null and EPassword <>'')
 if not exists(select TypeCode from tb_EventTypes where TypeCode='9999') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('9999','开店','开店','开店','开店',@lv)
 if not exists(select TypeCode from tb_EventTypes where TypeCode='9000') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('9000','关店','关店','关店','关店',@lv)
@@ -1074,7 +1074,7 @@ Create Procedure [dbo].[GetEventLevelByTypeCode]
 )
 
 AS
-declare @lv nvarchar(50)
+declare @lv nvarchar(500)
 begin
 select @lv=(select Solver from tb_Solver where SMTP is not null and SMTP <>'' and EPassword is not null and EPassword <>'')
 update tb_EventTypes set EventLevel=@lv where TypeCode in('9999','9000','8888','0000')	
@@ -1293,7 +1293,7 @@ create Procedure [dbo].[GetEventLogsInNormalEvent]
 )
 AS
 DECLARE  @where   nvarchar(500)
-DECLARE  @sql   nvarchar(1000)
+DECLARE  @sql   nvarchar(3000)
 	
 	
 	SET @where=' where 1=1 '
@@ -2031,7 +2031,7 @@ Create Procedure [dbo].[GetAddStocks]
 AS
 begin
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 
 if @warehouseNo<>''
@@ -2164,7 +2164,7 @@ Create Procedure [dbo].[GetStocks]
 AS
 begin
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @eventNo<>''
 begin
@@ -2219,7 +2219,7 @@ Create Procedure [dbo].[GetStocksInID]
 )
 AS
 declare @temp nvarchar(500)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 declare @n int
 
 begin
@@ -2241,7 +2241,7 @@ Create Procedure [dbo].[DelStocksToScrapInID]
 )
 AS
 declare @temp nvarchar(500)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 declare @n int
 
 begin
@@ -2320,7 +2320,7 @@ Create Procedure [dbo].[UpdateStocksMutualFacilityAllot]
 	@rowID		nvarchar(500)
 )
 as
-declare @sql	nvarchar(1000)
+declare @sql	nvarchar(3000)
 begin
 	set @sql='update tb_Stocks set EventNo='''+@eventNo+''' where ID in('+@rowID+')'
 end
@@ -2448,7 +2448,7 @@ Create Procedure [dbo].[GetOutStocks]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @eventNo<>''
 begin
@@ -2526,7 +2526,7 @@ Create Procedure [dbo].[GetAllotStocks]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @eventNo<>''
 begin
@@ -2756,7 +2756,7 @@ Create Procedure [dbo].[GetAllotStocksPaged]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' 1=1 '
 if @eventNo<>''
 	set @where=@where+' and EventNo = '''+@eventNo+''' '
@@ -2815,7 +2815,7 @@ Create Procedure [dbo].[GetAllotStocksTotal]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @eventNo<>''
 	set @where=@where+' and EventNo = '''+@eventNo+''' '
@@ -2962,7 +2962,7 @@ Create Procedure [dbo].[GetOutStocksTotal]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @eventNo<>''
 	set @where=@where+' and EventNo = '''+@eventNo+''' '
@@ -3046,18 +3046,18 @@ end
 Go
 Create Procedure [dbo].[GetEventLogsTotal]
 (
-	@eventTimeA		nvarchar(50)='',
-	@eventTimeB		nvarchar(50)='',
-	@storeNo		nvarchar(50)='',
-	@typeCode		nvarchar(50)='',
-	@eventState		nvarchar(50)='',
-	@eventNo		nvarchar(50)='',
-	@user			nvarchar(50)=''
+	@eventTimeA		nvarchar(500)='',
+	@eventTimeB		nvarchar(500)='',
+	@storeNo		nvarchar(500)='',
+	@typeCode		nvarchar(500)='',
+	@eventState		nvarchar(500)='',
+	@eventNo		nvarchar(500)='',
+	@user			nvarchar(500)=''
 )
 AS
 begin
 DECLARE  @where   nvarchar(500)
-DECLARE  @sql   nvarchar(1000)
+DECLARE  @sql   nvarchar(3000)
 	
 	
 	SET @where=' where 1=1 '
@@ -3116,20 +3116,20 @@ end
 Go
 Create Procedure [dbo].[GetEventLogsPaged]
 (
-	@eventTimeA		nvarchar(50)='',
-	@eventTimeB		nvarchar(50)='',
-	@storeNo		nvarchar(50)='',
-	@typeCode		nvarchar(50)='',
-	@eventState		nvarchar(50)='',
-	@eventNo		nvarchar(50)='',
-	@user			nvarchar(50)='',
+	@eventTimeA		nvarchar(500)='',
+	@eventTimeB		nvarchar(500)='',
+	@storeNo		nvarchar(500)='',
+	@typeCode		nvarchar(500)='',
+	@eventState		nvarchar(500)='',
+	@eventNo		nvarchar(500)='',
+	@user			nvarchar(500)='',
 	@pageSize		int = 30,
 	@pageIndex		int = 2
 )
 AS
 begin
 DECLARE  @where   nvarchar(500)
-DECLARE  @sql   nvarchar(1000)
+DECLARE  @sql   nvarchar(3000)
 declare  @n		nvarchar(100)
 set @n = Cast((@pageIndex - 1) * @pageSize as nvarchar(100))
 	
@@ -3203,7 +3203,7 @@ Create Procedure [dbo].[GetScrapStocksTotal]
 )
 AS
 declare @where nvarchar(300)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 set @where=' where 1=1 '
 if @warehouseNo<>''
 	set @where=@where+' and WarehouseNo = '''+@warehouseNo+''' '
@@ -3243,7 +3243,7 @@ Create Procedure [dbo].[GetScrapStocksPaged]
 )
 AS
 begin
-declare @where nvarchar(1000)
+declare @where nvarchar(3000)
 declare @sql nvarchar(2000)
 set @where=' 1=1 '
 if @warehouseNo<>''
@@ -3398,6 +3398,14 @@ Create Procedure [dbo].[GetSceneType]
 AS
 DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeName,BaseToken,ComputingMethod from tb_SceneType order by TypeName'
+print @sql
+EXEC(@sql)
+Go
+Create Procedure [dbo].[GetTypeName]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select TypeName from tb_SceneType order by TypeName'
 print @sql
 EXEC(@sql)
 Go
@@ -3569,7 +3577,166 @@ SET @sql = 'update tb_SceneServiceProvider set Phone ='''+@phone+''',ServiceArea
 print @sql
 EXEC(@sql)
 Go
+Create Procedure [dbo].[UpdateAddToken]
+(
+	@serviceProvider			nvarchar(500),
+	@token						nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)
+declare @remainToken nvarchar(500)
+select @remainToken= sum(RemainToken+cast(@token as float)) from tb_SceneServiceProvider where ServiceProvider=@serviceProvider
+SET @sql = 'update tb_SceneServiceProvider set RemainToken ='''+@remainToken+''' where ServiceProvider ='''+@serviceProvider+''''
+print @sql
+EXEC(@sql)
+Go
 /***************************SceneServiceProvider***************************/
+
+
+/***************************Token***************************/
+/**Add**/
+--Create Procedure [dbo].[AddToken]
+--(
+--	@eventNo				nvarchar(500)='1',
+--	@timeStart				nvarchar(500)='2000-12-20',
+--	@timeEnd				nvarchar(500)='2000-12-20',
+--	@sceneType				nvarchar(500)='1',
+--	@multiplyingPower		nvarchar(500)='1',		
+--	@serviceProvider		nvarchar(500)='1'
+--)
+--AS
+--DECLARE	 @sql	 nvarchar(3000)
+--declare  @temp		nvarchar(500)
+--declare  @values	nvarchar(500)
+--set @temp=' '
+--set @values=' '
+--if @eventNo<>''
+--	set @temp=@temp+'EventNo'
+--	set @values=@values+'''''+@eventNo+'''''
+--if @timeStart<>''
+--	set @temp=@temp+',TimeStart'
+--	set @values=@values+''',''+@timeStart+'''''
+--if @timeEnd<>''
+--	set @temp=@temp+',TimeEnd'
+--	set @values=@values+''',''+@timeEnd+'''''
+--if @sceneType<>''
+--begin
+--	declare @baseToken  nvarchar(500)
+--	declare @m  nvarchar(500)
+--	select @m=ComputingMethod from tb_SceneType where TypeName=@sceneType
+--	if @m='固定值'
+--	begin
+--		select @baseToken=BaseToken from tb_SceneType where TypeName=@sceneType
+--	end
+--	else
+--	begin
+--		select DATEDIFF(n,
+--		select @baseToken from tb_SceneType where TypeName=@sceneType
+--	end
+--	set @temp=@temp+',SceneType,BaseToken'
+--	set @values=@values+''',''+@sceneType+'',''+@baseToken+'''''
+--end
+--if @multiplyingPower<>''
+--	set @temp=@temp+',MultiplyingPower'
+--	set @values=@values+''',''+@multiplyingPower+'''''
+--if @serviceProvider<>''
+--	set @temp=@temp+',ServiceProvider'
+--	set @values=@values+''',''+@serviceProvider+'''''
+	
+--SET @sql = 'insert into tb_Token('+@temp+') values('+@values+')'
+--print @sql
+--EXEC(@sql)
+--Go
+/**Get**/
+Create Procedure [dbo].[GetTokenTotal]
+(
+	@eventNo				nvarchar(500)='',
+	@sceneType				nvarchar(500)='',
+	@timeStartA				nvarchar(500)='',
+	@timeStartB				nvarchar(500)='',	
+	@serviceProvider		nvarchar(500)=''
+)
+AS
+begin
+DECLARE  @where   nvarchar(1000)
+DECLARE  @sql   nvarchar(3000)
+	
+	
+	SET @where=' where 1=1 '
+if @eventNo<>''
+begin
+	SET @where=@where+' and EventNo= '''+@eventNo+''''
+end
+if @sceneType<>''
+begin
+	SET @where=@where+' and SceneType= '''+@sceneType+''''
+end
+if @timeStartA<>''
+begin
+	SET @where=@where+' and TimeStart >= '''+@timeStartA+''''
+end
+if @timeStartB<>''
+begin
+	SET @where=@where+' and TimeStart <= '''+@timeStartB+''''
+end
+if @serviceProvider<>''
+begin
+	SET @where=@where+' and ServiceProvider= '''+@serviceProvider+''''
+end
+
+
+set @sql='select row_number() over(order by TimeStart desc) N, tb_Token.EventNo,TimeStart,TimeEnd,SceneType,BaseToken,MultiplyingPower,BaseToken*MultiplyingPower as Total,ServiceProvider,tb_EventLogs.TypeCode,tb_EventLogs.ScenePic from tb_Token left join tb_EventLogs on tb_Token.EventNo=tb_EventLogs.EventNo '+ @where +' order by TimeStart desc '
+exec sp_executesql @sql
+end
+
+Go
+Create Procedure [dbo].[GetTokenPaged]
+(
+	@eventNo				nvarchar(500)='',
+	@sceneType				nvarchar(500)='',
+	@timeStartA				nvarchar(500)='',
+	@timeStartB				nvarchar(500)='',	
+	@serviceProvider		nvarchar(500)='',
+	@pageSize				int = 30,
+	@pageIndex				int = 2
+)
+AS
+begin
+DECLARE  @where   nvarchar(1000)
+DECLARE  @sql   nvarchar(3000)
+declare  @n		nvarchar(100)
+set @n = Cast((@pageIndex - 1) * @pageSize as nvarchar(100))
+	
+	
+	SET @where=' 1=1 '
+if @eventNo<>''
+begin
+	SET @where=@where+' and EventNo= '''+@eventNo+''''
+end
+if @sceneType<>''
+begin
+	SET @where=@where+' and SceneType= '''+@sceneType+''''
+end
+if @timeStartA<>''
+begin
+	SET @where=@where+' and TimeStart >= '''+@timeStartA+''''
+end
+if @timeStartB<>''
+begin
+	SET @where=@where+' and TimeStart <= '''+@timeStartB+''''
+end
+if @serviceProvider<>''
+begin
+	SET @where=@where+' and ServiceProvider= '''+@serviceProvider+''''
+end
+
+set @sql=' (row_number() over(order by TimeStart desc)) + cast('+@n+' as int) N, tb_Token.EventNo,TimeStart,TimeEnd,SceneType,BaseToken,MultiplyingPower,BaseToken*MultiplyingPower as Total,ServiceProvider,tb_EventLogs.TypeCode,tb_EventLogs.ScenePic '
+
+exec dbo.GetPageOfRecords @pageSize, @pageIndex, @sql, 'dbo.tb_Token left join tb_EventLogs on tb_Token.EventNo=tb_EventLogs.EventNo', @where, 'TimeStart', 1, 'TimeStart'
+end
+
+Go
+/***************************Token***************************/
 
 
 /***************************SystemUser***************************/
@@ -3674,7 +3841,7 @@ Create Procedure [dbo].[GetOnePermission]
 )
 AS
 declare @field nvarchar(500)
-declare @sql nvarchar(1000)
+declare @sql nvarchar(3000)
 begin
 if @temp='0'
 set @field='[Index]'

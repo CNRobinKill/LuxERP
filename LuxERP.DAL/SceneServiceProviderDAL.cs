@@ -15,6 +15,8 @@ namespace LuxERP.DAL
         private const string SPGetServiceProvider = "GetServiceProvider";
         private const string SPDelSceneServiceProvider = "DelSceneServiceProvider";
         private const string SPUpdateSceneServiceProvider = "UpdateSceneServiceProvider";
+        private const string SPUpdateAddToken = "UpdateAddToken";
+        
 
 
         public static int AddSceneServiceProvider(string serviceProvider, string phone, string serviceArea, string remainToken)
@@ -58,6 +60,15 @@ namespace LuxERP.DAL
                 new SqlParameter("@serviceArea",serviceArea)
             };
             return Common.SqlHelper.ExecuteNonQuery(SPUpdateSceneServiceProvider, paras);
+        }
+
+        public static int UpdateAddToken(string serviceProvider, string token)
+        {
+            SqlParameter[] paras = { 
+	            new SqlParameter("@serviceProvider",serviceProvider),
+                new SqlParameter("@token",token)
+            };
+            return Common.SqlHelper.ExecuteNonQuery(SPUpdateAddToken, paras);
         }
 
     }
