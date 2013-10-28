@@ -546,7 +546,7 @@ Create Procedure [dbo].[AddTypeOne]
 	@typeOne  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select TypeOne from tb_TypeOnes where TypeOne='''+@typeOne+''') insert into tb_TypeOnes(TypeOne) values('''+@typeOne+''')'
 print @sql
 EXEC(@sql)
@@ -555,7 +555,7 @@ Go
 Create Procedure [dbo].[GetTypeOne]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeOne from tb_TypeOnes order by TypeOne'
 print @sql
 EXEC(@sql)
@@ -566,7 +566,7 @@ Create Procedure [dbo].[DelTypeOne]
 	@typeOne  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_TypeOnes where TypeOne ='''+@typeOne+''''
 print @sql
 EXEC(@sql)
@@ -580,7 +580,7 @@ Create Procedure [dbo].[AddTypeTwo]
 	@typeTwo  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select TypeTwo from tb_TypeTwos where TypeTwo='''+@typeTwo+''') insert into tb_TypeTwos(TypeTwo) values('''+@typeTwo+''')'
 print @sql
 EXEC(@sql)
@@ -589,7 +589,7 @@ Go
 Create Procedure [dbo].[GetTypeTwo]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeTwo from tb_TypeTwos order by TypeTwo'
 print @sql
 EXEC(@sql)
@@ -600,7 +600,7 @@ Create Procedure [dbo].[DelTypeTwo]
 	@typeTwo  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_TypeTwos where TypeTwo ='''+@typeTwo+''''
 print @sql
 EXEC(@sql)
@@ -614,7 +614,7 @@ Create Procedure [dbo].[AddTypeThree]
 	@typeThree  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select TypeThree from tb_TypeThrees where TypeThree='''+@typeThree+''') insert into tb_TypeThrees(TypeThree) values('''+@typeThree+''')'
 print @sql
 EXEC(@sql)
@@ -623,7 +623,7 @@ Go
 Create Procedure [dbo].[GetTypeThree]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeThree from tb_TypeThrees order by TypeThree'
 print @sql
 EXEC(@sql)
@@ -634,7 +634,7 @@ Create Procedure [dbo].[DelTypeThree]
 	@typeThree  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_TypeThrees where TypeThree ='''+@typeThree+''''
 print @sql
 EXEC(@sql)
@@ -648,7 +648,7 @@ Create Procedure [dbo].[AddTypeFour]
 	@typeFour  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select TypeFour from tb_TypeFours where TypeFour='''+@typeFour+''') insert into tb_TypeFours(TypeFour) values('''+@typeFour+''')'
 print @sql
 EXEC(@sql)
@@ -657,7 +657,7 @@ Go
 Create Procedure [dbo].[GetTypeFour]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeFour from tb_TypeFours order by TypeFour'
 print @sql
 EXEC(@sql)
@@ -668,7 +668,7 @@ Create Procedure [dbo].[DelTypeFour]
 	@typeFour  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_TypeFours where TypeFour ='''+@typeFour+''''
 print @sql
 EXEC(@sql)
@@ -1045,7 +1045,7 @@ Create Procedure [dbo].[AddEventTypes]
 	@eventLevel	nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select TypeCode from tb_EventTypes where TypeCode='''+@typeCode+''') insert into tb_EventTypes(TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel) values('''+@typeCode+''','''+@typeOne+''','''+@typeTwo+''','''+@typeThree+''','''+@typeFour+''','''+@eventLevel+''')'
 print @sql
 EXEC(@sql)
@@ -1054,7 +1054,7 @@ Go
 Create Procedure [dbo].[GetEventTypes]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select TypeCode,TypeOne,TypeTwo,TypeThree,TypeFour,EventLevel, row_number() over(partition by left(TypeCode,3) order by cast(right(TypeCode,len(TypeCode)-3) as float)) from tb_EventTypes where TypeCode not in(''9999'',''9000'',''8888'',''0000'')'
 EXEC(@sql)
 Go
@@ -1087,7 +1087,7 @@ Create Procedure [dbo].[DelEventTypes]
 	@typeCode  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_EventTypes where TypeCode ='''+@typeCode+''''
 print @sql
 EXEC(@sql)
@@ -1192,7 +1192,7 @@ Create Procedure [dbo].[sp_DelSolution]
 	@TypeCode  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Solutions where TypeCode ='''+@TypeCode+''''
 print @sql
 EXEC(@sql)
@@ -1213,7 +1213,7 @@ Create Procedure [dbo].[AddEventLogs]
 	@logBy			nvarchar(500)
 )
 AS
-DECLARE	 @sql					nvarchar (1000)
+DECLARE	 @sql					nvarchar(3000)
 DECLARE  @eventDateTime			datetime
 DECLARE  @toResolvedDateTime	datetime
 DECLARE	 @handingBy				nvarchar(500)
@@ -1478,7 +1478,7 @@ Create Procedure [dbo].[AddEventSteps]
 	@stepBy			nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)
+DECLARE	 @sql	 nvarchar(3000)
 DECLARE  @stepDateTime   datetime
 SET @stepDateTime = cast(@stepTime as datetime)
 BEGIN
@@ -1544,7 +1544,7 @@ Create Procedure [dbo].[GetRegionByStoreNo]
 )
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select Region from tb_Stores where StoreNo='''+@storeNo+''''
 print @sql
 EXEC(@sql)
@@ -1716,7 +1716,7 @@ Go
 Create Procedure [dbo].[GetMachingFromFacility]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select distinct Maching from tb_Facility order by Maching'
 print @sql
 EXEC(@sql)
@@ -1727,7 +1727,7 @@ Create Procedure [dbo].[GetBrandFromFacility]
 	
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)
+DECLARE	 @sql	 nvarchar(3000)
 if	@maching <>''
 begin
 SET @sql = 'select distinct Brand from tb_Facility  where Maching='''+@maching+''' order by Brand'
@@ -1742,7 +1742,7 @@ Create Procedure [dbo].[GetModelFromFacility]
 	
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 if	@maching <>'' and @brand <>''
 begin
 SET @sql = 'select distinct Model from tb_Facility  where Maching='''+@maching+''' and Brand='''+@brand+''' order by Model'
@@ -1757,7 +1757,7 @@ Create Procedure [dbo].[GetParameterFromFacility]
 	@model		nvarchar(500)	
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)
+DECLARE	 @sql	 nvarchar(3000)
 if	@maching <>'' and @brand <>'' and @model <>''
 begin
 SET @sql = 'select distinct Parameter from tb_Facility  where Maching='''+@maching+''' and Brand='''+@brand+''' and Model='''+@model+''' order by Parameter'
@@ -1792,7 +1792,7 @@ create Procedure [dbo].[AddMaching]
 	@maching  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select maching from tb_Machings where maching='''+@maching+''') insert into tb_Machings(maching) values('''+@maching+''')'
 print @sql
 EXEC(@sql)
@@ -1801,7 +1801,7 @@ Go
 Create Procedure [dbo].[GetMaching]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select maching from tb_Machings order by maching'
 print @sql
 EXEC(@sql)
@@ -1812,7 +1812,7 @@ Create Procedure [dbo].[DelMaching]
 	@maching  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Machings where maching ='''+@maching+''''
 print @sql
 EXEC(@sql)
@@ -1826,7 +1826,7 @@ create Procedure [dbo].[AddBrand]
 	@brand  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select brand from tb_Brands where brand='''+@brand+''') insert into tb_Brands(brand) values('''+@brand+''')'
 print @sql
 EXEC(@sql)
@@ -1835,7 +1835,7 @@ Go
 Create Procedure [dbo].[GetBrand]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select brand from tb_Brands order by brand'
 print @sql
 EXEC(@sql)
@@ -1846,7 +1846,7 @@ Create Procedure [dbo].[DelBrand]
 	@brand  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Brands where brand ='''+@brand+''''
 print @sql
 EXEC(@sql)
@@ -1860,7 +1860,7 @@ create Procedure [dbo].[AddModel]
 	@model  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select model from tb_Models where model='''+@model+''') insert into tb_Models(model) values('''+@model+''')'
 print @sql
 EXEC(@sql)
@@ -1869,7 +1869,7 @@ Go
 Create Procedure [dbo].[GetModel]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select model from tb_Models order by model'
 print @sql
 EXEC(@sql)
@@ -1880,7 +1880,7 @@ Create Procedure [dbo].[DelModel]
 	@model  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Models where model ='''+@model+''''
 print @sql
 EXEC(@sql)
@@ -1894,7 +1894,7 @@ create Procedure [dbo].[AddParameter]
 	@parameter  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select parameter from tb_Parameters where parameter='''+@parameter+''') insert into tb_Parameters(parameter) values('''+@parameter+''')'
 print @sql
 EXEC(@sql)
@@ -1903,7 +1903,7 @@ Go
 Create Procedure [dbo].[GetParameter]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select parameter from tb_Parameters order by parameter'
 print @sql
 EXEC(@sql)
@@ -1914,7 +1914,7 @@ Create Procedure [dbo].[DelParameter]
 	@parameter  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Parameters where parameter ='''+@parameter+''''
 print @sql
 EXEC(@sql)
@@ -1928,7 +1928,7 @@ Create Procedure [dbo].[AddSupplier]
 	@supplier nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'if not exists(select supplier from tb_Suppliers where supplier='''+@supplier+''') insert into tb_Suppliers(supplier) values('''+@supplier+''')'
 print @sql
 EXEC(@sql)
@@ -1937,7 +1937,7 @@ Go
 Create Procedure [dbo].[GetSupplier]
 
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'select supplier from tb_Suppliers order by supplier'
 print @sql
 EXEC(@sql)
@@ -1948,7 +1948,7 @@ Create Procedure [dbo].[DelSupplier]
 	@supplier  nvarchar(500)
 )
 AS
-DECLARE	 @sql	 nvarchar (1000)	
+DECLARE	 @sql	 nvarchar(3000)	
 SET @sql = 'delete from tb_Suppliers where supplier ='''+@supplier+''''
 print @sql
 EXEC(@sql)
@@ -3377,6 +3377,200 @@ END
 Go
 
 /***************************IndexCount***************************/
+
+/***************************SceneType***************************/
+/**Add**/
+Create Procedure [dbo].[AddSceneType]
+(
+	@typeName				nvarchar(500),
+	@baseToken				nvarchar(500),
+	@computingMethod		nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'if not exists(select TypeName from tb_SceneType where TypeName='''+@typeName+''') insert into tb_SceneType(TypeName,BaseToken,ComputingMethod) values('''+@typeName+''','''+@baseToken+''','''+@computingMethod+''')'
+print @sql
+EXEC(@sql)
+Go
+/**Get**/
+Create Procedure [dbo].[GetSceneType]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select TypeName,BaseToken,ComputingMethod from tb_SceneType order by TypeName'
+print @sql
+EXEC(@sql)
+Go
+/**Del**/
+Create Procedure [dbo].[DelSceneType]
+(
+	@typeName  nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'delete from tb_SceneType where TypeName ='''+@typeName+''''
+print @sql
+EXEC(@sql)
+Go
+/***************************SceneType***************************/
+
+
+/***************************MultiplyingPowerType***************************/
+/**Add**/
+Create Procedure [dbo].[AddMultiplyingPowerType]
+(
+	@typeName					nvarchar(500),
+	@multiplyingPower			nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'if not exists(select TypeName from tb_MultiplyingPowerType where TypeName='''+@typeName+''') insert into tb_MultiplyingPowerType(TypeName,MultiplyingPower) values('''+@typeName+''','''+@multiplyingPower+''')'
+print @sql
+EXEC(@sql)
+Go
+/**Get**/
+Create Procedure [dbo].[GetMultiplyingPowerType]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select TypeName,MultiplyingPower from tb_MultiplyingPowerType order by TypeName'
+print @sql
+EXEC(@sql)
+Go
+/**Del**/
+Create Procedure [dbo].[DelMultiplyingPowerType]
+(
+	@typeName  nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'delete from tb_MultiplyingPowerType where TypeName ='''+@typeName+''''
+print @sql
+EXEC(@sql)
+Go
+/***************************MultiplyingPowerType***************************/
+
+
+/***************************AreaInfo***************************/
+/**Add**/
+Create Procedure [dbo].[AddAreaInfo]
+(
+	@areaName					nvarchar(500),
+	@areaAliss					nvarchar(500),
+	@areaManager				nvarchar(500),
+	@managerPhone				nvarchar(500),
+	@managerEmail				nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'if not exists(select AreaName from tb_AreaInfo where AreaName='''+@areaName+''') insert into tb_AreaInfo(AreaName,AreaAliss,AreaManager,ManagerPhone,ManagerEmail) values('''+@areaName+''','''+@areaAliss+''','''+@areaManager+''','''+@managerPhone+''','''+@managerEmail+''')'
+print @sql
+EXEC(@sql)
+Go
+/**Get**/
+Create Procedure [dbo].[GetAreaInfo]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select AreaName,AreaAliss,AreaManager,ManagerPhone,ManagerEmail from tb_AreaInfo order by AreaName'
+print @sql
+EXEC(@sql)
+Go
+Create Procedure [dbo].[GetAreaAliss]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select AreaAliss from tb_AreaInfo order by AreaAliss'
+print @sql
+EXEC(@sql)
+Go
+/**Del**/
+Create Procedure [dbo].[DelAreaInfo]
+(
+	@areaName  nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'delete from tb_AreaInfo where AreaName ='''+@areaName+''''
+print @sql
+EXEC(@sql)
+Go
+/**Update**/
+Create Procedure [dbo].[UpdateAreaInfo]
+(
+	@areaName					nvarchar(500),
+	@areaAliss					nvarchar(500),
+	@areaManager				nvarchar(500),
+	@managerPhone				nvarchar(500),
+	@managerEmail				nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'update tb_AreaInfo set AreaAliss='''+@areaAliss+''',AreaManager='''+@areaManager+''',ManagerPhone='''+@managerPhone+''',ManagerEmail='''+@managerEmail+''' where AreaName ='''+@areaName+''''
+print @sql
+EXEC(@sql)
+Go
+/***************************AreaInfo***************************/
+
+
+/***************************SceneServiceProvider***************************/
+/**Add**/
+Create Procedure [dbo].[AddSceneServiceProvider]
+(
+	@serviceProvider			nvarchar(500),
+	@phone						nvarchar(500),
+	@serviceArea				nvarchar(500),
+	@remainToken				nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'if not exists(select ServiceProvider from tb_SceneServiceProvider where ServiceProvider='''+@serviceProvider+''') insert into tb_SceneServiceProvider(ServiceProvider,Phone,ServiceArea,RemainToken) values('''+@serviceProvider+''','''+@phone+''','''+@serviceArea+''','''+@remainToken+''')'
+print @sql
+EXEC(@sql)
+Go
+/**Get**/
+Create Procedure [dbo].[GetSceneServiceProvider]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select ServiceProvider,Phone,ServiceArea,RemainToken from tb_SceneServiceProvider order by ServiceProvider'
+print @sql
+EXEC(@sql)
+Go
+Create Procedure [dbo].[GetServiceProvider]
+
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'select ServiceProvider from tb_SceneServiceProvider order by ServiceProvider'
+print @sql
+EXEC(@sql)
+Go
+/**Del**/
+Create Procedure [dbo].[DelSceneServiceProvider]
+(
+	@serviceProvider  nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'delete from tb_SceneServiceProvider where ServiceProvider ='''+@serviceProvider+''''
+print @sql
+EXEC(@sql)
+Go
+/**Update**/
+Create Procedure [dbo].[UpdateSceneServiceProvider]
+(
+	@serviceProvider			nvarchar(500),
+	@phone						nvarchar(500),
+	@serviceArea				nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)
+SET @sql = 'update tb_SceneServiceProvider set Phone ='''+@phone+''',ServiceArea ='''+@serviceArea+''' where ServiceProvider ='''+@serviceProvider+''''
+print @sql
+EXEC(@sql)
+Go
+/***************************SceneServiceProvider***************************/
+
 
 /***************************SystemUser***************************/
 insert into tb_SystemUser(UserName,[Password],CreateTime,UserState) values('SystemAdmin','SystemAdmin',GETDATE(),1)

@@ -31,7 +31,8 @@
         onrowdatabound="gvSystemUser_RowDataBound" 
         onrowcommand="gvSystemUser_RowCommand" 
         onrowdeleting="gvSystemUser_RowDeleting" onrowediting="gvSystemUser_RowEditing" 
-        onrowupdating="gvSystemUser_RowUpdating">
+        onrowupdating="gvSystemUser_RowUpdating" 
+        onrowcancelingedit="gvSystemUser_RowCancelingEdit">
         <Columns>
             <asp:BoundField DataField="RowNum" ReadOnly="true">
                  <ItemStyle Width="10px" />

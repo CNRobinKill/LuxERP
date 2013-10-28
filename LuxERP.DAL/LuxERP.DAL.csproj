@@ -44,6 +44,7 @@
     <Compile Include="AddStocksDAL.cs" />
     <Compile Include="AllotStocksDAL.cs" />
     <Compile Include="AppointEngineersDAL.cs" />
+    <Compile Include="AreaInfoDAL.cs" />
     <Compile Include="EventLogsDAL.cs" />
     <Compile Include="EventStateDAL.cs" />
     <Compile Include="EventStepsDAL.cs" />
@@ -52,12 +53,15 @@
     <Compile Include="FacilityDAL.cs" />
     <Compile Include="IPNetworking.cs" />
     <Compile Include="IndexDAL.cs" />
+    <Compile Include="MultiplyingPowerTypeDAL.cs" />
     <Compile Include="OutStockDemandsDAL.cs" />
     <Compile Include="OutStocksDAL.cs" />
     <Compile Include="PeopleDAL.cs" />
     <Compile Include="PermissionDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneServiceProviderDAL.cs" />
     <Compile Include="SceneStateDAL.cs" />
+    <Compile Include="SceneTypeDAL.cs" />
     <Compile Include="ScrapStocksDAL.cs" />
     <Compile Include="SendEmail.cs" />
     <Compile Include="SolutionsDAL.cs" />

@@ -11,6 +11,10 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="myContent" runat="server">
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
 <h2>SceneServiceProvider</h2>
     <asp:Label runat="server" Text="上门服务商："></asp:Label>
     <asp:TextBox ID="txtServiceProvider" runat="server" Width="100px"></asp:TextBox>
@@ -22,8 +26,15 @@
     <asp:TextBox ID="txtRemainToken" runat="server" Width="100px"></asp:TextBox>
 
 
-    <asp:Button ID="btnAddSceneServiceProvider" runat="server" Text="添加" CssClass="button"  />
-    <asp:GridView ID="gvSceneServiceProvider" runat="server" AutoGenerateColumns="False">
+    <asp:Button ID="btnAddSceneServiceProvider" runat="server" Text="添加" 
+        CssClass="button" onclick="btnAddSceneServiceProvider_Click"  />
+    <asp:GridView ID="gvSceneServiceProvider" runat="server" 
+        AutoGenerateColumns="False" 
+        onrowcancelingedit="gvSceneServiceProvider_RowCancelingEdit" 
+        onrowdatabound="gvSceneServiceProvider_RowDataBound" 
+        onrowdeleting="gvSceneServiceProvider_RowDeleting" 
+        onrowediting="gvSceneServiceProvider_RowEditing" 
+        onrowupdating="gvSceneServiceProvider_RowUpdating">
         <Columns>
                     <asp:BoundField DataField="ServiceProvider" >
                         <ItemStyle Width="100px" />
@@ -31,9 +42,20 @@
                     <asp:BoundField DataField="Phone" >
                         <ItemStyle Width="50px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="ServiceArea" >
+                    <asp:TemplateField HeaderStyle-Width="102px">
+                        <ItemTemplate>
+                        <%# Eval("ServiceArea")%>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                        <asp:HiddenField ID="hdServiceArea" runat="server" Value='<%# Eval("ServiceArea") %>' />
+                            <asp:DropDownList ID="ddlServiceAreaB" runat="server"></asp:DropDownList>
+                            </EditItemTemplate>
                         <ItemStyle Width="100px" />
-                    </asp:BoundField>
+                        <ControlStyle Width="101px" />
+                    </asp:TemplateField>
+<%--                    <asp:BoundField DataField="ServiceArea" >
+                        <ItemStyle Width="100px" />
+                    </asp:BoundField>--%>
                     <asp:BoundField DataField="RemainToken" ReadOnly="true">
                         <ItemStyle Width="100px" />
                     </asp:BoundField>
@@ -41,10 +63,13 @@
                     <asp:CommandField ShowDeleteButton="True" DeleteText="删除" ControlStyle-Width="50px" />
         </Columns>
     </asp:GridView>
+    <div runat="server" id="divAddToken">
     <asp:Label runat="server" Text="上门服务商:"></asp:Label>
     <asp:DropDownList ID="ddlServiceProvider" runat="server"></asp:DropDownList>
     <asp:Label runat="server" Text="增加Token数："></asp:Label>
     <asp:TextBox ID="txtToken" runat="server" Width="100px"></asp:TextBox>
     <asp:Button ID="Button1" runat="server" Text="增加" CssClass="button"  />
-
+    </div>
+ </ContentTemplate>
+ </asp:UpdatePanel>
 </asp:Content>

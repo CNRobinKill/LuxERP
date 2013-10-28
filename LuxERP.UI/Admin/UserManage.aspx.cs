@@ -157,6 +157,12 @@ namespace LuxERP.UI.Admin
             gvSystemUserBind();
         }
 
+        protected void gvSystemUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvSystemUser.EditIndex = -1;
+            gvSystemUserBind();
+        }
+
         protected void gvSystemUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             string password = ((TextBox)gvSystemUser.Rows[e.RowIndex].Cells[2].Controls[0]).Text.Trim();
@@ -232,5 +238,7 @@ namespace LuxERP.UI.Admin
         {
             Response.Redirect("RemoveStoreFacility.aspx");
         }
+
+        
     }
 }
