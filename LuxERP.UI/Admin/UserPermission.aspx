@@ -48,6 +48,12 @@
     <asp:TableCell><asp:CheckBox ID="chkInitialStores" runat="server" /><asp:Label runat="server" Text="店铺信息初始化"></asp:Label></asp:TableCell>
     <asp:TableCell><asp:CheckBox ID="chkInitialStocks" runat="server" /><asp:Label runat="server" Text="设备初始化"></asp:Label></asp:TableCell>
     <asp:TableCell><asp:CheckBox ID="chkScrapStocks" runat="server" /><asp:Label runat="server" Text="废损设备"></asp:Label></asp:TableCell>
+    <asp:TableCell><asp:CheckBox ID="chkSceneToken" runat="server" /><asp:Label runat="server" Text="上门管理查询"></asp:Label></asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
+    <asp:TableCell><asp:CheckBox ID="chkSceneInformation" runat="server" /><asp:Label runat="server" Text="上门基础信息管理"></asp:Label></asp:TableCell>
+    <asp:TableCell><asp:CheckBox ID="chkSceneServiceProvider" runat="server" /><asp:Label runat="server" Text="服务商管理"></asp:Label></asp:TableCell>
+    <asp:TableCell><asp:CheckBox ID="chkAreaInformation" runat="server" /><asp:Label runat="server" Text="区域信息管理"></asp:Label></asp:TableCell>
     <asp:TableCell></asp:TableCell>
     </asp:TableRow>
     </asp:Table>

@@ -472,7 +472,7 @@ namespace LuxERP.UI.EventManagement
                     gvEventSteps.Visible = false;
                     if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
                     {
-                        DAL.EventStepsDAL.AddEventSteps(eventNo, "(上门服务)已成功向服务商" + mailToName + "发送邮件", timeNow, "0", Session["userName"].ToString());
+                        DAL.EventStepsDAL.AddEventSteps(eventNo, "(上门服务)已成功向服务商 " + mailToName + " 发送邮件", timeNow, "0", Session["userName"].ToString());
                     }
                     else
                     {
@@ -663,6 +663,7 @@ namespace LuxERP.UI.EventManagement
                 {
                     string newName = Guid.NewGuid() + ext; //重命名，防止重名文件
                     DAL.EventLogsDAL.UpdateUpLoadPic(eventNo, "", newName);
+                    DAL.SceneServiceProviderDAL.UpdateRemainToken(eventNo,"0");
                     fuFile.SaveAs(path + newName);        //保存到服务器上了。
                     uploado.Visible = false;
                     uploadt.Visible = true;

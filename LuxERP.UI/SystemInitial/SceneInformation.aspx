@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneInformation.aspx.cs" Inherits="LuxERP.UI.SystemInitial.SceneInformation" %>
+﻿<%@ Page Title="上门基础信息管理" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneInformation.aspx.cs" Inherits="LuxERP.UI.SystemInitial.SceneInformation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script type="text/javascript">
     $(function () {
-        menuSlide('#systemInitial', '#peopleManage');
+        menuSlide('#systemInitial', '#sceneInformation');
     });
 
     function addRowStyle() {

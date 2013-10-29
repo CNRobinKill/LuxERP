@@ -51,7 +51,11 @@ namespace LuxERP.DAL
 	            int eventState,
 	            int initialStores,
 	            int initialStocks,
-                int scrapStocks
+                int scrapStocks,
+                int sceneToken,
+                int sceneInformation,
+                int sceneServiceProvider,
+                int areaInformation
             )
         {
             SqlParameter[] paras = { 
@@ -74,7 +78,11 @@ namespace LuxERP.DAL
 	            new SqlParameter("@eventState",eventState),
 	            new SqlParameter("@initialStores",initialStores),
 	            new SqlParameter("@initialStocks",initialStocks),
-                new SqlParameter("@scrapStocks",scrapStocks)
+                new SqlParameter("@scrapStocks",scrapStocks),
+                new SqlParameter("@sceneToken",sceneToken),
+	            new SqlParameter("@sceneInformation",sceneInformation),
+	            new SqlParameter("@sceneServiceProvider",sceneServiceProvider),
+                new SqlParameter("@areaInformation",areaInformation)
             };
             return Common.SqlHelper.ExecuteNonQuery(SPUpdatePermissionByUserName, paras);
         }

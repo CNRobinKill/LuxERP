@@ -11,64 +11,64 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["userName"] == null)
-            //{
-            //    Response.Write("<script LANGUAGE=JavaScript >" +
-            //           " alert('未登陆或已超时，请重新登录！');" +
-            //           " window.location=('/LogOn.aspx');" +
-            //           "</script>");
-            //    Response.End();
-            //}
-            //else
-            //{
-            //    if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
-            //    {
-            //        Response.Write("<script LANGUAGE=JavaScript >" +
-            //            " alert('用户已在另外一台机器上登录！');" +
-            //            " window.location=('/LogOn.aspx');" +
-            //            "</script>");
-            //        Response.End();
-            //    }
-            //    else
-            //    {
-            //        if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "13") == "0")
-            //        {
-            //            Response.Write("<script LANGUAGE=JavaScript >" +
-            //                " alert('没有权限，请联系管理员！');" +
-            //                " window.location=('/LogOn.aspx');" +
-            //                "</script>");
-            //            Response.End();
-            //        }
-            //        try
-            //        {
-            //            if (!IsPostBack)
-            //            {
-            //                //try
-            //                //{
+            if (Session["userName"] == null)
+            {
+                Response.Write("<script LANGUAGE=JavaScript >" +
+                       " alert('未登陆或已超时，请重新登录！');" +
+                       " window.location=('/LogOn.aspx');" +
+                       "</script>");
+                Response.End();
+            }
+            else
+            {
+                if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
+                {
+                    Response.Write("<script LANGUAGE=JavaScript >" +
+                        " alert('用户已在另外一台机器上登录！');" +
+                        " window.location=('/LogOn.aspx');" +
+                        "</script>");
+                    Response.End();
+                }
+                else
+                {
+                    if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "21") == "0")
+                    {
+                        Response.Write("<script LANGUAGE=JavaScript >" +
+                            " alert('没有权限，请联系管理员！');" +
+                            " window.location=('/LogOn.aspx');" +
+                            "</script>");
+                        Response.End();
+                    }
+                    try
+                    {
+                        if (!IsPostBack)
+                        {
+                            //try
+                            //{
 
-            //                //}
-            //                //catch
-            //                //{
-            //                //    Response.Write("<script LANGUAGE=JavaScript >" +
-            //                //            " alert('还没登录吧？');" +
-            //                //            " window.location=('/LogOn.aspx');" +
-            //                //            "</script>");
-            //                //}
+                            //}
+                            //catch
+                            //{
+                            //    Response.Write("<script LANGUAGE=JavaScript >" +
+                            //            " alert('还没登录吧？');" +
+                            //            " window.location=('/LogOn.aspx');" +
+                            //            "</script>");
+                            //}
 
-            //                gvSceneTypeBind();
-            //                gvMultiplyingPowerTypeBind();
-            //            }
-            //            if (IsPostBack)
-            //            {
-            //                RegisterJS("addRowStyle");
-            //            }
-            //        }
-            //        catch
-            //        {
-            //            Response.Redirect("~/Error.html");
-            //        }
-            //    }
-            //}
+                            gvSceneTypeBind();
+                            gvMultiplyingPowerTypeBind();
+                        }
+                        if (IsPostBack)
+                        {
+                            RegisterJS("addRowStyle");
+                        }
+                    }
+                    catch
+                    {
+                        Response.Redirect("~/Error.html");
+                    }
+                }
+            }
         }
 
         public void RegisterJS(string method)

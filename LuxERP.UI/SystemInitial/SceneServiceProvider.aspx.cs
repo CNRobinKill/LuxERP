@@ -11,64 +11,64 @@ namespace LuxERP.UI.SystemInitial
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["userName"] == null)
-            //{
-            //    Response.Write("<script LANGUAGE=JavaScript >" +
-            //           " alert('未登陆或已超时，请重新登录！');" +
-            //           " window.location=('/LogOn.aspx');" +
-            //           "</script>");
-            //    Response.End();
-            //}
-            //else
-            //{
-            //    if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
-            //    {
-            //        Response.Write("<script LANGUAGE=JavaScript >" +
-            //            " alert('用户已在另外一台机器上登录！');" +
-            //            " window.location=('/LogOn.aspx');" +
-            //            "</script>");
-            //        Response.End();
-            //    }
-            //    else
-            //    {
-            //        if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "13") == "0")
-            //        {
-            //            Response.Write("<script LANGUAGE=JavaScript >" +
-            //                " alert('没有权限，请联系管理员！');" +
-            //                " window.location=('/LogOn.aspx');" +
-            //                "</script>");
-            //            Response.End();
-            //        }
-            //        try
-            //        {
+            if (Session["userName"] == null)
+            {
+                Response.Write("<script LANGUAGE=JavaScript >" +
+                       " alert('未登陆或已超时，请重新登录！');" +
+                       " window.location=('/LogOn.aspx');" +
+                       "</script>");
+                Response.End();
+            }
+            else
+            {
+                if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
+                {
+                    Response.Write("<script LANGUAGE=JavaScript >" +
+                        " alert('用户已在另外一台机器上登录！');" +
+                        " window.location=('/LogOn.aspx');" +
+                        "</script>");
+                    Response.End();
+                }
+                else
+                {
+                    if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "22") == "0")
+                    {
+                        Response.Write("<script LANGUAGE=JavaScript >" +
+                            " alert('没有权限，请联系管理员！');" +
+                            " window.location=('/LogOn.aspx');" +
+                            "</script>");
+                        Response.End();
+                    }
+                    try
+                    {
                         if (!IsPostBack)
                         {
-            //                //try
-            //                //{
+                            //try
+                            //{
 
-            //                //}
-            //                //catch
-            //                //{
-            //                //    Response.Write("<script LANGUAGE=JavaScript >" +
-            //                //            " alert('还没登录吧？');" +
-            //                //            " window.location=('/LogOn.aspx');" +
-            //                //            "</script>");
-            //                //}
+                            //}
+                            //catch
+                            //{
+                            //    Response.Write("<script LANGUAGE=JavaScript >" +
+                            //            " alert('还没登录吧？');" +
+                            //            " window.location=('/LogOn.aspx');" +
+                            //            "</script>");
+                            //}
                             ddlServiceAreaShow();
                             ddlServiceProviderShow();
-            //                gvSceneServiceProviderBind();
+                            gvSceneServiceProviderBind();
                         }
-            //            if (IsPostBack)
-            //            {
-            //                RegisterJS("addRowStyle");
-            //            }
-            //        }
-            //        catch
-            //        {
-            //            Response.Redirect("~/Error.html");
-            //        }
-            //    }
-            //}
+                        if (IsPostBack)
+                        {
+                            RegisterJS("addRowStyle");
+                        }
+                    }
+                    catch
+                    {
+                        Response.Redirect("~/Error.html");
+                    }
+                }
+            }
         }
 
         public void ddlServiceAreaShow()
@@ -115,7 +115,7 @@ namespace LuxERP.UI.SystemInitial
 
         public void gvSceneServiceProviderBind()
         {
-            gvSceneServiceProvider.Width = 750;
+            gvSceneServiceProvider.Width = 900;
             gvSceneServiceProvider.DataSource = DAL.SceneServiceProviderDAL.GetSceneServiceProvider();
             gvSceneServiceProvider.DataKeyNames = new string[] { "ServiceProvider" };
             gvSceneServiceProvider.DataBind();
@@ -123,8 +123,9 @@ namespace LuxERP.UI.SystemInitial
             {
                 gvSceneServiceProvider.HeaderRow.Cells[0].Text = "<b>上门服务商</b>";
                 gvSceneServiceProvider.HeaderRow.Cells[1].Text = "<b>联系电话</b>";
-                gvSceneServiceProvider.HeaderRow.Cells[2].Text = "<b>服务区域</b>";
-                gvSceneServiceProvider.HeaderRow.Cells[3].Text = "<b>剩余Token数</b>";
+                gvSceneServiceProvider.HeaderRow.Cells[2].Text = "<b>联系邮箱</b>";
+                gvSceneServiceProvider.HeaderRow.Cells[3].Text = "<b>服务区域</b>";
+                gvSceneServiceProvider.HeaderRow.Cells[4].Text = "<b>剩余Token数</b>";
                 divAddToken.Visible = true;
             }
             else
@@ -150,7 +151,8 @@ namespace LuxERP.UI.SystemInitial
         {
             string serviceProvider = gvSceneServiceProvider.DataKeys[e.RowIndex].Value.ToString(); ;
             string phone = ((TextBox)gvSceneServiceProvider.Rows[e.RowIndex].Cells[1].Controls[0]).Text;
-            string serviceArea = ((DropDownList)gvSceneServiceProvider.Rows[e.RowIndex].Cells[2].FindControl("ddlServiceAreaB")).SelectedValue;
+            string email = ((TextBox)gvSceneServiceProvider.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
+            string serviceArea = ((DropDownList)gvSceneServiceProvider.Rows[e.RowIndex].Cells[3].FindControl("ddlServiceAreaB")).SelectedValue;
 
             if (phone == "")
             {
@@ -158,7 +160,7 @@ namespace LuxERP.UI.SystemInitial
             }
             else
             {
-                DAL.SceneServiceProviderDAL.UpdateSceneServiceProvider(serviceProvider, phone, serviceArea);
+                DAL.SceneServiceProviderDAL.UpdateSceneServiceProvider(serviceProvider, phone, email, serviceArea);
                 gvSceneServiceProvider.EditIndex = -1;
                 gvSceneServiceProviderBind();
             }

@@ -92,7 +92,7 @@ namespace LuxERP.UI
                 updateSolution.Visible = false;
                 solution.Visible = false;
             }
-            if (PermissionArray(3) == "0" && PermissionArray(4) == "0" && PermissionArray(5) == "0")
+            if (PermissionArray(3) == "0" && PermissionArray(4) == "0" && PermissionArray(5) == "0" && PermissionArray(21) == "0")
             {
                 eventManage.Visible = false;
             }
@@ -103,6 +103,8 @@ namespace LuxERP.UI
             { createEvent.Visible = false; }
             if (PermissionArray(5) == "0")
             { reportFormsEvent.Visible = false; }
+            if (PermissionArray(21) == "0")
+            { sceneToken.Visible = false; }
 
             if (PermissionArray(6) == "0" && PermissionArray(7) == "0" && PermissionArray(8) == "0" && PermissionArray(9) == "0" && PermissionArray(10) == "0" && PermissionArray(19) == "0")
             {
@@ -127,7 +129,7 @@ namespace LuxERP.UI
                 alterStore.Visible = false;
                 storeInformation.Visible = false;
             }
-            if (PermissionArray(12) == "0" && PermissionArray(13) == "0" && PermissionArray(14) == "0" && PermissionArray(15) == "0" && PermissionArray(16) == "0" && PermissionArray(17) == "0" && PermissionArray(18) == "0")
+            if (PermissionArray(12) == "0" && PermissionArray(13) == "0" && PermissionArray(14) == "0" && PermissionArray(15) == "0" && PermissionArray(16) == "0" && PermissionArray(17) == "0" && PermissionArray(18) == "0" && PermissionArray(22) == "0" && PermissionArray(23) == "0" && PermissionArray(24) == "0")
             {
                 systemInitial.Visible = false;
             }
@@ -145,7 +147,13 @@ namespace LuxERP.UI
             if (PermissionArray(17) == "0")
             { initialStores.Visible = false; }
             if (PermissionArray(18) == "0")
-            { initialStocks.Visible = false; }
+            { initialStocks.Visible = false; }            
+            if (PermissionArray(22) == "0")
+            { sceneInformation.Visible = false; }
+            if (PermissionArray(23) == "0")
+            { sceneServiceProvider.Visible = false; }
+            if (PermissionArray(24) == "0")
+            { areaInformation.Visible = false; }
 
             if (PermissionArray(19) == "0")
             { admin.Visible = false; }
@@ -174,6 +182,10 @@ namespace LuxERP.UI
                 && PermissionArray(18) == "0"
                 && PermissionArray(19) == "0"
                 && PermissionArray(20) == "0"
+                && PermissionArray(21) == "0"
+                && PermissionArray(22) == "0"
+                && PermissionArray(23) == "0"
+                && PermissionArray(24) == "0"
                 )
             {
                 Response.Write("<script LANGUAGE=JavaScript >" +

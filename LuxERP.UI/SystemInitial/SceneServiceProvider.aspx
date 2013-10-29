@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneServiceProvider.aspx.cs" Inherits="LuxERP.UI.SystemInitial.SceneServiceProvider" %>
+﻿<%@ Page Title="服务商管理" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneServiceProvider.aspx.cs" Inherits="LuxERP.UI.SystemInitial.SceneServiceProvider" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script type="text/javascript">
     $(function () {
-        menuSlide('#systemInitial', '#peopleManage');
+        menuSlide('#systemInitial', '#sceneServiceProvider');
     });
 
     function addRowStyle() {
@@ -47,7 +47,7 @@
                         <ItemStyle Width="100px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Email" >
-                        <ControlStyle Width="101px" />
+                        <ControlStyle Width="150px" />
                         <ItemStyle Width="100px" />
                     </asp:BoundField>
                     <asp:TemplateField HeaderStyle-Width="102px">

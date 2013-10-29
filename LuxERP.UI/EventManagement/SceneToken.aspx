@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneToken.aspx.cs" Inherits="LuxERP.UI.EventManagement.SceneToken" %>
+﻿<%@ Page Title="上门管理查询" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="SceneToken.aspx.cs" Inherits="LuxERP.UI.EventManagement.SceneToken" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script type="text/javascript">
     $(function () {
-        menuSlide('#eventManage', '#eventQuery');
+        menuSlide('#eventManage', '#sceneToken');
         setDate();
     });
     function addRowStyle() {

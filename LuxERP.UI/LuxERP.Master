@@ -98,6 +98,7 @@
                         <li><a href="/EventManagement/EventQuery.aspx" id="eventQuery" runat="server">事件查询</a></li>
                         <li><a href="/EventManagement/CreateEvent.aspx" id="createEvent" runat="server">创建事件</a></li>
                         <li><a href="/EventManagement/Reporting.aspx" id="reportFormsEvent" runat="server">事件报表</a></li>
+                        <li><a href="/EventManagement/SceneToken.aspx" id="sceneToken" runat="server">上门管理查询</a></li>
                     </ul>
                 </li>
                 <!-- 3rd menu -->
@@ -126,7 +127,10 @@
                         <li><a href="/SystemInitial/SynthesisManage.aspx" id="synthesisManage" runat="server">综合信息管理</a></li>
                         <li><a href="/SystemInitial/EventState.aspx" id="eventState" runat="server">事件状态管理</a></li>
                         <li><a href="/SystemInitial/InitialStores.aspx" id="initialStores" runat="server">店铺信息初始化</a></li>
-                        <li><a href="/SystemInitial/InitialStocks.aspx" id="initialStocks" runat="server">设备初始化</a></li>   
+                        <li><a href="/SystemInitial/InitialStocks.aspx" id="initialStocks" runat="server">设备初始化</a></li>
+                        <li><a href="/SystemInitial/SceneInformation.aspx" id="sceneInformation" runat="server">上门基础信息管理</a></li>
+                        <li><a href="/SystemInitial/SceneServiceProvider.aspx" id="sceneServiceProvider" runat="server">服务商管理</a></li>
+                        <li><a href="/SystemInitial/AreaInformation.aspx" id="areaInformation" runat="server">区域信息管理</a></li>   
                     </ul>
                 </li>
             </ul>

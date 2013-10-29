@@ -136,6 +136,14 @@ namespace LuxERP.UI.Admin
             { chkInitialStocks.Checked = true; }
             if (PermissionArray(20) == "1")
             { chkScrapStocks.Checked = true; }
+            if (PermissionArray(21) == "1")
+            { chkSceneToken.Checked = true; }
+            if (PermissionArray(22) == "1")
+            { chkSceneInformation.Checked = true; }
+            if (PermissionArray(23) == "1")
+            { chkSceneServiceProvider.Checked = true; }
+            if (PermissionArray(24) == "1")
+            { chkAreaInformation.Checked = true; }
         }
 
         protected void btnPermission_Click(object sender, EventArgs e)
@@ -160,6 +168,10 @@ namespace LuxERP.UI.Admin
 	        int initialStores;
 	        int initialStocks;
             int scrapStocks;
+            int sceneToken;
+            int sceneInformation;
+            int sceneServiceProvider;
+            int areaInformation;
 
             if (chkIndex.Checked == true)
             { index = 1; }
@@ -237,6 +249,22 @@ namespace LuxERP.UI.Admin
             { scrapStocks = 1; }
             else
             { scrapStocks = 0; }
+            if (chkSceneToken.Checked == true)
+            { sceneToken = 1; }
+            else
+            { sceneToken = 0; }
+            if (chkSceneInformation.Checked == true)
+            { sceneInformation = 1; }
+            else
+            { sceneInformation = 0; }
+            if (chkSceneServiceProvider.Checked == true)
+            { sceneServiceProvider = 1; }
+            else
+            { sceneServiceProvider = 0; }
+            if (chkAreaInformation.Checked == true)
+            { areaInformation = 1; }
+            else
+            { areaInformation = 0; }
 
             if (DAL.PermissionDAL.UpdatePermissionByUserName(
                                                 userName,
@@ -258,7 +286,11 @@ namespace LuxERP.UI.Admin
                                                 eventState,
                                                 initialStores,
                                                 initialStocks,
-                                                scrapStocks) > 0)
+                                                scrapStocks,
+                                                sceneToken,
+                                                sceneInformation,
+                                                sceneServiceProvider,
+                                                areaInformation) > 0)
             {
                 MsgBox("更新成功");
             }

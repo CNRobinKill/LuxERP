@@ -17,53 +17,53 @@ namespace LuxERP.UI.EventManagement
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["userName"] == null)
-            //{
-            //    Response.Write("<script LANGUAGE=JavaScript >" +
-            //           " alert('未登陆或已超时，请重新登录！');" +
-            //           " window.location=('/LogOn.aspx');" +
-            //           "</script>");
-            //    Response.End();
-            //}
-            //else
-            //{
-            //    if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
-            //    {
-            //        Response.Write("<script LANGUAGE=JavaScript >" +
-            //            " alert('用户已在另外一台机器上登录！');" +
-            //            " window.location=('/LogOn.aspx');" +
-            //            "</script>");
-            //        Response.End();
-            //    }
-            //    else
-            //    {
-            //        if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "2") == "0")
-            //        {
-            //            Response.Write("<script LANGUAGE=JavaScript >" +
-            //                " alert('没有权限，请联系管理员！');" +
-            //                " window.location=('/LogOn.aspx');" +
-            //                "</script>");
-            //            Response.End();
-            //        }
-            //        try
-            //        {
-            if (!IsPostBack)
+            if (Session["userName"] == null)
             {
-                ddlServiceProviderShow();
-                ddlSceneTypeShow();
+                Response.Write("<script LANGUAGE=JavaScript >" +
+                       " alert('未登陆或已超时，请重新登录！');" +
+                       " window.location=('/LogOn.aspx');" +
+                       "</script>");
+                Response.End();
             }
-            //            if (IsPostBack)
-            //            {
-            //                RegisterJS("addRowStyle");
-            //                RegisterJS("setDate");
-            //            }
-            //        }
-            //        catch
-            //        {
-            //            Response.Redirect("~/Error.html");
-            //        }
-            //    }
-            //}
+            else
+            {
+                if (DAL.SystemUserDAL.GetUserIP(Session["userName"].ToString(), DAL.IPNetworking.GetIP4Address()) == "")
+                {
+                    Response.Write("<script LANGUAGE=JavaScript >" +
+                        " alert('用户已在另外一台机器上登录！');" +
+                        " window.location=('/LogOn.aspx');" +
+                        "</script>");
+                    Response.End();
+                }
+                else
+                {
+                    if (DAL.PermissionDAL.GetOnePermission(Session["userName"].ToString(), "20") == "0")
+                    {
+                        Response.Write("<script LANGUAGE=JavaScript >" +
+                            " alert('没有权限，请联系管理员！');" +
+                            " window.location=('/LogOn.aspx');" +
+                            "</script>");
+                        Response.End();
+                    }
+                    try
+                    {
+                        if (!IsPostBack)
+                        {
+                            ddlServiceProviderShow();
+                            ddlSceneTypeShow();
+                        }
+                        if (IsPostBack)
+                        {
+                            RegisterJS("addRowStyle");
+                            RegisterJS("setDate");
+                        }
+                    }
+                    catch
+                    {
+                        Response.Redirect("~/Error.html");
+                    }
+                }
+            }
         }
 
         public void ddlServiceProviderShow()

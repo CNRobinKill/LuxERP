@@ -461,27 +461,31 @@ create table tb_SystemUser
 -- 权限
 create table tb_Permission
 (
-	UserName			nvarchar(500) references dbo.tb_SystemUser(UserName),
-	[Admin]				int,
-	[Index]				int,
-	UpdateSolution		int,
-	EventQuery			int,
-	CreateEvent			int,
-	ReportFormsEvent	int,
-	AddStock			int,
-	StockQuery			int,
-	OutStockQuery		int,
-	AllotStockQuery		int,
-	AddStockQuery		int,
-	AlterStore			int,
-	EventTypes			int,
-	FacilityManage		int,
-	PeopleManage		int,
-	SynthesisManage		int,
-	EventState			int,
-	InitialStores		int,
-	InitialStocks		int,
-	[ScrapStocks]		int
+	UserName					nvarchar(500) references dbo.tb_SystemUser(UserName),
+	[Admin]						int,
+	[Index]						int,
+	UpdateSolution				int,
+	EventQuery					int,
+	CreateEvent					int,
+	ReportFormsEvent			int,
+	AddStock					int,
+	StockQuery					int,
+	OutStockQuery				int,
+	AllotStockQuery				int,
+	AddStockQuery				int,
+	AlterStore					int,
+	EventTypes					int,
+	FacilityManage				int,
+	PeopleManage				int,
+	SynthesisManage				int,
+	EventState					int,
+	InitialStores				int,
+	InitialStocks				int,
+	[ScrapStocks]				int,	
+	SceneToken					int,
+	SceneInformation			int,
+	SceneServiceProvider		int,
+	AreaInformation				int
 )
 
 -- 上门类型
@@ -3442,7 +3446,7 @@ Create Procedure [dbo].[GetMultiplyingPowerType]
 
 AS
 DECLARE	 @sql	 nvarchar(3000)	
-SET @sql = 'select TypeName,MultiplyingPower from tb_MultiplyingPowerType order by TypeName'
+SET @sql = 'select TypeName,MultiplyingPower from tb_MultiplyingPowerType order by MultiplyingPower'
 print @sql
 EXEC(@sql)
 Go
@@ -3571,11 +3575,12 @@ Create Procedure [dbo].[UpdateSceneServiceProvider]
 (
 	@serviceProvider			nvarchar(500),
 	@phone						nvarchar(500),
+	@email						nvarchar(500),
 	@serviceArea				nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar(3000)
-SET @sql = 'update tb_SceneServiceProvider set Phone ='''+@phone+''',ServiceArea ='''+@serviceArea+''' where ServiceProvider ='''+@serviceProvider+''''
+SET @sql = 'update tb_SceneServiceProvider set Phone ='''+@phone+''',Email ='''+@email+''',ServiceArea ='''+@serviceArea+''' where ServiceProvider ='''+@serviceProvider+''''
 print @sql
 EXEC(@sql)
 Go
@@ -3588,6 +3593,30 @@ AS
 DECLARE	 @sql	 nvarchar(3000)
 declare @remainToken nvarchar(500)
 select @remainToken= sum(RemainToken+cast(@token as float)) from tb_SceneServiceProvider where ServiceProvider=@serviceProvider
+SET @sql = 'update tb_SceneServiceProvider set RemainToken ='''+@remainToken+''' where ServiceProvider ='''+@serviceProvider+''''
+print @sql
+EXEC(@sql)
+Go
+Create Procedure [dbo].[UpdateRemainToken]
+(
+	@eventNo			nvarchar(500),
+	@temp				nvarchar(500)
+)
+AS
+DECLARE	 @sql				nvarchar(3000)
+declare @token				nvarchar(500)
+declare @remainToken		nvarchar(500)
+declare @serviceProvider	nvarchar(500)
+select @serviceProvider=ServiceProvider,@token=BaseToken*MultiplyingPower from tb_Token where EventNo=@eventNo
+select @remainToken=RemainToken from tb_SceneServiceProvider where ServiceProvider=@serviceProvider
+if @temp='0'
+begin
+set @remainToken=cast(@remainToken as float)-cast(@token as float)
+end
+else
+begin
+set @remainToken=cast(@remainToken as float)+cast(@token as float)
+end
 SET @sql = 'update tb_SceneServiceProvider set RemainToken ='''+@remainToken+''' where ServiceProvider ='''+@serviceProvider+''''
 print @sql
 EXEC(@sql)
@@ -3749,15 +3778,14 @@ end
 
 Go
 /**Update**/
---EventNo,TimeStart,TimeEnd,SceneType,BaseToken,MultiplyingPower,ServiceProvider
-alter Procedure [dbo].[UpdateToken]
+Create Procedure [dbo].[UpdateToken]
 (
 	@eventNo				nvarchar(500),
-	@timeStart				nvarchar(500)='2000-12-20',
-	@timeEnd				nvarchar(500)='2000-12-21',
-	@sceneType				nvarchar(500)='1',
-	@multiplyingPower		nvarchar(500)='1',		
-	@serviceProvider		nvarchar(500)='1'
+	@timeStart				nvarchar(500),
+	@timeEnd				nvarchar(500),
+	@sceneType				nvarchar(500),
+	@multiplyingPower		nvarchar(500),		
+	@serviceProvider		nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar(3000)
@@ -3786,6 +3814,10 @@ begin
 		select @tempO=TimeStart from tb_Token where EventNo=@eventNo
 		select @sumO=DATEDIFF(n, @tempO,@timeEnd)
 		select @sumT=@sumO/15
+		if @sumT=0
+		begin
+		set @sumT=@sumT+1
+		end
 		if @sumO%15=0
 		begin
 		select @baseToken=@baseToken*@sumT
@@ -3804,8 +3836,9 @@ begin
 	if @m='固定值'
 	begin
 		select @baseToken=BaseToken from tb_SceneType where TypeName=@sceneType
+		SET @set=@set+', BaseToken= '''+@baseToken+''''
 	end
-	SET @set=@set+', SceneType= '''+@sceneType+''', BaseToken= '''+@baseToken+''''
+	SET @set=@set+', SceneType= '''+@sceneType+''''
 end
 if @multiplyingPower<>''
 begin
@@ -3830,7 +3863,7 @@ Go
 
 /***************************SystemUser***************************/
 insert into tb_SystemUser(UserName,[Password],CreateTime,UserState) values('SystemAdmin','SystemAdmin',GETDATE(),1)
-insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks])values('SystemAdmin',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks],SceneToken,SceneInformation,SceneServiceProvider,AreaInformation)values('SystemAdmin',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
 Go
 /**Add**/
 Create Procedure [dbo].[AddSystemUser]
@@ -3844,8 +3877,8 @@ begin
 if not exists(select UserName from tb_SystemUser where UserName=@userName)
 begin 
 insert into tb_SystemUser(UserName,[Password],CreateTime,UserState) values(@userName,@password,@createTime,0)
-insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks])
-						values(@userName,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks],SceneToken,SceneInformation,SceneServiceProvider,AreaInformation)
+						values(@userName,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 end
 end
 Go
@@ -3972,6 +4005,14 @@ if @temp='18'
 set @field='[Admin]'
 if @temp='19'
 set @field='[ScrapStocks]'
+if @temp='20'
+set @field='SceneToken'
+if @temp='21'
+set @field='SceneInformation'
+if @temp='22'
+set @field='SceneServiceProvider'
+if @temp='23'
+set @field='AreaInformation'
 
 	
 set @sql ='select '+@field+' 
@@ -3987,7 +4028,7 @@ Create Procedure [dbo].[GetPermission]
 AS
 declare @sql nvarchar(2000)
 begin
- set @sql=' select UserName,[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[Admin],[ScrapStocks] 
+ set @sql=' select UserName,[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[Admin],[ScrapStocks],SceneToken,SceneInformation,SceneServiceProvider,AreaInformation 
 from tb_Permission where UserName = '''+@userName+''''
 exec(@sql)
 end
@@ -3995,26 +4036,30 @@ Go
 /**Update**/
 Create Procedure [dbo].[UpdatePermissionByUserName]
 (
-	@userName			nvarchar(500),
-	@index				int,
-	@updateSolution		int,
-	@eventQuery			int,
-	@createEvent		int,
-	@reportFormsEvent	int,
-	@addStock			int,
-	@stockQuery			int,
-	@outStockQuery		int,
-	@allotStockQuery	int,
-	@addStockQuery		int,
-	@alterStore			int,
-	@eventTypes			int,
-	@facilityManage		int,
-	@peopleManage		int,
-	@synthesisManage	int,
-	@eventState			int,
-	@initialStores		int,
-	@initialStocks		int,
-	@scrapStocks		int
+	@userName					nvarchar(500),
+	@index						int,
+	@updateSolution				int,
+	@eventQuery					int,
+	@createEvent				int,
+	@reportFormsEvent			int,
+	@addStock					int,
+	@stockQuery					int,
+	@outStockQuery				int,
+	@allotStockQuery			int,
+	@addStockQuery				int,
+	@alterStore					int,
+	@eventTypes					int,
+	@facilityManage				int,
+	@peopleManage				int,
+	@synthesisManage			int,
+	@eventState					int,
+	@initialStores				int,
+	@initialStocks				int,
+	@scrapStocks				int,
+	@sceneToken					int,
+	@sceneInformation			int,
+	@sceneServiceProvider		int,
+	@areaInformation			int
 )
 AS
 begin
@@ -4022,7 +4067,9 @@ update tb_Permission set [Index]=@index,UpdateSolution=@updateSolution,EventQuer
 						ReportFormsEvent=@reportFormsEvent,AddStock=@addStock,StockQuery=@stockQuery,OutStockQuery=@outStockQuery,
 						AllotStockQuery=@allotStockQuery,AddStockQuery=@addStockQuery,AlterStore=@alterStore,EventTypes=@eventTypes,
 						FacilityManage=@facilityManage,PeopleManage=@peopleManage,SynthesisManage=@synthesisManage,EventState=@eventState,
-						InitialStores=@initialStores,InitialStocks=@initialStocks,[ScrapStocks]=@scrapStocks where UserName =@userName
+						InitialStores=@initialStores,InitialStocks=@initialStocks,[ScrapStocks]=@scrapStocks,SceneToken=@sceneToken,
+						SceneInformation=@sceneInformation,SceneServiceProvider=@sceneServiceProvider,AreaInformation=@areaInformation 
+						where UserName =@userName
 end
 Go
 /***************************Permission***************************/
