@@ -14,16 +14,6 @@ namespace LuxERP.UI.EventManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.btnAddEngineers.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddEngineers, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnAddStoreFacilitie.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnAddStoreFacilitie, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnChange.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnChange, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnDelPic.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnDelPic, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnEndNo.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnEndNo, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnEndOk.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnEndOk, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnGoOn.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnGoOn, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnStart.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnStart, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnUpload.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnUpload, "click") + ";this.disabled=true; this.value='处理中...';");
-            //this.btnWorkOrder.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnWorkOrder, "click") + ";this.disabled=true; this.value='处理中...';");
 
                 if (Session["userName"] == null)
                 {
@@ -53,8 +43,8 @@ namespace LuxERP.UI.EventManagement
                                 "</script>");
                             Response.End();
                         }
-                        try
-                        {
+                        //try
+                        //{
                             if (IsPostBack)
                             {
                                 string strFunName = Request.Form["FunName"] != null ? Request.Form["FunName"] : "";
@@ -96,23 +86,43 @@ namespace LuxERP.UI.EventManagement
                                 gvFacilitiesServicesBind();
                                 gvAppointEngineersBind();
                                 btnState();
-                                for (int i = 0; i < DAL.PeopleDAL.GetNameByPosition("工程师").Tables[0].Rows.Count; i++)
+                                ddlMultiplyingPowerShow();
+                                for (int i = 0; i < DAL.SceneServiceProviderDAL.GetServiceProvider().Tables[0].Rows.Count; i++)
                                 {
-                                    ddlName.Items.Add(DAL.PeopleDAL.GetNameByPosition("工程师").Tables[0].Rows[i][0].ToString());
+                                    ddlServiceProvider.Items.Add(DAL.SceneServiceProviderDAL.GetServiceProvider().Tables[0].Rows[i][0].ToString());
+                                }
+                                for (int i = 0; i < DAL.SceneTypeDAL.GetTypeName().Tables[0].Rows.Count; i++)
+                                {
+                                    ddlSceneType.Items.Add(DAL.SceneTypeDAL.GetTypeName().Tables[0].Rows[i][0].ToString());
                                 }
                                 for (int i = 1; i < 25; i++)
                                 {
                                     ddlTime.Items.Add(i.ToString());
                                 }
                             }
-                        }
-                        catch
-                        {
-                            Response.Redirect("~/Error.html");
-                        }
+                        //}
+                        //catch
+                        //{
+                        //    Response.Redirect("~/Error.html");
+                        //}
                     }
                 }
             
+        }
+
+
+        public void ddlMultiplyingPowerShow()
+        {
+            ddlMultiplyingPower.DataSource = DAL.MultiplyingPowerTypeDAL.GetMultiplyingPowerType();
+            ddlMultiplyingPower.DataValueField = "MultiplyingPower";
+            ddlMultiplyingPower.DataTextField = "TypeName";
+            ddlMultiplyingPower.DataBind();
+            ddlMultiplyingPower.SelectedIndex = 0;
+        }
+
+        protected void ddlMultiplyingPower_DataBound(object sender, EventArgs e)
+        {
+            ddlMultiplyingPower.Items.Insert(0, "选择倍率");
         }
 
         public void RegisterJS(string method)
@@ -235,7 +245,7 @@ namespace LuxERP.UI.EventManagement
             int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
             if (gvAppointEngineers.HeaderRow != null)
             {
-                gvAppointEngineers.HeaderRow.Cells[0].Text = "<b>工程师</b>";
+                gvAppointEngineers.HeaderRow.Cells[0].Text = "<b>服务商</b>";
                 gvAppointEngineers.HeaderRow.Cells[1].Text = "<b>联系电话</b>";
                 gvAppointEngineers.HeaderRow.Cells[2].Text = "<b>联系邮箱</b>";
                 gvAppointEngineers.HeaderRow.Cells[3].Text = "<b>预约时间</b>";
@@ -418,9 +428,10 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnAddEngineers_Click(object sender, EventArgs e)
         {
-                DAL.AppointEngineersDAL.AddAppointEngineers(Request.QueryString["eventNo"], ddlName.SelectedValue, "1");
-                //DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)正在预约工程师 " + ddlName.SelectedValue, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
-                gvAppointEngineersBind();
+            DAL.AppointEngineersDAL.AddAppointEngineers(Request.QueryString["eventNo"], ddlServiceProvider.SelectedValue, "1");
+            DAL.TokenDAL.UpdateToken(Request.QueryString["eventNo"], "", "", ddlSceneType.SelectedValue, "", ddlServiceProvider.SelectedValue);
+            //DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)正在预约工程师 " + ddlName.SelectedValue, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            gvAppointEngineersBind();
         }
 
         protected void gvAppointEngineers_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
@@ -440,7 +451,7 @@ namespace LuxERP.UI.EventManagement
                 string eventNo = Request.QueryString["eventNo"];
                 string sceneTime = SendEmailInfo(6);
                 string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)成功预约工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text.Trim() + " 于 " + sceneTime + " 上门", timeNow, "0", Session["userName"].ToString());
+                DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)成功预约服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text.Trim() + " 于 " + sceneTime + " 上门", timeNow, "0", Session["userName"].ToString());
                 string mailTo = SendEmailInfo(4);
                 if (mailTo != "")
                 {
@@ -457,11 +468,11 @@ namespace LuxERP.UI.EventManagement
 
                     gvEventSteps.Visible = true;
                     gvEventStepsDataBind();
-                    string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + " 工程师：<div>&nbsp; &nbsp; 当前有一个门店需要上门服务，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + Request.QueryString["storeNo"] + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店地址：" + storeAddress + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店电话：" + storeTel + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + eventNo + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：(" + typeCode + ") " + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件详细：</div><div>" + GridViewToHtml(gvEventSteps) + "</div><div>&nbsp; &nbsp; 请在我们双方预约的大概时间（" + sceneTime + "）到达门店，我们将会对整个上门服务流程进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
+                    string emailBody = "&nbsp; &nbsp; 你好，" + mailToName + " 服务商：<div>&nbsp; &nbsp; 当前有一个门店需要上门服务，</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店编号：" + Request.QueryString["storeNo"] + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店地址：" + storeAddress + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;门店电话：" + storeTel + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件编号：" + eventNo + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件概类：(" + typeCode + ") " + eventName + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;发送时间：" + timeNow + "</div><div>&nbsp; &nbsp; &nbsp; &nbsp;事件详细：</div><div>" + GridViewToHtml(gvEventSteps) + "</div><div>&nbsp; &nbsp; 请在我们双方预约的大概时间（" + sceneTime + "）到达门店，我们将会对整个上门服务流程进行跟踪！</div><div><br></div><div><br></div><div><br></div><div><font color='#ff3333'>该内容由IIRIS系统发出，如有疑问请回复邮件咨询！谢谢！</font></div>";
                     gvEventSteps.Visible = false;
                     if (DAL.SendEmail.SendMail(email, mailServer, ePassword, 25, mailTo, mailToName, "IIRIS系统邮件", emailBody) == true)
                     {
-                        DAL.EventStepsDAL.AddEventSteps(eventNo, "(上门服务)已成功向工程师" + mailToName + "发送邮件", timeNow, "0", Session["userName"].ToString());
+                        DAL.EventStepsDAL.AddEventSteps(eventNo, "(上门服务)已成功向服务商" + mailToName + "发送邮件", timeNow, "0", Session["userName"].ToString());
                     }
                     else
                     {
@@ -507,6 +518,8 @@ namespace LuxERP.UI.EventManagement
             string state = DAL.SceneStateDAL.GetSceneStateByEventNo(Request.QueryString["eventNo"]);
             if (state == "0")
             {
+                ddlMultiplyingPower.Visible = true;
+                divDate.Visible = true;
                 divJobSchedule.Visible = true;
                 btnStart.Enabled = true;
                 btnStart.CssClass = "button";
@@ -521,6 +534,8 @@ namespace LuxERP.UI.EventManagement
             }
             if (state == "1" || state == "4")
             {
+                ddlMultiplyingPower.Visible = false;
+                divDate.Visible = false;
                 divJobSchedule.Visible = true;
                 btnStart.Enabled = false;
                 btnStart.CssClass = "buttonnone";
@@ -535,6 +550,8 @@ namespace LuxERP.UI.EventManagement
             }
             if (state == "2")
             {
+                ddlMultiplyingPower.Visible = false;
+                divDate.Visible = false;
                 divJobSchedule.Visible = true;
                 btnStart.Enabled = false;
                 btnStart.CssClass = "buttonnone";
@@ -549,6 +566,8 @@ namespace LuxERP.UI.EventManagement
             }
             if (state == "3")
             {
+                ddlMultiplyingPower.Visible = false;
+                divDate.Visible = false;
                 divJobSchedule.Visible = false; 
                 divHistoryService.Visible = true;
                 gvHistoryServiceBind();
@@ -557,6 +576,8 @@ namespace LuxERP.UI.EventManagement
             }
             if (state == "5")
             {
+                ddlMultiplyingPower.Visible = false;
+                divDate.Visible = false;
                 divAddEngineers.Visible = true;
                 divJobSchedule.Visible = false;
             }
@@ -565,9 +586,17 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnStart_Click(object sender, EventArgs e)
         {
-            int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
-            DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "1");
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 开始上门", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            if (ddlMultiplyingPower.SelectedIndex != 0)
+            {
+                int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
+                DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "1");
+                DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 开始上门", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+                DAL.TokenDAL.UpdateToken(Request.QueryString["eventNo"], DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "", "", ddlMultiplyingPower.SelectedValue, "");
+            }
+            else
+            {
+                MsgBox("请选择倍率！");
+            }
             btnState();
         }
 
@@ -575,7 +604,7 @@ namespace LuxERP.UI.EventManagement
         {
             int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
             DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "2");
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 结束上门(未完成)", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 结束上门(未完成)", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
             btnState();
         }
 
@@ -583,7 +612,8 @@ namespace LuxERP.UI.EventManagement
         {
             int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
             DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "3");
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 结束上门(完成)", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 结束上门(完成)", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            DAL.TokenDAL.UpdateToken(Request.QueryString["eventNo"], "", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "", "", "");
             DAL.SceneStateDAL.AddHistoryServiceFromStocks(Request.QueryString["eventNo"], DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             btnState();
         }
@@ -592,7 +622,7 @@ namespace LuxERP.UI.EventManagement
         {
             int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
             DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "4");
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 再次上门", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 再次上门", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
             btnState();
         }
 
@@ -600,7 +630,7 @@ namespace LuxERP.UI.EventManagement
         {
             int rowCount = DAL.AppointEngineersDAL.GetAppointEngineersByEventNo(Request.QueryString["eventNo"]).Tables[0].Rows.Count;
             DAL.SceneStateDAL.UpdateSceneState(Request.QueryString["eventNo"], "5");
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)工程师 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 需要更换", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
+            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)服务商 " + gvAppointEngineers.Rows[rowCount - 1].Cells[0].Text + " 需要更换", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "0", Session["userName"].ToString());
             btnState();
         }
 
@@ -650,5 +680,7 @@ namespace LuxERP.UI.EventManagement
             uploado.Visible = true;
             uploadt.Visible = false;
         }
+
+        
     }
 }

@@ -514,6 +514,7 @@ create table tb_SceneServiceProvider
 (
 	ServiceProvider			nvarchar(500) primary key,
 	Phone					nvarchar(500),
+	Email					nvarchar(500),
 	ServiceArea				nvarchar(500),
 	RemainToken				float
 )
@@ -2564,7 +2565,7 @@ AS
 BEGIN
  declare @phonevalue	nvarchar(500)
  declare @email			nvarchar(500)
- select @phonevalue=Phone,@email=Email from tb_People where Name=@name
+ select @phonevalue=Phone,@email=Email from tb_SceneServiceProvider where ServiceProvider=@name 
  insert into tb_AppointEngineers(EventNo,Name,Phone,Email,SceneTime,AppointState) values(@eventNo,@name,@phonevalue,@email,NULL,@appointState)
 END
 Go
@@ -3527,12 +3528,13 @@ Create Procedure [dbo].[AddSceneServiceProvider]
 (
 	@serviceProvider			nvarchar(500),
 	@phone						nvarchar(500),
+	@email						nvarchar(500),
 	@serviceArea				nvarchar(500),
 	@remainToken				nvarchar(500)
 )
 AS
 DECLARE	 @sql	 nvarchar(3000)	
-SET @sql = 'if not exists(select ServiceProvider from tb_SceneServiceProvider where ServiceProvider='''+@serviceProvider+''') insert into tb_SceneServiceProvider(ServiceProvider,Phone,ServiceArea,RemainToken) values('''+@serviceProvider+''','''+@phone+''','''+@serviceArea+''','''+@remainToken+''')'
+SET @sql = 'if not exists(select ServiceProvider from tb_SceneServiceProvider where ServiceProvider='''+@serviceProvider+''') insert into tb_SceneServiceProvider(ServiceProvider,Phone,Email,ServiceArea,RemainToken) values('''+@serviceProvider+''','''+@phone+''','''+@email+''','''+@serviceArea+''','''+@remainToken+''')'
 print @sql
 EXEC(@sql)
 Go
@@ -3541,7 +3543,7 @@ Create Procedure [dbo].[GetSceneServiceProvider]
 
 AS
 DECLARE	 @sql	 nvarchar(3000)	
-SET @sql = 'select ServiceProvider,Phone,ServiceArea,RemainToken from tb_SceneServiceProvider order by ServiceProvider'
+SET @sql = 'select ServiceProvider,Phone,Email,ServiceArea,RemainToken from tb_SceneServiceProvider order by ServiceProvider'
 print @sql
 EXEC(@sql)
 Go
@@ -3647,6 +3649,16 @@ Go
 --print @sql
 --EXEC(@sql)
 --Go
+Create Procedure [dbo].[AddToken]
+(
+	@eventNo				nvarchar(500)
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)	
+SET @sql = 'if not exists(select EventNo from tb_Token where EventNo='''+@eventNo+''') insert into tb_Token(EventNo,TimeStart,TimeEnd,SceneType,BaseToken,MultiplyingPower,ServiceProvider) values('''+@eventNo+''',NULL,NULL,NULL,NULL,NULL,NULL)'
+print @sql
+EXEC(@sql)
+Go
 /**Get**/
 Create Procedure [dbo].[GetTokenTotal]
 (
@@ -3662,7 +3674,7 @@ DECLARE  @where   nvarchar(1000)
 DECLARE  @sql   nvarchar(3000)
 	
 	
-	SET @where=' where 1=1 '
+	SET @where=' where TimeEnd is not null '
 if @eventNo<>''
 begin
 	SET @where=@where+' and EventNo= '''+@eventNo+''''
@@ -3708,7 +3720,7 @@ declare  @n		nvarchar(100)
 set @n = Cast((@pageIndex - 1) * @pageSize as nvarchar(100))
 	
 	
-	SET @where=' 1=1 '
+	SET @where=' TimeEnd is not null '
 if @eventNo<>''
 begin
 	SET @where=@where+' and EventNo= '''+@eventNo+''''
@@ -3735,6 +3747,83 @@ set @sql=' (row_number() over(order by TimeStart desc)) + cast('+@n+' as int) N,
 exec dbo.GetPageOfRecords @pageSize, @pageIndex, @sql, 'dbo.tb_Token left join tb_EventLogs on tb_Token.EventNo=tb_EventLogs.EventNo', @where, 'TimeStart', 1, 'TimeStart'
 end
 
+Go
+/**Update**/
+--EventNo,TimeStart,TimeEnd,SceneType,BaseToken,MultiplyingPower,ServiceProvider
+alter Procedure [dbo].[UpdateToken]
+(
+	@eventNo				nvarchar(500),
+	@timeStart				nvarchar(500)='2000-12-20',
+	@timeEnd				nvarchar(500)='2000-12-21',
+	@sceneType				nvarchar(500)='1',
+	@multiplyingPower		nvarchar(500)='1',		
+	@serviceProvider		nvarchar(500)='1'
+)
+AS
+DECLARE	 @sql	 nvarchar(3000)
+DECLARE  @set   nvarchar(1000)
+declare  @baseToken  nvarchar(500)
+declare  @m  nvarchar(500)
+declare  @n  nvarchar(500)
+	
+	
+	SET @set=''
+if @timeStart<>''
+begin
+	SET @set=@set+' TimeStart = '''+@timeStart+''''
+end
+if @timeEnd<>''
+begin
+	declare @tempO nvarchar(500)
+	select @tempO=SceneType from tb_Token where EventNo=@eventNo
+	select @m=ComputingMethod from tb_SceneType where TypeName=@tempO
+	if @m<>'固定值'
+	begin
+		
+		declare @sumO int
+		declare @sumT int
+		select @baseToken=BaseToken from tb_SceneType where TypeName=@tempO
+		select @tempO=TimeStart from tb_Token where EventNo=@eventNo
+		select @sumO=DATEDIFF(n, @tempO,@timeEnd)
+		select @sumT=@sumO/15
+		if @sumO%15=0
+		begin
+		select @baseToken=@baseToken*@sumT
+		end
+		else
+		begin
+		select @baseToken=@baseToken*(@sumT+1)
+		end
+		SET @set=@set+', BaseToken = '''+@baseToken+''''
+	end
+	SET @set=@set+', TimeEnd = '''+@timeEnd+''''
+end
+if @sceneType<>''
+begin
+	select @m=ComputingMethod from tb_SceneType where TypeName=@sceneType
+	if @m='固定值'
+	begin
+		select @baseToken=BaseToken from tb_SceneType where TypeName=@sceneType
+	end
+	SET @set=@set+', SceneType= '''+@sceneType+''', BaseToken= '''+@baseToken+''''
+end
+if @multiplyingPower<>''
+begin
+	SET @set=@set+', MultiplyingPower = '''+@multiplyingPower+''''
+end
+if @serviceProvider<>''
+begin
+	SET @set=@set+', ServiceProvider = '''+@serviceProvider+''''
+end
+
+if substring(@set,1,1)=','
+begin
+set @set=substring(@set,2,len(@set))
+end
+
+SET @sql = 'update tb_Token set'+@set+' where EventNo ='''+@eventNo+''''
+print @sql
+EXEC(@sql)
 Go
 /***************************Token***************************/
 

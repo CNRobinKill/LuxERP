@@ -759,7 +759,8 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnSceneByEnent_Click(object sender, EventArgs e)
         {
-            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)需要工程师上门服务", timeNow(), "0", Session["userName"].ToString());
+            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(上门服务)需要上门服务", timeNow(), "0", Session["userName"].ToString());
+            DAL.TokenDAL.AddToken(Request.QueryString["eventNo"]);
             string url = "SceneByEnent.aspx?eventNo=" + Request.QueryString["eventNo"] + "&storeNo=" + StoreInformationArray(0) + "&typeCode=" + Request.QueryString["typeCode"];
             Response.Redirect(url);
         }

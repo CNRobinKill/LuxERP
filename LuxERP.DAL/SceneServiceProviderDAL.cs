@@ -16,14 +16,15 @@ namespace LuxERP.DAL
         private const string SPDelSceneServiceProvider = "DelSceneServiceProvider";
         private const string SPUpdateSceneServiceProvider = "UpdateSceneServiceProvider";
         private const string SPUpdateAddToken = "UpdateAddToken";
-        
 
 
-        public static int AddSceneServiceProvider(string serviceProvider, string phone, string serviceArea, string remainToken)
+
+        public static int AddSceneServiceProvider(string serviceProvider, string phone, string email, string serviceArea, string remainToken)
         {
             SqlParameter[] paras = { 
 	            new SqlParameter("@serviceProvider",serviceProvider),
                 new SqlParameter("@phone",phone),
+                new SqlParameter("@email",email),
                 new SqlParameter("@serviceArea",serviceArea),
                 new SqlParameter("@remainToken",remainToken)
             };

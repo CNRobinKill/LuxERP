@@ -20,7 +20,9 @@
     <asp:TextBox ID="txtServiceProvider" runat="server" Width="100px"></asp:TextBox>
     <asp:Label runat="server" Text="联系电话："></asp:Label>
     <asp:TextBox ID="txtPhone" runat="server" Width="100px"></asp:TextBox>
-    <asp:Label runat="server" Text="服务区域:"></asp:Label>
+    <asp:Label runat="server" Text="联系邮箱："></asp:Label>
+    <asp:TextBox ID="txtEmail" runat="server" Width="150px"></asp:TextBox>
+    <asp:Label runat="server" Text="服务区域："></asp:Label>
     <asp:DropDownList ID="ddlServiceArea" runat="server"></asp:DropDownList>
     <asp:Label runat="server" Text="剩余Token数："></asp:Label>
     <asp:TextBox ID="txtRemainToken" runat="server" Width="100px"></asp:TextBox>
@@ -41,6 +43,10 @@
                         <ItemStyle Width="160px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Phone" >
+                        <ControlStyle Width="101px" />
+                        <ItemStyle Width="100px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="Email" >
                         <ControlStyle Width="101px" />
                         <ItemStyle Width="100px" />
                     </asp:BoundField>

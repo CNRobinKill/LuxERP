@@ -188,8 +188,11 @@
 <div id="divSceneStateHeader" class="content-box-header" ><h3 style="cursor: s-resize;">JobSchedule</h3></div>
 <div id="divSceneStateContent" class="content-box-content">
 <div style=" padding:15px 15px 15px 0px">
+    <asp:DropDownList ID="ddlMultiplyingPower" runat="server" Height="50px" 
+        ondatabound="ddlMultiplyingPower_DataBound">
+    </asp:DropDownList>
     <asp:Button ID="btnStart" runat="server" Text="开始上门" CssClass="button" 
-        Width="100px" Height="50px" Font-Size="XX-Large" Font-Bold="true" 
+        Width="100px" Height="50px" Font-Size="XX-Large" Font-Bold="true"
         onclick="btnStart_Click" />
     <asp:Button ID="btnEndNo" runat="server" Text="结束上门(未完成)" Enabled="false" CssClass="button" 
         Width="150px" Height="50px" Font-Size="XX-Large" Font-Bold="true" 
@@ -200,10 +203,14 @@
     <asp:Button ID="btnGoOn" runat="server" Text="继续上门" Enabled="false" CssClass="button" 
         Width="100px" Height="50px" Font-Size="XX-Large" Font-Bold="true" 
         onclick="btnGoOn_Click"/>
-    <asp:Button ID="btnChange" runat="server" Text="更换工程师" Enabled="false" CssClass="button" 
+    <asp:Button ID="btnChange" runat="server" Text="更换服务商" Enabled="false" CssClass="button" 
         Width="130px" Height="50px" Font-Size="XX-Large" Font-Bold="true" 
         onclick="btnChange_Click"/>
+    <div runat="server" id="divDate">
+    <iframe id="calendar" frameborder="0" width="100%" scrolling="no" style="background-color: transparent; height: 440px;" allowtransparency="true" src="http://baidu365.duapp.com/wnl.html" name="calendar"></iframe>
+    </div>
 </div>
+
     
 </div>
 </div>
@@ -215,8 +222,11 @@
         <asp:Label runat="server" Font-Bold="false" Font-Size="Medium" ForeColor="Red">添加需上门服务设备后操作</asp:Label>
     </div>
     <div id="divAddEngineers" runat="server" visible="false">
-        <asp:Label runat="server" Text="选择工程师："></asp:Label>
-        <asp:DropDownList ID="ddlName" runat="server">
+        <asp:Label ID="Label3" runat="server" Text="选择上门服务商："></asp:Label>
+        <asp:DropDownList ID="ddlServiceProvider" runat="server">
+        </asp:DropDownList>
+        <asp:Label ID="Label2" runat="server" Text="选择上门类型："></asp:Label>
+        <asp:DropDownList ID="ddlSceneType" runat="server">
         </asp:DropDownList>
         <asp:Button ID="btnAddEngineers" runat="server" Text="确认" CssClass="button" 
             onclick="btnAddEngineers_Click" />

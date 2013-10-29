@@ -140,7 +140,7 @@ namespace LuxERP.UI.SystemInitial
                 string remainToken = txtRemainToken.Text.Trim();
                 if (returnbool(remainToken))
                 {
-                    DAL.SceneServiceProviderDAL.AddSceneServiceProvider(txtServiceProvider.Text.Trim(), txtPhone.Text.Trim(), ddlServiceArea.SelectedValue, txtRemainToken.Text.Trim());
+                    DAL.SceneServiceProviderDAL.AddSceneServiceProvider(txtServiceProvider.Text.Trim(), txtPhone.Text.Trim(), txtEmail.Text.Trim(), ddlServiceArea.SelectedValue, txtRemainToken.Text.Trim());
                 }
             }
             gvSceneServiceProviderBind();

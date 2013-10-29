@@ -103,6 +103,15 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divJobSchedule;
         
         /// <summary>
+        /// ddlMultiplyingPower 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMultiplyingPower;
+        
+        /// <summary>
         /// btnStart 控件。
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.Button btnChange;
         
         /// <summary>
+        /// divDate 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDate;
+        
+        /// <summary>
         /// noEngineersText 控件。
         /// </summary>
         /// <remarks>
@@ -166,13 +184,40 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddEngineers;
         
         /// <summary>
-        /// ddlName 控件。
+        /// Label3 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlName;
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// ddlServiceProvider 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlServiceProvider;
+        
+        /// <summary>
+        /// Label2 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// ddlSceneType 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSceneType;
         
         /// <summary>
         /// btnAddEngineers 控件。

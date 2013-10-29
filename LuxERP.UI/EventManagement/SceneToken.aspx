@@ -55,10 +55,14 @@
 <ContentTemplate>
 <div>
     <asp:Label runat="server" Text="事件编号："></asp:Label><asp:TextBox ID="txtEventNo" runat="server" Width="100px"></asp:TextBox>
-    <asp:Label runat="server" Text="上门类型："></asp:Label><asp:DropDownList ID="ddlSceneType" runat="server"></asp:DropDownList>
+    <asp:Label runat="server" Text="上门类型："></asp:Label>
+    <asp:DropDownList ID="ddlSceneType" runat="server" 
+        ondatabound="ddlSceneType_DataBound"></asp:DropDownList>
     <asp:Label runat="server" Text="服务时间："></asp:Label><asp:TextBox ID="txtAServiceTime" runat="server" Width="100px"></asp:TextBox>
     <asp:Label runat="server" Text="至"></asp:Label><asp:TextBox ID="txtBServiceTime" runat="server" Width="100px"></asp:TextBox>
-    <asp:Label runat="server" Text="服务商："></asp:Label><asp:DropDownList ID="ddlServiceProvider" runat="server"></asp:DropDownList>
+    <asp:Label runat="server" Text="服务商："></asp:Label>
+    <asp:DropDownList ID="ddlServiceProvider" runat="server" 
+        ondatabound="ddlServiceProvider_DataBound"></asp:DropDownList>
     <asp:Button ID="btnTokenQuery" runat="server" Text="Token查询" CssClass="button" 
         onclick="btnTokenQuery_Click" />
 </div>

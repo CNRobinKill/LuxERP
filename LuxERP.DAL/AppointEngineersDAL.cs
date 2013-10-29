@@ -18,7 +18,7 @@ namespace LuxERP.DAL
         {
             SqlParameter[] paras = {
                                        new SqlParameter("@eventNo",eventNo),
-                                       new SqlParameter("@name",name),                                    
+                                       new SqlParameter("@name",name),                                   
                                        new SqlParameter("@appointState",appointState)
                                    };
             return Common.SqlHelper.ExecuteNonQuery(SPAddAppointEngineers, paras);
