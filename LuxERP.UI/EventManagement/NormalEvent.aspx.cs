@@ -696,6 +696,11 @@ namespace LuxERP.UI.EventManagement
             Response.Redirect("EventQuery.aspx");
         }
 
+        protected void btnReturnCreateEvent_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CreateEvent.aspx");
+        }
+
         protected void btnReOpenEvent_Click(object sender, EventArgs e)
         {
             DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], "99");
@@ -977,6 +982,8 @@ namespace LuxERP.UI.EventManagement
             lblToResolvedTime.Text = EventInformationArray(5);
             gvEventStepsDataBind();
         }
+
+        
 
     }
 }

@@ -79,6 +79,9 @@
 <div style="width:800px">
 <asp:Button ID="btnReturnEventQuery" runat="server" Text="返回事件查询页" CssClass="button" 
         onclick="btnReturnEventQuery_Click" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+<asp:Button ID="btnReturnCreateEvent" runat="server" Height="40px" Text="创建事件" 
+        CssClass="button" onclick="btnReturnCreateEvent_Click" />
 <h2>EventLog</h2>
 <div style="width:800px; text-align:right"><asp:Button ID="btnStopEventLog" 
         runat="server" Text="关闭/作废事件" CssClass="button" 
@@ -188,8 +191,9 @@
             onclick="btnReOpenEvent_Click" /></td>
     <td style="width:400px">
         <asp:TextBox ID="txtStepDescribe" runat="server" Width="300px"></asp:TextBox>
-        </td><td style="width:100px"></td><td style="width:100px"></td>
-        <td style="width:50px"><asp:Button ID="btnAddEventSteps" runat="server" Text="添加" CssClass="button" onclick="btnAddEventSteps_Click"></asp:Button>
+        </td><td style="width:100px"><asp:Button ID="btnAddEventSteps" runat="server" Text="添加" CssClass="button" onclick="btnAddEventSteps_Click"></asp:Button>
+        </td><td style="width:100px"></td>
+        <td style="width:50px">
         </td>
     </tr>
     </table>
