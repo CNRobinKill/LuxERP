@@ -681,7 +681,7 @@ Go
 /***************************TypeFour***************************/
 
 /***************************Solver***************************/
-insert into tb_Solver(Solver,SMTP,Email,EPassword,Note) values('库存管理员',NULL,NULL,NULL,NULL)
+if not exists(select Solver from tb_Solver where Solver='库存管理员')insert into tb_Solver(Solver,SMTP,Email,EPassword,Note) values('库存管理员',NULL,NULL,NULL,NULL)
 Go
 /**Add**/
 Create Procedure [dbo].[AddSolver]
@@ -798,15 +798,15 @@ Go
 /***************************Solver***************************/
 
 /***************************EventState***************************/
-insert tb_EventState(StateID,StateName,StateDay) values(99,'处理中',0)
-insert tb_EventState(StateID,StateName,StateDay) values(0,'已完成',0)
-insert tb_EventState(StateID,StateName,StateDay) values(100,'完成开店',0)
-insert tb_EventState(StateID,StateName,StateDay) values(200,'完成关店',0)
-insert tb_EventState(StateID,StateName,StateDay) values(300,'完成装修',0)
-insert tb_EventState(StateID,StateName,StateDay) values(999,'预开店',0)
-insert tb_EventState(StateID,StateName,StateDay) values(998,'需装修',0)
-insert tb_EventState(StateID,StateName,StateDay) values(997,'预关店',0)
-insert tb_EventState(StateID,StateName,StateDay) values(900,'营业中',0)
+if not exists(select StateID from tb_Solver where StateID=99)insert into tb_EventState(StateID,StateName,StateDay) values(99,'处理中',0)
+if not exists(select StateID from tb_Solver where StateID=0)insert into tb_EventState(StateID,StateName,StateDay) values(0,'已完成',0)
+if not exists(select StateID from tb_Solver where StateID=100)insert into tb_EventState(StateID,StateName,StateDay) values(100,'完成开店',0)
+if not exists(select StateID from tb_Solver where StateID=200)insert into tb_EventState(StateID,StateName,StateDay) values(200,'完成关店',0)
+if not exists(select StateID from tb_Solver where StateID=300)insert into tb_EventState(StateID,StateName,StateDay) values(300,'完成装修',0)
+if not exists(select StateID from tb_Solver where StateID=999)insert into tb_EventState(StateID,StateName,StateDay) values(999,'预开店',0)
+if not exists(select StateID from tb_Solver where StateID=998)insert into tb_EventState(StateID,StateName,StateDay) values(998,'需装修',0)
+if not exists(select StateID from tb_Solver where StateID=997)insert into tb_EventState(StateID,StateName,StateDay) values(997,'预关店',0)
+if not exists(select StateID from tb_Solver where StateID=900)insert into tb_EventState(StateID,StateName,StateDay) values(900,'营业中',0)
 Go
 /**Add**/
 Create Procedure [dbo].[AddEventState]
@@ -3862,8 +3862,8 @@ Go
 
 
 /***************************SystemUser***************************/
-insert into tb_SystemUser(UserName,[Password],CreateTime,UserState) values('SystemAdmin','SystemAdmin',GETDATE(),1)
-insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks],SceneToken,SceneInformation,SceneServiceProvider,AreaInformation)values('SystemAdmin',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+if not exists(select UserName from tb_SystemUser where UserName='SystemAdmin')insert into tb_SystemUser(UserName,[Password],CreateTime,UserState) values('SystemAdmin','SystemAdmin',GETDATE(),1)
+if not exists(select UserName from tb_Permission where UserName='SystemAdmin')insert into tb_Permission(UserName,[Admin],[Index],UpdateSolution,EventQuery,CreateEvent,ReportFormsEvent,AddStock,StockQuery,OutStockQuery,AllotStockQuery,AddStockQuery,AlterStore,EventTypes,FacilityManage,PeopleManage,SynthesisManage,EventState,InitialStores,InitialStocks,[ScrapStocks],SceneToken,SceneInformation,SceneServiceProvider,AreaInformation)values('SystemAdmin',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
 Go
 /**Add**/
 Create Procedure [dbo].[AddSystemUser]
