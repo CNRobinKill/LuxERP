@@ -46,7 +46,7 @@ namespace LuxERP.UI
                         {
                             DAL.SystemUserDAL.UpdateLogOnByUserName(txtUserName.Text.Trim(), DAL.IPNetworking.GetIP4Address());
                             Session["userName"] = txtUserName.Text.Trim();
-                            Session.Timeout = 1400;
+                            Session.Timeout = 10000;
                             //Response.Cookies["userName"].Value = txtUserName.Text.Trim();
                             //Response.Cookies["userName"].Expires = DateTime.Now.AddDays(1);
                             ////產生一個Cookie
