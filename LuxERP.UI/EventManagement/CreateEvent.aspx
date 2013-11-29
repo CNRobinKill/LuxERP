@@ -119,12 +119,12 @@
 <div runat="server" id="basicInformation">
 <h2>BasicInformation</h2> 
       <table>
-      <tr runat="server" id="trTypeCode"><td style=" width:100px;"><asp:Label ID="Label1" runat="server">店号：</asp:Label></td> <td>
+      <tr runat="server" id="trStoreNo1"><td style=" width:100px;"><asp:Label ID="Label1" runat="server">店号：</asp:Label></td> <td>
           <asp:TextBox runat="server" ID="txtStoreNo" Width="50px" AutoCompleteType="Disabled" onkeyup="showStores(this.value)" ></asp:TextBox>&nbsp;&nbsp;
           <asp:Button ID="btnStoreInfo" runat="server" Text="门店相关信息" CssClass="button"  onclick="btnStoreInfo_Click" />
           <asp:Label ID="lblStoreInfoText" runat="server" ForeColor="Red"></asp:Label>
           </td></tr>
-      <tr runat="server" id="trStoreNo1"><td style=" width:100px;"><asp:Label ID="Label2" runat="server">事件类型编号：</asp:Label></td> <td>
+      <tr runat="server" id="trTypeCode"><td style=" width:100px;"><asp:Label ID="Label2" runat="server">事件类型编号：</asp:Label></td> <td>
           <asp:TextBox runat="server" ID="txtTypeCode"  Width="100px" AutoCompleteType="Disabled" onkeyup="showHint(this.value)" ></asp:TextBox>&nbsp;&nbsp;
           <asp:Label ID="lblTypeCodeText" runat="server" ForeColor="Red"></asp:Label>
       </td></tr>
