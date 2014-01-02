@@ -91,30 +91,31 @@ namespace LuxERP.UI.StoreInformation
         public void GVDataBind()
         {
             string storeNo = txtStoreNo.Text.Trim();
-            string topStore = ddlTopStore.SelectedValue;
+            //string topStore = ddlTopStore.SelectedValue;
             string storeType = ddlStoreType.SelectedValue;
             string region = txtRegion.Text.Trim();
-            string rating = ddlRating.SelectedValue;
-            string opeingDateF = txtOpeingDateF.Text.Trim();
-            string opeingDateT = txtOpeingDateT.Text.Trim();
+            string storeTel = txtStoreTel.Text.Trim();
+            string storeName = txtStoreName.Text.Trim();
+            //string rating = ddlRating.SelectedValue;
+            //string opeingDateF = txtOpeingDateF.Text.Trim();
+            //string opeingDateT = txtOpeingDateT.Text.Trim();
             string storeState = ddlStoreState.SelectedValue;
 
-            gvStores.DataSource = DAL.StoresDAL.GetStores(storeNo, topStore, storeType, region, rating, opeingDateF, opeingDateT, storeState);
+            gvStores.DataSource = DAL.StoresDAL.GetStores(storeNo, storeType, region, storeTel, storeName, storeState);
             gvStores.DataKeyNames = new string[] { "StoreNo" };
             gvStores.DataBind();
             gvStores.Width = 1120;
             if (gvStores.HeaderRow != null)
             {
                 gvStores.HeaderRow.Cells[0].Text = "<b>店号</b>";
-                gvStores.HeaderRow.Cells[1].Text = "<b>重点店铺</b>";
-                gvStores.HeaderRow.Cells[2].Text = "<b>店铺类型</b>";
-                gvStores.HeaderRow.Cells[3].Text = "<b>区域</b>";
-                gvStores.HeaderRow.Cells[4].Text = "<b>等级</b>";
-                gvStores.HeaderRow.Cells[5].Text = "<b>店铺名称</b>";
-                gvStores.HeaderRow.Cells[6].Text = "<b>城市</b>";
-                gvStores.HeaderRow.Cells[7].Text = "<b>电话</b>";
-                gvStores.HeaderRow.Cells[8].Text = "<b>地址</b>";
-                gvStores.HeaderRow.Cells[9].Text = "<b>店铺状态</b>";
+                gvStores.HeaderRow.Cells[1].Text = "<b>店铺类型</b>";
+                gvStores.HeaderRow.Cells[2].Text = "<b>区域</b>";
+                gvStores.HeaderRow.Cells[3].Text = "<b>店铺名称</b>";
+                gvStores.HeaderRow.Cells[4].Text = "<b>城市</b>";
+                gvStores.HeaderRow.Cells[5].Text = "<b>电话</b>";
+                gvStores.HeaderRow.Cells[6].Text = "<b>宽带账号</b>";
+                gvStores.HeaderRow.Cells[7].Text = "<b>地址</b>";
+                gvStores.HeaderRow.Cells[8].Text = "<b>店铺状态</b>";
             }
         }
 
@@ -145,14 +146,13 @@ namespace LuxERP.UI.StoreInformation
         protected void gvStores_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             string storeNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[0].Controls[0]).Text;
-            string topStore = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[1].FindControl("ddlTopStoreE")).SelectedValue;
-            string storeType = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[2].FindControl("ddlStoreTypeE")).SelectedValue;
-            string region = ((TextBox)gvStores.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
-            string rating = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[4].FindControl("ddlRatingE")).SelectedValue;
-            string storeName = ((TextBox)gvStores.Rows[e.RowIndex].Cells[5].Controls[0]).Text;
-            string city = ((TextBox)gvStores.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
-            string storeTel = ((TextBox)gvStores.Rows[e.RowIndex].Cells[7].Controls[0]).Text;
-            string storeAddress = ((TextBox)gvStores.Rows[e.RowIndex].Cells[8].Controls[0]).Text;
+            string storeType = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[1].FindControl("ddlStoreTypeE")).SelectedValue;
+            string region = ((TextBox)gvStores.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
+            string storeName = ((TextBox)gvStores.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
+            string city = ((TextBox)gvStores.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
+            string storeTel = ((TextBox)gvStores.Rows[e.RowIndex].Cells[5].Controls[0]).Text;
+            string aDSLNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
+            string storeAddress = ((TextBox)gvStores.Rows[e.RowIndex].Cells[7].Controls[0]).Text;
 
             if (storeNo == "" || region == "")
             {
@@ -160,7 +160,7 @@ namespace LuxERP.UI.StoreInformation
             }
             else
             {
-                DAL.StoresDAL.UpdateStores(storeNo, topStore, storeType, region, rating, storeName, city, storeAddress, storeTel, "", "", "");
+                DAL.StoresDAL.UpdateStores(storeNo, storeType, region, storeName, city, storeAddress, storeTel, aDSLNo, "", "", "");
                 gvStores.EditIndex = -1;
                 GVDataBind();
             }         

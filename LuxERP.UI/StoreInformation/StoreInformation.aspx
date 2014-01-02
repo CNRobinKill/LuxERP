@@ -23,42 +23,42 @@
 <script type="text/javascript">
   $(function () {
     menuSlide('#storeInformation', '#alterStore');
-    setDate();    
+//    setDate();    
   });
 
   function addRowStyle() {
     $('#myContent_gvStores tbody tr:even').addClass('alt-row');
   };
 
-  function setDate() {
-    $("#myContent_txtOpeingDateF").datepicker({
-      onClose: function (selectedDate) {
-        $("#myContent_txtOpeingDateT").datepicker("option", "minDate", selectedDate);
-      }
-    });
-    $("#myContent_txtOpeingDateT").datepicker({
-      onClose: function (selectedDate) {
-        $("#myContent_txtOpeingDateF").datepicker("option", "maxDate", selectedDate);
-      }
-    });
+//  function setDate() {
+//    $("#myContent_txtOpeingDateF").datepicker({
+//      onClose: function (selectedDate) {
+//        $("#myContent_txtOpeingDateT").datepicker("option", "minDate", selectedDate);
+//      }
+//    });
+//    $("#myContent_txtOpeingDateT").datepicker({
+//      onClose: function (selectedDate) {
+//        $("#myContent_txtOpeingDateF").datepicker("option", "maxDate", selectedDate);
+//      }
+//    });
 
-    set('#myContent_txtOpeingDateF');
-    set('#myContent_txtOpeingDateT');
+//    set('#myContent_txtOpeingDateF');
+//    set('#myContent_txtOpeingDateT');
 
 //    var input = $('#myContent_gvStores tr:gt(0)').find("td:eq(10)").find('input[type=text]');
 //    var t = input.val();
 //    var a = "input[name='" + input.attr('name') + "']";
 //    set(a);
 //    input.val(t);
-  };
+//  };
 
-  function set(id) {
-    $(id).datepicker();
-    $(id).datepicker("option", "dateFormat", "yy-mm-dd");
-    $(id).datepicker("option", $.datepicker.regional["zh-TW"]);
-    $(id).datepicker("option", "changeMonth", "true");
-    $(id).datepicker("option", "changeYear", "true");
-  };
+//  function set(id) {
+//    $(id).datepicker();
+//    $(id).datepicker("option", "dateFormat", "yy-mm-dd");
+//    $(id).datepicker("option", $.datepicker.regional["zh-TW"]);
+//    $(id).datepicker("option", "changeMonth", "true");
+//    $(id).datepicker("option", "changeYear", "true");
+//  };
 
   function setDialog() {
     $("#myContent_facility").dialog({
@@ -97,18 +97,20 @@
     <h2>StoreInformation</h2>
     <div>
       店号：<asp:TextBox ID="txtStoreNo" runat="server" Width="40px"></asp:TextBox>&nbsp;
-      重点店铺：<asp:DropDownList ID="ddlTopStore" runat="server">
+<%--      重点店铺：<asp:DropDownList ID="ddlTopStore" runat="server">
                 <asp:ListItem></asp:ListItem>
                 <asp:ListItem>Yes</asp:ListItem>
                 <asp:ListItem>No</asp:ListItem>
-              </asp:DropDownList>&nbsp;
+              </asp:DropDownList>&nbsp;--%>
       店铺类型：<asp:DropDownList ID="ddlStoreType" runat="server">
                 <asp:ListItem></asp:ListItem>
                 <asp:ListItem>Focus</asp:ListItem>
                 <asp:ListItem>IFocus</asp:ListItem>
               </asp:DropDownList>&nbsp;
       店铺区域：<asp:TextBox ID="txtRegion" runat="server" Width="40px"></asp:TextBox>&nbsp;
-      店铺等级：<asp:DropDownList ID="ddlRating" runat="server">
+      店铺名称：<asp:TextBox ID="txtStoreName" runat="server" Width="70px"></asp:TextBox>&nbsp;
+      电话：<asp:TextBox ID="txtStoreTel" runat="server" Width="150px"></asp:TextBox>&nbsp;
+<%--      店铺等级：<asp:DropDownList ID="ddlRating" runat="server">
             <asp:ListItem Selected="True"></asp:ListItem>
             <asp:ListItem>Energy</asp:ListItem>
             <asp:ListItem>FO</asp:ListItem>
@@ -116,9 +118,9 @@
             <asp:ListItem>Platinum</asp:ListItem>
             <asp:ListItem>Silver 1</asp:ListItem>
             <asp:ListItem>Silver 2</asp:ListItem>
-          </asp:DropDownList>&nbsp;
-      开店时间：<asp:TextBox ID="txtOpeingDateF" runat="server" Width="70px"></asp:TextBox>&nbsp;
-      至：<asp:TextBox ID="txtOpeingDateT" runat="server" Width="70px"></asp:TextBox>
+          </asp:DropDownList>&nbsp;--%>
+<%--      开店时间：<asp:TextBox ID="txtOpeingDateF" runat="server" Width="70px"></asp:TextBox>&nbsp;
+      至：<asp:TextBox ID="txtOpeingDateT" runat="server" Width="70px"></asp:TextBox>--%>
       店铺状态：<asp:DropDownList ID="ddlStoreState" runat="server">
                 <asp:ListItem></asp:ListItem>
                 <asp:ListItem Value="900,997">营业中</asp:ListItem>
@@ -139,7 +141,7 @@
             <ControlStyle Width="35px" />
             <ItemStyle Width="40px" />
           </asp:BoundField>
-          <asp:TemplateField HeaderStyle-Width="60px">
+<%--          <asp:TemplateField HeaderStyle-Width="60px">
              <ItemTemplate>
                 <%# Eval("TopStore")%>
              </ItemTemplate>
@@ -152,7 +154,7 @@
                    </EditItemTemplate>
               <ItemStyle Width="65px" />
               <ControlStyle Width="60px" />
-          </asp:TemplateField> 
+          </asp:TemplateField>--%> 
           <asp:TemplateField HeaderStyle-Width="75px">
              <ItemTemplate>
                 <%# Eval("StoreType")%>
@@ -171,7 +173,7 @@
             <ControlStyle Width="25px" />
             <ItemStyle Width="30px" />
           </asp:BoundField>
-          <asp:TemplateField HeaderStyle-Width="75px">
+<%--          <asp:TemplateField HeaderStyle-Width="75px">
              <ItemTemplate>
                 <%# Eval("Rating")%>
              </ItemTemplate>
@@ -188,7 +190,7 @@
              </EditItemTemplate>
               <ItemStyle Width="65px" />
               <ControlStyle Width="75px" />
-          </asp:TemplateField>
+          </asp:TemplateField>--%>
           <asp:BoundField DataField="StoreName" HeaderStyle-Width="105px">
             <ControlStyle Width="100px" />
             <ItemStyle Width="100px" />
@@ -200,6 +202,10 @@
           <asp:BoundField DataField="StoreTel" HeaderStyle-Width="90px">
           <ControlStyle Width="82px" />
             <ItemStyle Width="90px" />
+          </asp:BoundField>
+          <asp:BoundField DataField="ADSLNo" HeaderStyle-Width="90px">
+          <ControlStyle Width="102px" />
+            <ItemStyle Width="110px" />
           </asp:BoundField>
           <asp:BoundField DataField="StoreAddress" HeaderStyle-Width="300px">
           <ControlStyle Width="300px" />

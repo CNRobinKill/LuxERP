@@ -76,15 +76,6 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.Label lblStoreNo;
         
         /// <summary>
-        /// lblTopStore 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTopStore;
-        
-        /// <summary>
         /// lblStoreType 控件。
         /// </summary>
         /// <remarks>
@@ -103,15 +94,6 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.Label lblRegion;
         
         /// <summary>
-        /// lblRating 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRating;
-        
-        /// <summary>
         /// lblStoreTel 控件。
         /// </summary>
         /// <remarks>
@@ -121,13 +103,13 @@ namespace LuxERP.UI.EventManagement {
         protected global::System.Web.UI.WebControls.Label lblStoreTel;
         
         /// <summary>
-        /// lblStoreAddress 控件。
+        /// lblADSL 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStoreAddress;
+        protected global::System.Web.UI.WebControls.Label lblADSL;
         
         /// <summary>
         /// lblStoreState 控件。
@@ -137,6 +119,15 @@ namespace LuxERP.UI.EventManagement {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStoreState;
+        
+        /// <summary>
+        /// lblStoreAddress 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStoreAddress;
         
         /// <summary>
         /// Label1 控件。

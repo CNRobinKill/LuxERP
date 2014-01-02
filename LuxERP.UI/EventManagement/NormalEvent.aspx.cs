@@ -353,12 +353,11 @@ namespace LuxERP.UI.EventManagement
         public void LoadStoreInformation()
         {
             lblStoreNo.Text = StoreInformationArray(0);
-            lblTopStore.Text = StoreInformationArray(1);
-            lblStoreType.Text = StoreInformationArray(2);
-            lblRegion.Text = StoreInformationArray(3);
-            lblRating.Text = StoreInformationArray(4);
-            lblStoreAddress.Text = StoreInformationArray(7);
-            lblStoreTel.Text = StoreInformationArray(8);
+            lblStoreType.Text = StoreInformationArray(1);
+            lblRegion.Text = StoreInformationArray(2);
+            lblStoreAddress.Text = StoreInformationArray(4);
+            lblStoreTel.Text = StoreInformationArray(5);
+            lblADSL.Text = StoreInformationArray(6);
             lblStoreState.Text = StoreInformationArray(11);
             
         }
@@ -596,7 +595,7 @@ namespace LuxERP.UI.EventManagement
                         DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
                         DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
                         DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
-                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "", "900");
+                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "","", "", "", "900");
                         txtStepDescribe.Visible = false;
                         btnAddEventSteps.Visible = false;
                         btnReOpenEvent.Visible = false;
@@ -659,7 +658,7 @@ namespace LuxERP.UI.EventManagement
                         DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
                         DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
                         DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
-                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "", "900");
+                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
                         txtStepDescribe.Visible = false;
                         btnAddEventSteps.Visible = false;
                         btnReOpenEvent.Visible = false;
@@ -906,7 +905,7 @@ namespace LuxERP.UI.EventManagement
                     DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], "200");
                     DAL.StocksDAL.DelStocksBack(Request.QueryString["eventNo"]);
                     DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(特殊情况)事件被强行关闭，涉及设备和门店被强行还原", timeNow(), "0", Session["userName"].ToString());
-                    DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "", "900");
+                    DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
                     txtStepDescribe.Visible = false;
                     btnAddEventSteps.Visible = false;
                     btnReOpenEvent.Visible = false;
@@ -925,7 +924,7 @@ namespace LuxERP.UI.EventManagement
                     //string minState = DAL.EventStateDAL.GetMinEventState("3").ToString();
                     DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], "300");
                     DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(特殊情况)事件被强行关闭", timeNow(), "0", Session["userName"].ToString());
-                    DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "", "900");
+                    DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
                     txtStepDescribe.Visible = false;
                     btnAddEventSteps.Visible = false;
                     btnReOpenEvent.Visible = false;

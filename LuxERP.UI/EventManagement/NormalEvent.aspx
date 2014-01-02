@@ -91,18 +91,17 @@
 <table id="tbStoreInformation">
 <tr>
     <td><asp:Label runat="server" Text="店号：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreNo" runat="server" Text=""></asp:Label></td>
-    <td><asp:Label runat="server" Text="重点店：" Font-Bold="true"></asp:Label><asp:Label ID="lblTopStore" runat="server" Text=""></asp:Label></td>
     <td><asp:Label runat="server" Text="类型：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreType" runat="server" Text=""></asp:Label></td>
+    <td><asp:Label runat="server" Text="区域：" Font-Bold="true"></asp:Label><asp:Label ID="lblRegion" runat="server" Text=""></asp:Label></td>
 </tr>
 <tr>
     
-    <td><asp:Label runat="server" Text="区域：" Font-Bold="true"></asp:Label><asp:Label ID="lblRegion" runat="server" Text=""></asp:Label></td>
-    <td><asp:Label runat="server" Text="等级：" Font-Bold="true"></asp:Label><asp:Label ID="lblRating" runat="server" Text=""></asp:Label></td>
     <td><asp:Label runat="server" Text="联系电话：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreTel" runat="server" Text=""></asp:Label></td>
+    <td><asp:Label runat="server" Text="宽带账号：" Font-Bold="true"></asp:Label><asp:Label ID="lblADSL" runat="server" Text=""></asp:Label></td>
+    <td><asp:Label runat="server" Text="状态：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreState" runat="server" Text=""></asp:Label></td>
 </tr>
 <tr>
     <td colspan="2"><asp:Label runat="server" Text="地址：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreAddress" runat="server" Text=""></asp:Label></td>
-    <td><asp:Label runat="server" Text="状态：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreState" runat="server" Text=""></asp:Label></td>
 </tr>
 </table>
 </div>

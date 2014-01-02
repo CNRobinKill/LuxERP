@@ -324,7 +324,7 @@ namespace LuxERP.UI.EventManagement
                 string nowTime = DateTime.Now.ToString("yyyyMMddHHmmss");
                 if (txtStoreNo2.Text.Trim() != "" && txtRegion.Text.Trim() != "")
                 {
-                    if (DAL.StoresDAL.AddStores(txtStoreNo2.Text.Trim(), "", "IFocus", region, "", "", "", "", "", "", "", "999") > 0)
+                    if (DAL.StoresDAL.AddStores(txtStoreNo2.Text.Trim(), "", "IFocus", region, "", "", "", "", "", "", "999") > 0)
                     {
                         if (DAL.EventLogsDAL.AddEventLogs(region + nowTime, timeNow, txtStoreNo2.Text.Trim(), "9999", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "199", Session["userName"].ToString()) > 0)
                         {
@@ -355,7 +355,7 @@ namespace LuxERP.UI.EventManagement
                 n++;
                 string eventNoNow = EventNo();
                 string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "997") > 0)
+                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "997") > 0)
                 {
                     if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "9000", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "299", Session["userName"].ToString()) > 0)
                     {
@@ -382,7 +382,7 @@ namespace LuxERP.UI.EventManagement
                 n++;
                 string eventNoNow = EventNo();
                 string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "", "998") > 0)
+                if (DAL.StoresDAL.UpdateStores(txtStoreNo.Text.Trim(), "", "", "", "", "", "", "", "", "", "998") > 0)
                 {
                     if (DAL.EventLogsDAL.AddEventLogs(eventNoNow, timeNow, txtStoreNo.Text.Trim(), "8888", txtEventDescribe.Text.Trim(), txtToResolvedTime.Text.Trim(), "399", Session["userName"].ToString()) > 0)
                     {

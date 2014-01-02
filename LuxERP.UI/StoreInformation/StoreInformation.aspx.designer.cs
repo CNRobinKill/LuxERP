@@ -40,15 +40,6 @@ namespace LuxERP.UI.StoreInformation {
         protected global::System.Web.UI.WebControls.TextBox txtStoreNo;
         
         /// <summary>
-        /// ddlTopStore 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTopStore;
-        
-        /// <summary>
         /// ddlStoreType 控件。
         /// </summary>
         /// <remarks>
@@ -67,31 +58,22 @@ namespace LuxERP.UI.StoreInformation {
         protected global::System.Web.UI.WebControls.TextBox txtRegion;
         
         /// <summary>
-        /// ddlRating 控件。
+        /// txtStoreName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRating;
+        protected global::System.Web.UI.WebControls.TextBox txtStoreName;
         
         /// <summary>
-        /// txtOpeingDateF 控件。
+        /// txtStoreTel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOpeingDateF;
-        
-        /// <summary>
-        /// txtOpeingDateT 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOpeingDateT;
+        protected global::System.Web.UI.WebControls.TextBox txtStoreTel;
         
         /// <summary>
         /// ddlStoreState 控件。

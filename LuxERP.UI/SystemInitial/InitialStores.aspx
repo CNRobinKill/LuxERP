@@ -59,38 +59,20 @@
           <asp:TextBox ID="txtStoreNo" runat="server"></asp:TextBox>
        </div>
        <div class="right">
-         <asp:Label ID="Label14" runat="server" Text="重点店铺：" Width="60px"></asp:Label>
-          <asp:DropDownList ID="ddlTopStore" runat="server">
-            <asp:ListItem Selected="True" Value="Yes">Yes</asp:ListItem>
-            <asp:ListItem>No</asp:ListItem>
-          </asp:DropDownList>
-       </div>
-       <div class="clear left">
          <asp:Label ID="Label15" runat="server" Text="店铺类型：" Width="60px"></asp:Label>
           <asp:DropDownList ID="ddlStoreType" runat="server">
             <asp:ListItem Selected="True">Focus</asp:ListItem>
             <asp:ListItem Value="IFocus">IFocus</asp:ListItem>
           </asp:DropDownList>
        </div>
-       <div class="right">
+       <div class="clear left">
          <asp:Label ID="Label16" runat="server" Text="区域：" Width="60px"></asp:Label>
           <asp:TextBox ID="txtRegion" runat="server"></asp:TextBox>
-       </div>     
-       <div class="clear left">
-         <asp:Label ID="Label17" runat="server" Text="等级：" Width="60px"></asp:Label>
-          <asp:DropDownList ID="ddlRating" runat="server">
-            <asp:ListItem Selected="True">Energy</asp:ListItem>
-            <asp:ListItem Value="FO">FO</asp:ListItem>
-            <asp:ListItem>Gold</asp:ListItem>
-            <asp:ListItem>Platinum</asp:ListItem>
-            <asp:ListItem>Silver 1</asp:ListItem>
-            <asp:ListItem>Silver 2</asp:ListItem>
-          </asp:DropDownList>
        </div>
        <div class="right">
          <asp:Label ID="Label18" runat="server" Text="店铺名称：" Width="60px"></asp:Label>
           <asp:TextBox ID="txtStoreName" runat="server"></asp:TextBox>
-       </div> 
+       </div>     
        <div class="clear left">
          <asp:Label ID="Label19" runat="server" Text="城市：" Width="60px"></asp:Label>
           <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
@@ -103,21 +85,13 @@
          <asp:Label ID="Label21" runat="server" Text="电话：" Width="60px"></asp:Label>
           <asp:TextBox ID="txtStoreTel" runat="server"></asp:TextBox>
        </div>
-<%--       <div class="right">
-         <asp:Label ID="Label22" runat="server" Text="合同面积：" Width="60px"></asp:Label>
-          <asp:TextBox ID="txtContractArea" runat="server"></asp:TextBox>
+       <div class="right">
+         <asp:Label ID="Label1" runat="server" Text="宽带账号：" Width="60px"></asp:Label>
+          <asp:TextBox ID="txtADSLNo" runat="server"></asp:TextBox>
        </div> 
        <div class="clear left">
-         <asp:Label ID="Label23" runat="server" Text="开业时间：" Width="60px"></asp:Label>
-          <asp:TextBox ID="txtOpeningDate" runat="server"></asp:TextBox>
-       </div>--%>
-       <%--<div class="right">
-         <asp:Label ID="Label24" runat="server" Text="店铺状态：" Width="60px"></asp:Label>
-          <asp:DropDownList ID="ddlStoreState" runat="server">
-            <asp:ListItem Value="900">营业中</asp:ListItem>
-            <asp:ListItem Value="998">装修中</asp:ListItem>
-          </asp:DropDownList>
-       </div>--%> 
+         
+       </div>
        <div style="clear:both;">
          <asp:Button ID="btnAddStores" runat="server" CssClass="button" Text="确认" 
             onclick="btnAddStores_Click" />

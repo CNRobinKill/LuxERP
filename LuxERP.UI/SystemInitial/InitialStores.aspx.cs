@@ -75,14 +75,13 @@ namespace LuxERP.UI.SystemInitial
         protected void btnAddStores_Click(object sender, EventArgs e)
         {
             string storeNo = txtStoreNo.Text.Trim();
-            string topStore = ddlTopStore.SelectedValue;
             string storeType = ddlStoreType.SelectedValue;
             string region = txtRegion.Text.Trim();
-            string rating = ddlRating.Text.Trim();
             string storeName = txtStoreName.Text.Trim();
             string city = txtCity.Text.Trim();
             string storeAddress = txtStoreAddress.Text.Trim();
             string storeTel = txtStoreTel.Text.Trim();
+            string aDSLNo = txtADSLNo.Text.Trim();
             //string contractArea = txtContractArea.Text.Trim();
             //string openingDate = txtOpeningDate.Text.Trim();
             //string storeState = ddlStoreState.SelectedValue;
@@ -93,7 +92,7 @@ namespace LuxERP.UI.SystemInitial
             }
             else
             {
-                if (DAL.StoresDAL.AddStores(storeNo, topStore, storeType, region, rating, storeName, city, storeAddress, storeTel, "", "", "900") > 0)
+                if (DAL.StoresDAL.AddStores(storeNo, storeType, region, storeName, city, storeAddress, storeTel, aDSLNo, "", "", "900") > 0)
                 {   
                     MsgBox("添加店铺成功！");
                     RegisterJS("clearPage");

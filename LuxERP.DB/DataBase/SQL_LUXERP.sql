@@ -116,14 +116,13 @@ create table tb_EventTypes
 create table tb_Stores
 (
 	StoreNo			nvarchar(500) not null primary key,
-	TopStore		nvarchar(500),
 	StoreType		nvarchar(500),
 	Region			nvarchar(500),
-	Rating			nvarchar(500),
 	StoreName		nvarchar(500),
 	City			nvarchar(500),
 	StoreAddress	nvarchar(500),
 	StoreTel		nvarchar(500),
+	ADSLNo			nvarchar(500),
 	ContractArea	nvarchar(500),
 	OpeingDate		date,
 	StoreState		nvarchar(500)
@@ -798,15 +797,15 @@ Go
 /***************************Solver***************************/
 
 /***************************EventState***************************/
-if not exists(select StateID from tb_Solver where StateID=99)insert into tb_EventState(StateID,StateName,StateDay) values(99,'处理中',0)
-if not exists(select StateID from tb_Solver where StateID=0)insert into tb_EventState(StateID,StateName,StateDay) values(0,'已完成',0)
-if not exists(select StateID from tb_Solver where StateID=100)insert into tb_EventState(StateID,StateName,StateDay) values(100,'完成开店',0)
-if not exists(select StateID from tb_Solver where StateID=200)insert into tb_EventState(StateID,StateName,StateDay) values(200,'完成关店',0)
-if not exists(select StateID from tb_Solver where StateID=300)insert into tb_EventState(StateID,StateName,StateDay) values(300,'完成装修',0)
-if not exists(select StateID from tb_Solver where StateID=999)insert into tb_EventState(StateID,StateName,StateDay) values(999,'预开店',0)
-if not exists(select StateID from tb_Solver where StateID=998)insert into tb_EventState(StateID,StateName,StateDay) values(998,'需装修',0)
-if not exists(select StateID from tb_Solver where StateID=997)insert into tb_EventState(StateID,StateName,StateDay) values(997,'预关店',0)
-if not exists(select StateID from tb_Solver where StateID=900)insert into tb_EventState(StateID,StateName,StateDay) values(900,'营业中',0)
+if not exists(select StateID from tb_EventState where StateID=99)insert into tb_EventState(StateID,StateName,StateDay) values(99,'处理中',0)
+if not exists(select StateID from tb_EventState where StateID=0)insert into tb_EventState(StateID,StateName,StateDay) values(0,'已完成',0)
+if not exists(select StateID from tb_EventState where StateID=100)insert into tb_EventState(StateID,StateName,StateDay) values(100,'完成开店',0)
+if not exists(select StateID from tb_EventState where StateID=200)insert into tb_EventState(StateID,StateName,StateDay) values(200,'完成关店',0)
+if not exists(select StateID from tb_EventState where StateID=300)insert into tb_EventState(StateID,StateName,StateDay) values(300,'完成装修',0)
+if not exists(select StateID from tb_EventState where StateID=999)insert into tb_EventState(StateID,StateName,StateDay) values(999,'预开店',0)
+if not exists(select StateID from tb_EventState where StateID=998)insert into tb_EventState(StateID,StateName,StateDay) values(998,'需装修',0)
+if not exists(select StateID from tb_EventState where StateID=997)insert into tb_EventState(StateID,StateName,StateDay) values(997,'预关店',0)
+if not exists(select StateID from tb_EventState where StateID=900)insert into tb_EventState(StateID,StateName,StateDay) values(900,'营业中',0)
 Go
 /**Add**/
 Create Procedure [dbo].[AddEventState]
@@ -1519,14 +1518,13 @@ go
 create proc dbo.AddStores
 (
 	@storeNo		nvarchar(500),
-    @topStore		nvarchar(500),
     @storeType		nvarchar(500),
     @region			nvarchar(500),
-    @rating			nvarchar(500),
     @storeName		nvarchar(500),
     @city			nvarchar(500),
     @storeAddress	nvarchar(500),
     @storeTel		nvarchar(500),
+    @aDSLNo			nvarchar(500),
     @contractArea	nvarchar(500),
     @opeingDate		nvarchar(500),
     @storeState		nvarchar(500)
@@ -1537,8 +1535,8 @@ if @opeingDate =''
 	set @opeingDate=NULL
 if not exists(select StoreNo from dbo.tb_Stores where StoreNo=@storeNo)
 insert into dbo.tb_Stores 
-select @storeNo, @topStore, @storeType, @region, @rating, @storeName, @city, @storeAddress,
-	   @storeTel, @contractArea, @opeingDate, @storeState 
+select @storeNo, @storeType, @region, @storeName, @city, @storeAddress,
+	   @storeTel, @aDSLNo, @contractArea, @opeingDate, @storeState 
 
 end
 go
@@ -1560,18 +1558,19 @@ Create Procedure [dbo].[GetStoresByStoreNo]
 )
 AS
 begin	
-select StoreNo,TopStore,StoreType,Region,Rating,StoreName,City,StoreAddress,StoreTel,ContractArea,OpeingDate,StateName as StoreState from tb_Stores left join tb_EventState on tb_Stores.StoreState=tb_EventState.StateID where StoreNo = @storeNo
+select StoreNo,StoreType,Region,StoreName,City,StoreAddress,StoreTel,ADSLNo,ContractArea,OpeingDate,StateName as StoreState from tb_Stores left join tb_EventState on tb_Stores.StoreState=tb_EventState.StateID where StoreNo = @storeNo
 end
 Go
 create proc dbo.GetStores
 (
 	@storeNo	nvarchar(500),
-	@topStore	nvarchar(500),
+	--@topStore	nvarchar(500),
 	@storeType	nvarchar(500),
 	@region		nvarchar(500),
-	@rating		nvarchar(500),
-	@opeingDateF nvarchar(500),
-	@opeingDateT nvarchar(500),
+	@storeName	nvarchar(500),
+	@storeTel	nvarchar(500),
+	--@opeingDateF nvarchar(500),
+	--@opeingDateT nvarchar(500),
 	@storeState nvarchar(500)
 )
 as
@@ -1580,39 +1579,41 @@ declare @sql nvarchar(4000)
 declare @where nvarchar(4000)
 
 set @storeNo = RTRIM(LTRIM(@storeNo))
-set @topStore = RTRIM(LTRIM(@topStore))
 set @storeType = RTRIM(LTRIM(@storeType))
 set @region = RTRIM(LTRIM(@region))
-set @rating = RTRIM(LTRIM(@rating))
+set @storeName = RTRIM(LTRIM(@storeName))
+set @storeTel = RTRIM(LTRIM(@storeTel))
 set @storeState = RTRIM(LTRIM(@storeState))
 
-if @opeingDateF<>''
-	set @opeingDateF = CONVERT(nvarchar(10),@opeingDateF,127)
-if @opeingDateT<>''
-	set @opeingDateT = CONVERT(nvarchar(10),@opeingDateT,127)
+--if @opeingDateF<>''
+--	set @opeingDateF = CONVERT(nvarchar(10),@opeingDateF,127)
+--if @opeingDateT<>''
+--	set @opeingDateT = CONVERT(nvarchar(10),@opeingDateT,127)
 	
 set @where = ' where 1=1 '
 if @storeNo<>''
 	set @where = @where + ' and StoreNo ='''+@storeNo+''''
-if @topStore<>''
-	set @where = @where + ' and TopStore ='''+@topStore+''''
+--if @topStore<>''
+--	set @where = @where + ' and TopStore ='''+@topStore+''''
 if @storeType<>''
 	set @where = @where + ' and StoreType ='''+@storeType+''''
 if @region<>''
 	set @where = @where + ' and Region ='''+@region+''''
-if @rating<>''
-	set @where = @where + ' and Rating ='''+@rating+''''
-if @opeingDateF<>''
-	set @where = @where + ' and OpeingDate >='''+@opeingDateF+''''
-if @opeingDateT<>''
-	set @where = @where + ' and OpeingDate <='''+@opeingDateT+''''
+if @storeName<>''
+	set @where = @where + ' and StoreName ='''+@storeName+''''
+if @storeTel<>''
+	set @where = @where + ' and StoreTel like ''%'+@storeTel+'%'''
+--if @opeingDateF<>''
+--	set @where = @where + ' and OpeingDate >='''+@opeingDateF+''''
+--if @opeingDateT<>''
+--	set @where = @where + ' and OpeingDate <='''+@opeingDateT+''''
 if @storeState<>''
 begin
 	set @storeState = replace(@storeState,',',''',''')
 	set @where = @where + ' and StoreState in ('''+@storeState+''')'
 end
 	
-set @sql = ' select StoreNo,TopStore,StoreType,Region,Rating,StoreName,City,StoreAddress,StoreTel,ContractArea,
+set @sql = ' select StoreNo,StoreType,Region,StoreName,City,StoreAddress,StoreTel,ADSLNo,ContractArea,
    convert(nvarchar(10),OpeingDate,127) OpeingDate,StateName as StoreState from dbo.tb_Stores left join tb_EventState on tb_Stores.StoreState=tb_EventState.StateID' + @where + ''
 exec sp_executesql @sql
 end
@@ -1632,14 +1633,13 @@ Go
 create proc dbo.UpdateStores
 (
 	@storeNo		nvarchar(500),
-    @topStore		nvarchar(500),
     @storeType		nvarchar(500),
     @region			nvarchar(500),
-    @rating			nvarchar(500),
     @storeName		nvarchar(500),
     @city			nvarchar(500),
     @storeAddress	nvarchar(500),
     @storeTel		nvarchar(500),
+    @aDSLNo			nvarchar(500),
     @contractArea	nvarchar(500),
     @opeingDate		nvarchar(500),
     @storeState		nvarchar(500)
@@ -1652,14 +1652,10 @@ declare @n   int
 set @set=''
 if ltrim(rtrim(@storeNo))<>''
  set @set=@set+' StoreNo='''+@storeNo+''', '
-if ltrim(rtrim(@topStore))<>''
- set @set=@set+' TopStore='''+@topStore+''', '
 if ltrim(rtrim(@storeType))<>''
  set @set=@set+' StoreType='''+@storeType+''', '
 if ltrim(rtrim(@region))<>''
  set @set=@set+' Region='''+@region+''', '
-if ltrim(rtrim(@rating))<>''
- set @set=@set+' Rating='''+@rating+''', '
 if ltrim(rtrim(@storeName))<>''
  set @set=@set+' StoreName='''+@storeName+''', '
 if ltrim(rtrim(@city))<>''
@@ -1668,6 +1664,8 @@ if ltrim(rtrim(@storeAddress))<>''
  set @set=@set+' StoreAddress='''+@storeAddress+''', '
 if ltrim(rtrim(@storeTel))<>''
  set @set=@set+' StoreTel='''+@storeTel+''', '
+ if ltrim(rtrim(@storeTel))<>''
+ set @set=@set+' ADSLNo='''+@aDSLNo+''', '
 if ltrim(rtrim(@contractArea))<>''
  set @set=@set+' ContractArea='''+@contractArea+''', '
 if ltrim(rtrim(@opeingDate))<>''

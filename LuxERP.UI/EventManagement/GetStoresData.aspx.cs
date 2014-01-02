@@ -51,7 +51,7 @@ namespace LuxERP.UI.EventManagement
 
         private void ReadData(Dictionary<string,string> stores)
         {
-            DataTable dt = DAL.StoresDAL.GetStores("", "", "", "", "", "", "", "").Tables[0];
+            DataTable dt = DAL.StoresDAL.GetStores("", "", "", "", "", "").Tables[0];
             foreach (DataRow dr in dt.Rows)
             {
                 string key = dr["StoreNo"].ToString();

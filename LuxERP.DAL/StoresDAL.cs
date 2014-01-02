@@ -33,19 +33,18 @@ namespace LuxERP.DAL
             return Common.SqlHelper.ExecuteReader(SPGetStoresByStoreNo, paras);
         }
 
-        public static int AddStores(string storeNo, string topStore, string storeType, string region, string rating,
-            string storeName, string city, string storeAddress, string storeTel, string contractArea, string opeingDate, string storeState)
+        public static int AddStores(string storeNo, string storeType, string region,
+            string storeName, string city, string storeAddress, string storeTel, string aDSLNo, string contractArea, string opeingDate, string storeState)
         {
             SqlParameter[] paras = {
                                        new SqlParameter("@storeNo",storeNo),
-                                       new SqlParameter("@topStore",topStore),
                                        new SqlParameter("@storeType",storeType),
                                        new SqlParameter("@region",region),
-                                       new SqlParameter("@rating",rating),
                                        new SqlParameter("@storeName",storeName),
                                        new SqlParameter("@city",city),
                                        new SqlParameter("@storeAddress",storeAddress),
                                        new SqlParameter("@storeTel",storeTel),
+                                       new SqlParameter("@aDSLNo",aDSLNo),
                                        new SqlParameter("@contractArea",contractArea),
                                        new SqlParameter("@opeingDate",opeingDate),
                                        new SqlParameter("@storeState",storeState)
@@ -53,35 +52,31 @@ namespace LuxERP.DAL
             return Common.SqlHelper.ExecuteNonQuery(SPAddStores, paras);
         }
 
-        public static DataSet GetStores(string storeNo, string topStore, string storeType, string region, string rating,
-            string opeingDateF, string opeingDateT, string storeState)
+        public static DataSet GetStores(string storeNo, string storeType, string region, string storeTel, string storeName, string storeState)
         {
             SqlParameter[] paras = {
                                        new SqlParameter("@storeNo",storeNo),
-                                       new SqlParameter("@topStore",topStore),
                                        new SqlParameter("@storeType",storeType),
                                        new SqlParameter("@region",region),
-                                       new SqlParameter("@rating",rating),
-                                       new SqlParameter("@opeingDateF",opeingDateF),
-                                       new SqlParameter("@opeingDateT",opeingDateT),
+                                       new SqlParameter("@storeTel",storeTel),
+                                       new SqlParameter("@storeName",storeName),
                                        new SqlParameter("@storeState",storeState)
                                    };
             return Common.SqlHelper.ExecuteDataSet(SPGetStores, paras);
         }
 
-        public static int UpdateStores(string storeNo, string topStore, string storeType, string region, string rating,
-            string storeName, string city, string storeAddress, string storeTel, string contractArea, string opeingDate, string storeState)
+        public static int UpdateStores(string storeNo, string storeType, string region,
+            string storeName, string city, string storeAddress, string storeTel, string aDSLNo, string contractArea, string opeingDate, string storeState)
         {
             SqlParameter[] paras = {
                                        new SqlParameter("@storeNo",storeNo),
-                                       new SqlParameter("@topStore",topStore),
                                        new SqlParameter("@storeType",storeType),
                                        new SqlParameter("@region",region),
-                                       new SqlParameter("@rating",rating),
                                        new SqlParameter("@storeName",storeName),
                                        new SqlParameter("@city",city),
                                        new SqlParameter("@storeAddress",storeAddress),
                                        new SqlParameter("@storeTel",storeTel),
+                                       new SqlParameter("@aDSLNo",aDSLNo),
                                        new SqlParameter("@contractArea",contractArea),
                                        new SqlParameter("@opeingDate",opeingDate),
                                        new SqlParameter("@storeState",storeState)
