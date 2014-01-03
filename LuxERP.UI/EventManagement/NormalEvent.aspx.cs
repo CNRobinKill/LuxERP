@@ -355,11 +355,10 @@ namespace LuxERP.UI.EventManagement
             lblStoreNo.Text = StoreInformationArray(0);
             lblStoreType.Text = StoreInformationArray(1);
             lblRegion.Text = StoreInformationArray(2);
-            lblStoreAddress.Text = StoreInformationArray(4);
-            lblStoreTel.Text = StoreInformationArray(5);
-            lblADSL.Text = StoreInformationArray(6);
-            lblStoreState.Text = StoreInformationArray(11);
-            
+            lblStoreAddress.Text = StoreInformationArray(5);
+            lblStoreTel.Text = StoreInformationArray(6);
+            lblADSL.Text = StoreInformationArray(7);
+            lblStoreState.Text = StoreInformationArray(10);            
         }
 
         public void gvEventStepsDataBind()
@@ -558,134 +557,140 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnOKUpdate_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888")
+            if (EventInformationArray(3) != "0000")
             {
-                if (ddlEventState.SelectedValue == "0")
+                if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888")
                 {
-                    DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                    DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], ddlResolvedBy.SelectedValue, timeNow());
-                    DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
-                    txtStepDescribe.Visible = false;
-                    btnAddEventSteps.Visible = false;
-                    btnReOpenEvent.Visible = true;
-                    divThreeBtn.Visible = false;
-                    btnUpdateEventState.Visible = false;
-                    btnOKUpdate.Visible = false;
-                    gvEventStepsDataBind();
-                    LoadEventInformation();
-                    ddlResolvedBy.Visible = false;
-                    btnUpdateEventType.Visible = false;
-                    btnSendEventTo.Visible = false;
-                    btnStopEventLog.Visible = false;
+                    if (ddlEventState.SelectedValue == "0")
+                    {
+                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                        DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], ddlResolvedBy.SelectedValue, timeNow());
+                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
+                        txtStepDescribe.Visible = false;
+                        btnAddEventSteps.Visible = false;
+                        btnReOpenEvent.Visible = true;
+                        divThreeBtn.Visible = false;
+                        btnUpdateEventState.Visible = false;
+                        btnOKUpdate.Visible = false;
+                        gvEventStepsDataBind();
+                        LoadEventInformation();
+                        ddlResolvedBy.Visible = false;
+                        btnUpdateEventType.Visible = false;
+                        btnSendEventTo.Visible = false;
+                    }
+                    else
+                    {
+                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                        btnUpdateEventState.Visible = true;
+                        lblResolvedByText.Visible = false;
+                        lblResolvedBy.Visible = false;
+                    }
                 }
                 else
                 {
-                    DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                    btnUpdateEventState.Visible = true;
-                    lblResolvedByText.Visible = false;
-                    lblResolvedBy.Visible = false;
+                    if (Request.QueryString["typeCode"] == "9999")
+                    {
+                        if (ddlEventState.SelectedValue == "100")
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
+                            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
+                            DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
+                            txtStepDescribe.Visible = false;
+                            btnAddEventSteps.Visible = false;
+                            btnReOpenEvent.Visible = false;
+                            divThreeBtn.Visible = false;
+                            btnUpdateEventState.Visible = false;
+                            btnOKUpdate.Visible = false;
+                            gvEventStepsDataBind();
+                            LoadEventInformation();
+                            ddlResolvedBy.Visible = false;
+                            btnUpdateEventType.Visible = false;
+                            btnSendEventTo.Visible = false;
+                            btnStopEventLog.Visible = false;
+                            btnUpdateToResolvedTime.Visible = false;
+                        }
+                        else
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            btnUpdateEventState.Visible = true;
+                            lblResolvedByText.Visible = false;
+                            lblResolvedBy.Visible = false;
+                        }
+                    }
+
+                    if (Request.QueryString["typeCode"] == "9000")
+                    {
+                        if (ddlEventState.SelectedValue == "200")
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
+                            DAL.StoresDAL.DelStores(StoreInformationArray(0));
+                            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
+                            txtStepDescribe.Visible = false;
+                            btnAddEventSteps.Visible = false;
+                            btnReOpenEvent.Visible = false;
+                            divThreeBtn.Visible = false;
+                            btnUpdateEventState.Visible = false;
+                            btnOKUpdate.Visible = false;
+                            gvEventStepsDataBind();
+                            LoadEventInformation();
+                            ddlResolvedBy.Visible = false;
+                            btnUpdateEventType.Visible = false;
+                            btnSendEventTo.Visible = false;
+                            btnStopEventLog.Visible = false;
+                            btnUpdateToResolvedTime.Visible = false;
+
+                        }
+                        else
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            btnUpdateEventState.Visible = true;
+                            lblResolvedByText.Visible = false;
+                            lblResolvedBy.Visible = false;
+                        }
+                    }
+
+                    if (Request.QueryString["typeCode"] == "8888")
+                    {
+                        if (ddlEventState.SelectedValue == "300")
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
+                            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
+                            DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
+                            txtStepDescribe.Visible = false;
+                            btnAddEventSteps.Visible = false;
+                            btnReOpenEvent.Visible = false;
+                            divThreeBtn.Visible = false;
+                            btnUpdateEventState.Visible = false;
+                            btnOKUpdate.Visible = false;
+                            gvEventStepsDataBind();
+                            LoadEventInformation();
+                            ddlResolvedBy.Visible = false;
+                            btnUpdateEventType.Visible = false;
+                            btnSendEventTo.Visible = false;
+                            btnStopEventLog.Visible = false;
+                            btnUpdateToResolvedTime.Visible = false;
+                        }
+                        else
+                        {
+                            DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
+                            btnUpdateEventState.Visible = true;
+                            lblResolvedByText.Visible = false;
+                            lblResolvedBy.Visible = false;
+                        }
+                    }
+
                 }
+                ddlEventState.Enabled = false;
+                btnOKUpdate.Visible = false;
+                ddlEventState.SelectedValue = EventInformationArray(6);
             }
             else
             {
-                if (Request.QueryString["typeCode"] == "9999")
-                {
-                    if (ddlEventState.SelectedValue == "100")
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
-                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "","", "", "", "900");
-                        txtStepDescribe.Visible = false;
-                        btnAddEventSteps.Visible = false;
-                        btnReOpenEvent.Visible = false;
-                        divThreeBtn.Visible = false;
-                        btnUpdateEventState.Visible = false;
-                        btnOKUpdate.Visible = false;
-                        gvEventStepsDataBind();
-                        LoadEventInformation();
-                        ddlResolvedBy.Visible = false;
-                        btnUpdateEventType.Visible = false;
-                        btnSendEventTo.Visible = false;
-                        btnStopEventLog.Visible = false;
-                        btnUpdateToResolvedTime.Visible = false;
-                    }
-                    else
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        btnUpdateEventState.Visible = true;
-                        lblResolvedByText.Visible = false;
-                        lblResolvedBy.Visible = false;
-                    }
-                }
-                
-                if (Request.QueryString["typeCode"] == "9000")
-                {
-                    if (ddlEventState.SelectedValue == "200")
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
-                        DAL.StoresDAL.DelStores(StoreInformationArray(0));
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString()); 
-                        txtStepDescribe.Visible = false;
-                        btnAddEventSteps.Visible = false;
-                        btnReOpenEvent.Visible = false;
-                        divThreeBtn.Visible = false;
-                        btnUpdateEventState.Visible = false;
-                        btnOKUpdate.Visible = false;
-                        gvEventStepsDataBind();
-                        LoadEventInformation();
-                        ddlResolvedBy.Visible = false;
-                        btnUpdateEventType.Visible = false;
-                        btnSendEventTo.Visible = false;
-                        btnStopEventLog.Visible = false;
-                        btnUpdateToResolvedTime.Visible = false;
-                        
-                    }
-                    else
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        btnUpdateEventState.Visible = true;
-                        lblResolvedByText.Visible = false;
-                        lblResolvedBy.Visible = false;
-                    }
-                }
-                
-                if (Request.QueryString["typeCode"] == "8888")
-                {
-                    if (ddlEventState.SelectedValue == "300")
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
-                        DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "900");
-                        txtStepDescribe.Visible = false;
-                        btnAddEventSteps.Visible = false;
-                        btnReOpenEvent.Visible = false;
-                        divThreeBtn.Visible = false;
-                        btnUpdateEventState.Visible = false;
-                        btnOKUpdate.Visible = false;
-                        gvEventStepsDataBind();
-                        LoadEventInformation();
-                        ddlResolvedBy.Visible = false;
-                        btnUpdateEventType.Visible = false;
-                        btnSendEventTo.Visible = false;
-                        btnStopEventLog.Visible = false;
-                        btnUpdateToResolvedTime.Visible = false;
-                    }
-                    else
-                    {
-                        DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
-                        btnUpdateEventState.Visible = true;
-                        lblResolvedByText.Visible = false;
-                        lblResolvedBy.Visible = false;
-                    }
-                }
-                
+                MsgBox("请选择类型后再关闭事件！");
             }
-            ddlEventState.Enabled = false;
-            btnOKUpdate.Visible = false;
-            ddlEventState.SelectedValue = EventInformationArray(6);
             gvEventStepsDataBind();
             
         }
@@ -772,8 +777,11 @@ namespace LuxERP.UI.EventManagement
         protected void btnUpdateEventType_Click(object sender, EventArgs e)
         {
             txtType.Visible = true;
+            txtEventDescribe.Visible = true;
             txtType.Text = Request.QueryString["typeCode"];
+            txtEventDescribe.Text = EventInformationArray(4);
             lblType.Visible = false;
+            lblEventDescribe.Visible = false;
             btnUpdateEventType.Visible = false;
             btnOKUpdateType.Visible = true;
             gvEventStepsDataBind();
@@ -781,27 +789,38 @@ namespace LuxERP.UI.EventManagement
 
         protected void btnOKUpdateType_Click(object sender, EventArgs e)
         {
-            if (txtType.Text.Trim() == "" || txtType.Text.Trim() == Request.QueryString["typeCode"])
+            if (txtType.Text.Trim() == EventInformationArray(3) && txtEventDescribe.Text.Trim() == EventInformationArray(4))
             {
                 txtType.Text = "";
+                txtEventDescribe.Text = "";
                 txtType.Visible = false;
+                txtEventDescribe.Visible = false;
                 lblType.Visible = true;
+                lblEventDescribe.Visible = true;
                 btnUpdateEventType.Visible = true;
-                btnOKUpdateType.Visible = false;                
+                btnOKUpdateType.Visible = false;
             }
-            else 
+            else
             {
-                if (DAL.EventLogsDAL.UpdateTypeCode(Request.QueryString["eventNo"], txtType.Text.Trim()) > 0)
+                if (txtEventDescribe.Text.Trim() != "" && txtType.Text.Trim() != "")
                 {
-                    if (Request.QueryString["typeCode"] != "0000")
+                    string temp = EventInformationArray(3);
+                    if (DAL.EventLogsDAL.UpdateEvent(Request.QueryString["eventNo"], txtType.Text.Trim(), txtEventDescribe.Text.Trim()) > 0)
                     {
-                        DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(更改信息)事件类型由 " + Request.QueryString["typeCode"] + " 更改成 " + EventInformationArray(3) + "", timeNow(), "0", Session["userName"].ToString());
+                        if (EventInformationArray(3) != "0000" && txtType.Text.Trim() != temp)
+                        {
+                            DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(更改信息)事件类型由 " + Request.QueryString["typeCode"] + " 更改成 " + EventInformationArray(3) + "", timeNow(), "0", Session["userName"].ToString());
+                        }
+                        Response.Redirect("NormalEvent.aspx?eventNo=" + Request.QueryString["eventNo"] + "&typeCode=" + EventInformationArray(3) + "");
                     }
-                    Response.Redirect("NormalEvent.aspx?eventNo=" + Request.QueryString["eventNo"] + "&typeCode=" + EventInformationArray(3) + "");
+                    else
+                    {
+                        MsgBox("不存在该事件类型！");
+                    }
                 }
                 else
                 {
-                    MsgBox("不存在该事件类型！");
+                    MsgBox("所填写信息不能为空！");
                 }
             }
             gvEventStepsDataBind();

@@ -16,7 +16,7 @@ namespace LuxERP.DAL
         private const string SPUpdateEventState = "UpdateEventState";
         private const string SPUpdateToResolvedTime = "UpdateToResolvedTime";
         private const string SPUpdateResolvedByAndTime = "UpdateResolvedByAndTime";
-        private const string SPUpdateTypeCode = "UpdateTypeCode";
+        private const string SPUpdateEvent = "UpdateEvent";
         private const string SPUpdateHandingBy = "UpdateHandingBy";
         private const string SPGetHandingByByEventNo = "GetHandingByByEventNo";
         private const string SPUpdateEventStateByShutUpShop = "UpdateEventStateByShutUpShop";
@@ -93,13 +93,14 @@ namespace LuxERP.DAL
             return Common.SqlHelper.ExecuteNonQuery(SPUpdateResolvedByAndTime, paras);
         }
 
-        public static int UpdateTypeCode(string eventNo, string typeCode)
+        public static int UpdateEvent(string eventNo, string typeCode, string eventDescribe)
         {
             SqlParameter[] paras = { 
 	            new SqlParameter("@eventNo",eventNo),
-                new SqlParameter("@typeCode",typeCode)
+                new SqlParameter("@typeCode",typeCode),
+                new SqlParameter("@eventDescribe",eventDescribe)
             };
-            return Common.SqlHelper.ExecuteNonQuery(SPUpdateTypeCode, paras);
+            return Common.SqlHelper.ExecuteNonQuery(SPUpdateEvent, paras);
         }
 
         public static int UpdateHandingBy(string eventNo, string handingBy)

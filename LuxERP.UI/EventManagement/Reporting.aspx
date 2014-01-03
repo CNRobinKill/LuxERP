@@ -18,5 +18,5 @@
             <asp:ListItem Value="DataCatalog">分类分析</asp:ListItem>
         </asp:DropDownList>
     </div>
-    <iframe id="frame" name="frame" src="" style="width: 100%; height:600px; float:left" runat="server" />
+    <iframe id="frame" name="frame" src="" style="width: 100%; height:800px; float:left" runat="server" />
 </asp:Content>

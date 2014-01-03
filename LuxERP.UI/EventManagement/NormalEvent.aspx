@@ -117,15 +117,15 @@
 </tr>
 <tr>
     <td class="style4"><asp:Label ID="Label3" runat="server" Text="事件类型：" Font-Bold="true"></asp:Label><asp:Label ID="lblType" runat="server" Text=""></asp:Label><asp:TextBox ID="txtType" runat="server" Visible="false"></asp:TextBox></td>
-    <td><asp:Label ID="Label4" runat="server" Text="事件简述：" Font-Bold="true"></asp:Label><asp:Label ID="lblEventDescribe" runat="server" Text=""></asp:Label></td>
+    <td><asp:Label ID="Label4" runat="server" Text="事件简述：" Font-Bold="true"></asp:Label><asp:Label ID="lblEventDescribe" runat="server" Text=""></asp:Label><asp:TextBox ID="txtEventDescribe" runat="server" Visible="false"></asp:TextBox></td>
 </tr>
 <tr>
     <td class="style4"><asp:Label ID="Label5" runat="server" Text="创建人：" Font-Bold="true"></asp:Label><asp:Label ID="lblLogBy" runat="server" Text=""></asp:Label></td>
     <td><asp:Label ID="Label6" runat="server" Text="当前状态：" Font-Bold="true"></asp:Label><asp:DropDownList ID="ddlEventState" runat="server" Enabled="false" AutoPostBack="true" onselectedindexchanged="ddlEventState_SelectedIndexChanged" ></asp:DropDownList></td>
 </tr>
 <tr><td class="style4">
-                        <asp:Button ID="btnUpdateEventType" runat="server" Text="更改类型" CssClass="button" onclick="btnUpdateEventType_Click"/>
-                        <asp:Button ID="btnOKUpdateType" runat="server" Text="确认类型" CssClass="button" Visible="false" onclick="btnOKUpdateType_Click"/>
+                        <asp:Button ID="btnUpdateEventType" runat="server" Text="修改事件" CssClass="button" onclick="btnUpdateEventType_Click"/>
+                        <asp:Button ID="btnOKUpdateType" runat="server" Text="确认修改" CssClass="button" Visible="false" onclick="btnOKUpdateType_Click"/>
                         <asp:Button ID="btnSendEventTo" runat="server" Text="移交事件" CssClass="button" onclick="btnSendEventTo_Click"/>
                         <asp:Button ID="btnOKSend" runat="server" Text="确认移交" CssClass="button" Visible="false" onclick="btnOKSend_Click"/>
                         <asp:Button ID="btnUpdateToResolvedTime" runat="server" Text="更改日期" CssClass="button" onclick="btnUpdateToResolvedTime_Click" />

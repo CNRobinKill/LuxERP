@@ -1432,14 +1432,15 @@ begin
 	update tb_EventLogs set ResolvedBy=@resolvedBy,ResolvedTime=@resolvedTime where EventNo = @eventNo
 end
 go
-Create Procedure UpdateTypeCode
+Create Procedure UpdateEvent
 (
 	@typeCode	nvarchar(500),
+	@eventDescribe	nvarchar(500),
 	@eventNo	nvarchar(500)
 )
 as
 begin
-	if exists(select TypeCode from tb_EventTypes where TypeCode=@typeCode) update tb_EventLogs set TypeCode=@typeCode where EventNo = @eventNo
+	if exists(select TypeCode from tb_EventTypes where TypeCode=@typeCode) update tb_EventLogs set TypeCode=@typeCode,EventDescribe=@eventDescribe where EventNo = @eventNo
 end
 go
 Create Procedure UpdateHandingBy
