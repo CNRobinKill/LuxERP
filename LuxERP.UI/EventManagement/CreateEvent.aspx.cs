@@ -10,7 +10,15 @@ namespace LuxERP.UI.EventManagement
 {
     public partial class CreateEvent : System.Web.UI.Page
     {
+        /// <summary>
+        /// 防页面重复加载
+        /// </summary>
         private static int n = 0;
+        /// <summary>
+        /// 创建页面加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             //this.btnNormalEvent.Attributes.Add("onclick", ClientScript.GetPostBackEventReference(btnNormalEvent, "click") + ";this.disabled=true; this.value='处理中...';");

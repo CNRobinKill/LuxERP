@@ -9,6 +9,11 @@ namespace LuxERP.UI.EventManagement
 {
     public partial class Reporting : System.Web.UI.Page
     {
+        /// <summary>
+        /// 事件报表加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -17,7 +22,11 @@ namespace LuxERP.UI.EventManagement
                 frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fWeek&rs:Command=Render";
             }
         }
-
+        /// <summary>
+        /// 报表下拉框类型选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string val = ddlReports.SelectedValue.ToString();

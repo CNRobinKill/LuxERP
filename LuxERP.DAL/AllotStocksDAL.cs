@@ -7,15 +7,29 @@ using System.Data.SqlClient;
 
 namespace LuxERP.DAL
 {
+    /// <summary>
+    /// 调拨库存
+    /// </summary>
     public class AllotStocksDAL
     {
+        /// <summary>
+        /// 引用存储过程
+        /// </summary>
         private const string SPAddAllAllotStocksFromStocks = "AddAllAllotStocksFromStocks";
         private const string SPAddAllotStocksFromStocks = "AddAllotStocksFromStocks";
         private const string SPGetAllotStocks = "GetAllotStocks";
         private const string SPGetCountAllotStocksState = "GetCountAllotStocksState";
         private const string SPGetAllotStocksTotal = "GetAllotStocksTotal";
         private const string SPGetAllotStocksPaged = "GetAllotStocksPaged";
-
+        /// <summary>
+        /// 调拨历史
+        /// </summary>
+        /// <param name="eventNo">事件编号</param>
+        /// <param name="warehouseStoreNoB">目标仓库</param>
+        /// <param name="allotStockDate">调拨时间</param>
+        /// <param name="Operator">操作人</param>
+        /// <param name="allotStockState">调拨状态</param>
+        /// <returns>int</returns>
         public static int AddAllAllotStocksFromStocks(string eventNo, string warehouseStoreNoB, string allotStockDate, string Operator, string allotStockState)
         {
             SqlParameter[] paras = {
@@ -27,7 +41,16 @@ namespace LuxERP.DAL
              };
             return Common.SqlHelper.ExecuteNonQuery(SPAddAllAllotStocksFromStocks, paras);
         }
-
+        /// <summary>
+        /// 添加调拨历史
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <param name="warehouseStoreNoB">目标仓库</param>
+        /// <param name="allotStockDate">调拨时间</param>
+        /// <param name="Operator">操作人</param>
+        /// <param name="allotStockState">调拨状态</param>
+        /// <param name="scrapReason">调拨原因</param>
+        /// <returns>int</returns>
         public static int AddAllotStocksFromStocks(string id, string warehouseStoreNoB, string allotStockDate, string Operator, string allotStockState, string scrapReason)
         {
             SqlParameter[] paras = {
@@ -40,7 +63,11 @@ namespace LuxERP.DAL
              };
             return Common.SqlHelper.ExecuteNonQuery(SPAddAllotStocksFromStocks, paras);
         }
-
+        /// <summary>
+        ///获取调拨历史
+        /// </summary>
+        /// <param name="eventNo">事件编号</param>
+        /// <returns>DataSet</returns>
         public static DataSet GetAllotStocks(string eventNo)
         {
             SqlParameter[] paras = {
@@ -50,7 +77,11 @@ namespace LuxERP.DAL
             ds = Common.SqlHelper.ExecuteDataSet(SPGetAllotStocks, paras);
             return ds;
         }
-
+        /// <summary>
+        /// 获取调拨设备
+        /// </summary>
+        /// <param name="eventNo"></param>
+        /// <returns></returns>
         public static int GetCountAllotStocksState(string eventNo)
         {
             SqlParameter[] paras = {

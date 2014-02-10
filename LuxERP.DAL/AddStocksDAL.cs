@@ -7,11 +7,28 @@ using System.Data.SqlClient;
 
 namespace LuxERP.DAL
 {
+    /// <summary>
+    /// 添加库存
+    /// </summary>
     public class AddStocksDAL
     {
+        /// <summary>
+        /// 引用存储过程
+        /// </summary>
         private const string SPGetAddStocks = "GetAddStocks";
         private const string SPGetAddStocksPaged = "GetAddStocksPaged";
-
+        /// <summary>
+        /// 获取库存添加历史
+        /// </summary>
+        /// <param name="warehouseNo">仓库编号</param>
+        /// <param name="maching">机器名称</param>
+        /// <param name="brand">品牌</param>
+        /// <param name="model">型号</param>
+        /// <param name="parameter">参数</param>
+        /// <param name="supplier">供应商</param>
+        /// <param name="addStockDateA">时间区间</param>
+        /// <param name="addStockDateB">时间区间</param>
+        /// <returns>dataset数据</returns>
         public static DataSet GetAddStocks(
                         string warehouseNo,
                         string maching,
@@ -35,7 +52,20 @@ namespace LuxERP.DAL
                                    };
             return Common.SqlHelper.ExecuteDataSet(SPGetAddStocks, paras);
         }
-
+        /// <summary>
+        /// 获取库存添加历史(翻页)
+        /// </summary>
+        /// <param name="warehouseNo">仓库编号</param>
+        /// <param name="maching">机器名称</param>
+        /// <param name="brand">品牌</param>
+        /// <param name="model">型号</param>
+        /// <param name="parameter">参数</param>
+        /// <param name="supplier">供应商</param>
+        /// <param name="addStockDateA">时间区间</param>
+        /// <param name="addStockDateB">时间区间</param>
+        /// <param name="pageSize">单页显示量</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns>dataset</returns>
         public static DataSet GetAddStocksPaged(
                         string warehouseNo,
                         string maching,
