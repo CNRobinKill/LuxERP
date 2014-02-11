@@ -7,12 +7,26 @@ using System.Data.SqlClient;
 
 namespace LuxERP.DAL
 {
+    /// <summary>
+    /// 快递
+    /// </summary>
     public class ExpressDAL
     {
+        /// <summary>
+        /// 引用存储过程
+        /// </summary>
         private const string SPAddExpress = "AddExpress";
         private const string SPGetExpressByEventNo = "GetExpressByEventNo";
         private const string SPUpdateExpressState = "UpdateExpressState";
-
+        /// <summary>
+        /// 添加快递
+        /// </summary>
+        /// <param name="eventNo">事件编号</param>
+        /// <param name="expressCo">快递公司</param>
+        /// <param name="expressNo">快递编号</param>
+        /// <param name="getOrSend">寄/收送</param>
+        /// <param name="expressState">快递状态</param>
+        /// <returns>int</returns>
         public static int AddExpress(string eventNo,string expressCo,string expressNo,int getOrSend,int expressState)
         {
             SqlParameter[] paras = {

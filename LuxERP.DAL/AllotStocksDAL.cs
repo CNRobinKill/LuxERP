@@ -78,10 +78,10 @@ namespace LuxERP.DAL
             return ds;
         }
         /// <summary>
-        /// 获取调拨设备
+        /// 获取正在调拨设备
         /// </summary>
-        /// <param name="eventNo"></param>
-        /// <returns></returns>
+        /// <param name="eventNo">事件编号</param>
+        /// <returns>int</returns>
         public static int GetCountAllotStocksState(string eventNo)
         {
             SqlParameter[] paras = {
@@ -89,7 +89,22 @@ namespace LuxERP.DAL
             };
             return (int)Common.SqlHelper.ExecuteScalar(SPGetCountAllotStocksState, paras);
         }
-
+        /// <summary>
+        /// 获取设备调拨历史(总量)
+        /// </summary>
+        /// <param name="eventNo">事件编号</param>
+        /// <param name="storeNoA">目标仓库A</param>
+        /// <param name="storeNoB">目标仓库B</param>
+        /// <param name="maching">机器名称</param>
+        /// <param name="brand">品牌</param>
+        /// <param name="model">型号</param>
+        /// <param name="serialNo">序列号</param>
+        /// <param name="parameter">参数</param>
+        /// <param name="allotStockDateF">调拨区间</param>
+        /// <param name="allotStockDateT">调拨区间</param>
+        /// <param name="operators">操作人</param>
+        /// <param name="allotStockState">调拨状态</param>
+        /// <returns>DataSet</returns>
         public static DataSet GetAllotStocksTotal(
             string eventNo,
             string storeNoA,
@@ -122,7 +137,24 @@ namespace LuxERP.DAL
             ds = Common.SqlHelper.ExecuteDataSet(SPGetAllotStocksTotal, paras);
             return ds;
         }
-
+        /// <summary>
+        /// 获取设备调拨历史(分页)
+        /// </summary>
+        /// <param name="eventNo">事件编号</param>
+        /// <param name="storeNoA">目标仓库A</param>
+        /// <param name="storeNoB">目标仓库B</param>
+        /// <param name="maching">机器名称</param>
+        /// <param name="brand">品牌</param>
+        /// <param name="model">型号</param>
+        /// <param name="serialNo">序列号</param>
+        /// <param name="parameter">参数</param>
+        /// <param name="allotStockDateF">调拨区间</param>
+        /// <param name="allotStockDateT">调拨区间</param>
+        /// <param name="operators">操作人</param>
+        /// <param name="allotStockState">调拨状态</param>
+        /// <param name="pageSize">单页量</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns>DataSet</returns>
         public static DataSet GetAllotStocksPaged(
             string eventNo,
             string storeNoA,
