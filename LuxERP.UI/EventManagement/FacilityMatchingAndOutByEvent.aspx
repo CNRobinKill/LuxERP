@@ -1,4 +1,4 @@
-﻿<%@ Page Title="设备出库" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="FacilityMatchingAndOutByEvent.aspx.cs" Inherits="LuxERP.UI.EventManagement.FacilityMatchingAndOutByEvent" %>
+﻿<%@ Page Title="设备出库" Language="C#" MasterPageFile="~/LuxERP.Master" AutoEventWireup="true" CodeBehind="FacilityMatchingAndOutByEvent.aspx.cs" Inherits="LuxERP.UI.EventManagement.FacilityMatchingAndOutByEvent" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <style type="text/css">
         .ui-dialog-titlebar span
