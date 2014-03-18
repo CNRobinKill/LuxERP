@@ -61,8 +61,9 @@
        <div class="right">
          <asp:Label ID="Label15" runat="server" Text="店铺类型：" Width="60px"></asp:Label>
           <asp:DropDownList ID="ddlStoreType" runat="server">
-            <asp:ListItem Selected="True">Focus</asp:ListItem>
-            <asp:ListItem Value="IFocus">IFocus</asp:ListItem>
+            <asp:ListItem Value="IFocus"  Selected="True">IFocus</asp:ListItem>
+            <asp:ListItem Value="Accufit">Accufit</asp:ListItem>
+            <asp:ListItem Value="Focus">Focus</asp:ListItem>
           </asp:DropDownList>
        </div>
        <div class="clear left">

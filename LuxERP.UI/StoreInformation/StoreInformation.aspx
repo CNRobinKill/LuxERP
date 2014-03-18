@@ -104,8 +104,9 @@
               </asp:DropDownList>&nbsp;--%>
       店铺类型：<asp:DropDownList ID="ddlStoreType" runat="server">
                 <asp:ListItem></asp:ListItem>
-                <asp:ListItem>Focus</asp:ListItem>
-                <asp:ListItem>IFocus</asp:ListItem>
+                <asp:ListItem Value="IFocus">IFocus</asp:ListItem>
+                <asp:ListItem Value="Accufit">Accufit</asp:ListItem>
+                <asp:ListItem Value="Focus">Focus</asp:ListItem>  
               </asp:DropDownList>&nbsp;
       店铺区域：<asp:TextBox ID="txtRegion" runat="server" Width="40px"></asp:TextBox>&nbsp;
       店铺名称：<asp:TextBox ID="txtStoreName" runat="server" Width="70px"></asp:TextBox>&nbsp;
@@ -127,6 +128,7 @@
                 <asp:ListItem Value="998">需装修</asp:ListItem>
                 <asp:ListItem Value="999">预开店</asp:ListItem>
                 <asp:ListItem Value="997">预关店</asp:ListItem>
+                <asp:ListItem Value="996">已关店</asp:ListItem>
               </asp:DropDownList> 
       <asp:Button ID="txtQuery" runat="server" Text="查询" CssClass="button" onclick="txtQuery_Click" />       
     </div>
@@ -137,6 +139,10 @@
         onrowdatabound="gvStores_RowDataBound" onrowupdating="gvStores_RowUpdating" 
         onselectedindexchanging="gvStores_SelectedIndexChanging">
         <Columns>
+          <asp:BoundField DataField="Row" HeaderStyle-Width="27px">
+            <ControlStyle Width="25px" />
+            <ItemStyle Width="25px" />
+          </asp:BoundField>
           <asp:BoundField DataField="StoreNo" HeaderStyle-Width="40px">
             <ControlStyle Width="35px" />
             <ItemStyle Width="40px" />
@@ -161,9 +167,10 @@
              </ItemTemplate>
              <EditItemTemplate>
                 <asp:HiddenField ID="hdStoreType" runat="server" Value='<%# Eval("StoreType") %>' />
-                   <asp:DropDownList ID="ddlStoreTypeE" runat="server">                              
-                      <asp:ListItem>Focus</asp:ListItem>
-                      <asp:ListItem>IFocus</asp:ListItem>
+                   <asp:DropDownList ID="ddlStoreTypeE" runat="server">
+                      <asp:ListItem Value="IFocus">IFocus</asp:ListItem>
+                      <asp:ListItem Value="Accufit">Accufit</asp:ListItem>                                                   
+                      <asp:ListItem Value="Focus">Focus</asp:ListItem>                     
                     </asp:DropDownList>
                    </EditItemTemplate>
               <ItemStyle Width="65px" />

@@ -32,6 +32,7 @@ namespace LuxERP.UI.EventManagement
                             if (item.Key == q)
                             {
                                 hint = item.Key;
+                                break;
                             }
                         }
 

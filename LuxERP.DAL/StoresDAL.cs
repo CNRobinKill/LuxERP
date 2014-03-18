@@ -14,6 +14,7 @@ namespace LuxERP.DAL
         private const string SPAddStores = "AddStores";
         private const string SPGetStores = "GetStores";
         private const string SPUpdateStores = "UpdateStores";
+        private const string SPUpdateStoresState = "UpdateStoresState";
         private const string SPDelStores = "DelStores";
         
 
@@ -82,6 +83,15 @@ namespace LuxERP.DAL
                                        new SqlParameter("@storeState",storeState)
                                    };
             return Common.SqlHelper.ExecuteNonQuery(SPUpdateStores, paras);
+        }
+
+        public static int UpdateStoresState(string storeNo, string storeState)
+        {
+            SqlParameter[] paras = {
+                                       new SqlParameter("@storeNo",storeNo),
+                                       new SqlParameter("@storeState",storeState)
+                                   };
+            return Common.SqlHelper.ExecuteNonQuery(SPUpdateStoresState, paras);
         }
 
         public static int DelStores(string storeNo)

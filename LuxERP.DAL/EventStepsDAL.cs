@@ -18,6 +18,7 @@ namespace LuxERP.DAL
         private const string SPAddEventSteps = "AddEventSteps";
         private const string SPGetEventStepsByEventNo = "GetEventStepsByEventNo";
         private const string SPUpdateEventSteps = "UpdateEventSteps";
+        private const string SPDeleteEventStepsByEventNo = "DeleteEventStepsByEventNo";
 
         /// <summary>
         /// 添加事件步骤
@@ -68,6 +69,14 @@ namespace LuxERP.DAL
                 new SqlParameter("@stepState",stepState)
             };
             return Common.SqlHelper.ExecuteNonQuery(SPUpdateEventSteps, paras);
+        }
+
+        public static int DeleteEventStepsByEventNo(string eventNo)
+        {
+            SqlParameter[] paras = { 
+                new SqlParameter("@eventNo",eventNo)
+            };
+            return Common.SqlHelper.ExecuteNonQuery(SPDeleteEventStepsByEventNo, paras);
         }
     }
 }

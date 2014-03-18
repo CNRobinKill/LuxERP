@@ -355,10 +355,12 @@ namespace LuxERP.UI.EventManagement
             lblStoreNo.Text = StoreInformationArray(0);
             lblStoreType.Text = StoreInformationArray(1);
             lblRegion.Text = StoreInformationArray(2);
+            lblStoreName.Text = StoreInformationArray(3);
             lblStoreAddress.Text = StoreInformationArray(5);
             lblStoreTel.Text = StoreInformationArray(6);
             lblADSL.Text = StoreInformationArray(7);
-            lblStoreState.Text = StoreInformationArray(10);            
+            lblStoreState.Text = StoreInformationArray(10);
+            
         }
 
         public void gvEventStepsDataBind()
@@ -625,7 +627,7 @@ namespace LuxERP.UI.EventManagement
                         {
                             DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], ddlEventState.SelectedValue);
                             DAL.EventLogsDAL.UpdateResolvedByAndTime(Request.QueryString["eventNo"], "", timeNow());
-                            DAL.StoresDAL.DelStores(StoreInformationArray(0));
+                            DAL.StoresDAL.UpdateStores(StoreInformationArray(0), "", "", "", "", "", "", "", "", "", "996");
                             DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "事件已结束", timeNow(), "0", Session["userName"].ToString());
                             txtStepDescribe.Visible = false;
                             btnAddEventSteps.Visible = false;
@@ -880,20 +882,23 @@ namespace LuxERP.UI.EventManagement
         {
             if (Request.QueryString["typeCode"] != "9999" && Request.QueryString["typeCode"] != "9000" && Request.QueryString["typeCode"] != "8888")
             {
-                    DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], "0");
+                    //DAL.EventLogsDAL.UpdateEventState(Request.QueryString["eventNo"], "0");
                     DAL.StocksDAL.DelStocksBack(Request.QueryString["eventNo"]);
-                    DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(特殊情况)事件被强行关闭，涉及设备被强行还原", timeNow(), "0", Session["userName"].ToString());
-                    txtStepDescribe.Visible = false;
-                    btnAddEventSteps.Visible = false;
-                    btnReOpenEvent.Visible = true;
-                    divThreeBtn.Visible = false;
-                    btnUpdateEventState.Visible = false;
-                    btnOKUpdate.Visible = false;
-                    gvEventStepsDataBind();
-                    LoadEventInformation();
-                    ddlResolvedBy.Visible = false;
-                    btnUpdateEventType.Visible = false;
-                    btnSendEventTo.Visible = false;
+                    //DAL.EventStepsDAL.AddEventSteps(Request.QueryString["eventNo"], "(特殊情况)事件被强行关闭，涉及设备被强行还原", timeNow(), "0", Session["userName"].ToString());
+                    //txtStepDescribe.Visible = false;
+                    //btnAddEventSteps.Visible = false;
+                    //btnReOpenEvent.Visible = true;
+                    //divThreeBtn.Visible = false;
+                    //btnUpdateEventState.Visible = false;
+                    //btnOKUpdate.Visible = false;
+                    //gvEventStepsDataBind();
+                    //LoadEventInformation();
+                    //ddlResolvedBy.Visible = false;
+                    //btnUpdateEventType.Visible = false;
+                    //btnSendEventTo.Visible = false;
+                    DAL.EventStepsDAL.DeleteEventStepsByEventNo(Request.QueryString["eventNo"]);
+                    DAL.EventLogsDAL.DeleteEventLogsByEventNo(Request.QueryString["eventNo"]);
+                    Response.Redirect("CreateEvent.aspx");
             }
             else
             {
@@ -957,12 +962,11 @@ namespace LuxERP.UI.EventManagement
                     btnSendEventTo.Visible = false;
 
                 }
-
+                ddlEventState.Enabled = false;
+                btnOKUpdate.Visible = false;
+                ddlEventState.SelectedValue = EventInformationArray(6);
+                gvEventStepsDataBind();
             }
-            ddlEventState.Enabled = false;
-            btnOKUpdate.Visible = false;
-            ddlEventState.SelectedValue = EventInformationArray(6);
-            gvEventStepsDataBind();
         }
 
         protected void btnUpdateToResolvedTime_Click(object sender, EventArgs e)

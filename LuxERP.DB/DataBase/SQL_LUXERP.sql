@@ -1470,6 +1470,16 @@ begin
 	update tb_EventLogs set ToResolvedTime=@toResolvedTime where EventNo=@eventNo
 end
 go
+
+create Procedure [dbo].[DeleteEventLogsByEventNo]
+(
+	@eventNo		nvarchar(500)
+)
+AS
+begin	
+delete from tb_EventLogs where EventNo = @eventNo
+end
+Go
 /***************************EventLogs***************************/
 
 /***************************EventSteps***************************/
@@ -1512,6 +1522,16 @@ begin
 	update tb_EventSteps set StepDescribe=@stepDescribe, StepState=@stepState where ID = @id
 end
 go
+
+create Procedure [dbo].[DeleteEventStepsByEventNo]
+(
+	@eventNo		nvarchar(500)
+)
+AS
+begin	
+delete from tb_EventSteps where EventNo = @eventNo
+end
+Go
 /***************************EventSteps***************************/
 
 /***************************Stores***************************/
@@ -1692,6 +1712,17 @@ begin
 end
           
 exec sp_executesql @sql
+end
+go
+
+create proc dbo.UpdateStoresState
+(
+	@storeNo		nvarchar(500),
+    @storeState		nvarchar(500)
+)
+as
+begin
+update tb_Stores set StoreState=@storeState where StoreNo=@storeNo
 end
 go
 /***************************Stores***************************/
@@ -3320,7 +3351,7 @@ BEGIN
 	from tb_EventLogs 
 	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
 	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
-	where EventState<>'0' and LogBy=@logBy and HandingBy=@handingBy) tm where tm.rn=1  
+	where TypeCode<>'9999' and TypeCode<>'9000' and TypeCode<>'8888' and EventState<>'0' and LogBy=@logBy and HandingBy=@handingBy) tm where tm.rn=1  
 	order by tm.EventTime desc 
 END
 if @temp='1'
@@ -3329,7 +3360,7 @@ BEGIN
 	from tb_EventLogs 
 	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
 	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
-	where EventState<>'0' and LogBy<>@logBy and HandingBy=@handingBy) tm where tm.rn=1  
+	where TypeCode<>'9999' and TypeCode<>'9000' and TypeCode<>'8888' and EventState<>'0' and LogBy<>@logBy and HandingBy=@handingBy) tm where tm.rn=1  
 	order by tm.EventTime desc 
 END
 if @temp='2'
@@ -3338,7 +3369,7 @@ BEGIN
 	from tb_EventLogs 
 	left join tb_EventState on tb_EventLogs.EventState=tb_EventState.StateID  
 	left join tb_EventSteps on tb_EventLogs.EventNo=tb_EventSteps.EventNo 
-	where EventState<>'0'  and HandingBy<>@handingBy) tm where tm.rn=1  
+	where TypeCode<>'9999' and TypeCode<>'9000' and TypeCode<>'8888' and EventState<>'0'  and HandingBy<>@handingBy) tm where tm.rn=1  
 	order by tm.EventTime desc 
 END
 END

@@ -84,7 +84,7 @@
         CssClass="button" onclick="btnReturnCreateEvent_Click" />
 <h2>EventLog</h2>
 <div style="width:800px; text-align:right"><asp:Button ID="btnStopEventLog" 
-        runat="server" Text="关闭/作废事件" CssClass="button" 
+        runat="server" Text="删除事件" CssClass="button" 
         onclick="btnStopEventLog_Click" /></div>
 <div class="content-box-header" ><h3 style="cursor: s-resize;">StoreInformation</h3></div>
 <div class="content-box-content">
@@ -102,6 +102,7 @@
 </tr>
 <tr>
     <td colspan="2"><asp:Label runat="server" Text="地址：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreAddress" runat="server" Text=""></asp:Label></td>
+    <td><asp:Label runat="server" Text="店铺名称：" Font-Bold="true"></asp:Label><asp:Label ID="lblStoreName" runat="server" Text=""></asp:Label></td>
 </tr>
 </table>
 </div>

@@ -107,15 +107,15 @@ namespace LuxERP.UI.StoreInformation
             gvStores.Width = 1120;
             if (gvStores.HeaderRow != null)
             {
-                gvStores.HeaderRow.Cells[0].Text = "<b>店号</b>";
-                gvStores.HeaderRow.Cells[1].Text = "<b>店铺类型</b>";
-                gvStores.HeaderRow.Cells[2].Text = "<b>区域</b>";
-                gvStores.HeaderRow.Cells[3].Text = "<b>店铺名称</b>";
-                gvStores.HeaderRow.Cells[4].Text = "<b>城市</b>";
-                gvStores.HeaderRow.Cells[5].Text = "<b>电话</b>";
-                gvStores.HeaderRow.Cells[6].Text = "<b>宽带账号</b>";
-                gvStores.HeaderRow.Cells[7].Text = "<b>地址</b>";
-                gvStores.HeaderRow.Cells[8].Text = "<b>店铺状态</b>";
+                gvStores.HeaderRow.Cells[1].Text = "<b>店号</b>";
+                gvStores.HeaderRow.Cells[2].Text = "<b>店铺类型</b>";
+                gvStores.HeaderRow.Cells[3].Text = "<b>区域</b>";
+                gvStores.HeaderRow.Cells[4].Text = "<b>店铺名称</b>";
+                gvStores.HeaderRow.Cells[5].Text = "<b>城市</b>";
+                gvStores.HeaderRow.Cells[6].Text = "<b>电话</b>";
+                gvStores.HeaderRow.Cells[7].Text = "<b>宽带账号</b>";
+                gvStores.HeaderRow.Cells[8].Text = "<b>地址</b>";
+                gvStores.HeaderRow.Cells[9].Text = "<b>店铺状态</b>";
             }
         }
 
@@ -141,6 +141,11 @@ namespace LuxERP.UI.StoreInformation
             SetDDLValue("ddlStoreTypeE", "hdStoreType", e);
             SetDDLValue("ddlRatingE", "hdRating", e);
             //SetDDLValue("ddlStoreStateE", "hdStoreState", e);
+            if (e.Row.Cells[8].Text == "已关店")
+            {
+                e.Row.Cells[9].Text = "";
+                e.Row.Cells[10].Text = "";
+            }
         }
 
         protected void gvStores_RowUpdating(object sender, GridViewUpdateEventArgs e)

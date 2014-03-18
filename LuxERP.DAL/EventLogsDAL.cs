@@ -31,7 +31,7 @@ namespace LuxERP.DAL
         private const string SPGetAllotStocksPaged = "GetEventLogsPaged";
         private const string SPUpdateUpLoadPic = "UpdateUpLoadPic";
         private const string SPGetUsers = "GetUsers";
-        
+        private const string SPDeleteEventLogsByEventNo = "DeleteEventLogsByEventNo";
         /// <summary>
         /// 添加事件记录
         /// </summary>
@@ -321,6 +321,14 @@ namespace LuxERP.DAL
         {
             DataSet ds = Common.SqlHelper.ExecuteDataSet(SPGetUsers, null);
             return ds;
+        }
+
+        public static int DeleteEventLogsByEventNo(string eventNo)
+        {
+            SqlParameter[] paras = { 
+	            new SqlParameter("@eventNo",eventNo)
+            };
+            return Common.SqlHelper.ExecuteNonQuery(SPDeleteEventLogsByEventNo, paras);
         }
     }
 }
