@@ -19,7 +19,7 @@ namespace LuxERP.UI.EventManagement
             if (!IsPostBack)
             {
                 ddlReports.SelectedValue = "Week";
-                frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fWeek&rs:Command=Render";
+                frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fWeek&rs:Command=Render";
             }
         }
         /// <summary>
@@ -33,22 +33,22 @@ namespace LuxERP.UI.EventManagement
             switch (val)
             {
                 case "Week":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fWeek&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fWeek&rs:Command=Render";
                     break;
                 case "Month":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fMonth&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fMonth&rs:Command=Render";
                     break;
                 case "FocusPKiFocus":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fFocusIFocus&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fFocusIFocus&rs:Command=Render";
                     break;
                 case "MonthPercent":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fMonthPercent&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fMonthPercent&rs:Command=Render";
                     break;
                 case "TimeSegment":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fTimeSegment&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fTimeSegment&rs:Command=Render";
                     break;
                 case "DataCatalog":
-                    frame.Attributes["src"] = "http://10.15.140.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fDataCatalog&rs:Command=Render";
+                    frame.Attributes["src"] = "http://10.15.123.110/ReportServer/Pages/ReportViewer.aspx?%2fReports%2fDataCatalog&rs:Command=Render";
                     break;                
             }
         }

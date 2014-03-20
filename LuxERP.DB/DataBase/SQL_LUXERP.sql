@@ -1582,7 +1582,7 @@ begin
 select StoreNo,StoreType,Region,StoreName,City,StoreAddress,StoreTel,ADSLNo,ContractArea,OpeingDate,StateName as StoreState from tb_Stores left join tb_EventState on tb_Stores.StoreState=tb_EventState.StateID where StoreNo = @storeNo
 end
 Go
-create proc dbo.GetStores
+create  proc [dbo].[GetStores]
 (
 	@storeNo	nvarchar(500),
 	--@topStore	nvarchar(500),
@@ -1634,7 +1634,7 @@ begin
 	set @where = @where + ' and StoreState in ('''+@storeState+''')'
 end
 	
-set @sql = ' select StoreNo,StoreType,Region,StoreName,City,StoreAddress,StoreTel,ADSLNo,ContractArea,
+set @sql = ' select row_number() over(order by StoreNo) as Row,StoreNo,StoreType,Region,StoreName,City,StoreAddress,StoreTel,ADSLNo,ContractArea,
    convert(nvarchar(10),OpeingDate,127) OpeingDate,StateName as StoreState from dbo.tb_Stores left join tb_EventState on tb_Stores.StoreState=tb_EventState.StateID' + @where + ''
 exec sp_executesql @sql
 end
