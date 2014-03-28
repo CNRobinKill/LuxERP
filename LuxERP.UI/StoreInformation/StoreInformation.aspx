@@ -139,7 +139,7 @@
         onrowdatabound="gvStores_RowDataBound" onrowupdating="gvStores_RowUpdating" 
         onselectedindexchanging="gvStores_SelectedIndexChanging">
         <Columns>
-          <asp:BoundField DataField="Row" HeaderStyle-Width="27px">
+          <asp:BoundField DataField="Row" HeaderStyle-Width="27px" ReadOnly="true">
             <ControlStyle Width="25px" />
             <ItemStyle Width="25px" />
           </asp:BoundField>

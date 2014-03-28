@@ -150,14 +150,14 @@ namespace LuxERP.UI.StoreInformation
 
         protected void gvStores_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string storeNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[0].Controls[0]).Text;
-            string storeType = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[1].FindControl("ddlStoreTypeE")).SelectedValue;
-            string region = ((TextBox)gvStores.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
-            string storeName = ((TextBox)gvStores.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
-            string city = ((TextBox)gvStores.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
-            string storeTel = ((TextBox)gvStores.Rows[e.RowIndex].Cells[5].Controls[0]).Text;
-            string aDSLNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
-            string storeAddress = ((TextBox)gvStores.Rows[e.RowIndex].Cells[7].Controls[0]).Text;
+            string storeNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[1].Controls[0]).Text;
+            string storeType = ((DropDownList)gvStores.Rows[e.RowIndex].Cells[2].FindControl("ddlStoreTypeE")).SelectedValue;
+            string region = ((TextBox)gvStores.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
+            string storeName = ((TextBox)gvStores.Rows[e.RowIndex].Cells[4].Controls[0]).Text;
+            string city = ((TextBox)gvStores.Rows[e.RowIndex].Cells[5].Controls[0]).Text;
+            string storeTel = ((TextBox)gvStores.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
+            string aDSLNo = ((TextBox)gvStores.Rows[e.RowIndex].Cells[7].Controls[0]).Text;
+            string storeAddress = ((TextBox)gvStores.Rows[e.RowIndex].Cells[8].Controls[0]).Text;
 
             if (storeNo == "" || region == "")
             {
