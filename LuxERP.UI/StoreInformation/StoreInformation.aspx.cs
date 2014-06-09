@@ -205,7 +205,7 @@ namespace LuxERP.UI.StoreInformation
             
             gvFacility.Visible = true;
             int idx =  e.NewSelectedIndex;
-            string storeNo = gvStores.Rows[idx].Cells[0].Text;
+            string storeNo = gvStores.Rows[idx].Cells[1].Text;
             facility.Attributes.Remove("title");
             facility.Attributes.Add("title", storeNo+"设备信息");
             
